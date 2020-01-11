@@ -58,7 +58,7 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     //attackSlider.setLookAndFeel(&otherLookAndFeel);
    
     
-    
+
     
     // Mod index
    
@@ -88,6 +88,8 @@ void JuceSynthFrameworkAudioProcessorEditor::paint (Graphics& g)
     g.setColour (Colours::white);
     g.setFont (15.0f);
     
+    
+    
 }
 
 void JuceSynthFrameworkAudioProcessorEditor::resized()
@@ -116,6 +118,8 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
     mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+    
+    std::cout << "resized" << std::endl;
 }
 
 //implement the OSC receiver class as it's a pure virtual function so won't work uninitialised:
@@ -126,10 +130,37 @@ void JuceSynthFrameworkAudioProcessorEditor::oscMessageReceived (const OSCMessag
         theZed = message[0].getFloat32();
         theEx = message[1].getFloat32();
         
-        std::cout << "z: " << theZed
-        << std::endl << "x: " << theEx
-        << std::endl;
+//        std::cout << "z: " << theZed
+//        << std::endl << "x: " << theEx
+//        << std::endl;
     }
+    //std::cout << "oscReceived" <<std::endl;
+}
+
+std::vector<double> JuceSynthFrameworkAudioProcessorEditor::rollAndPitch(const float& _ex, const float& _zed)
+{
+    std::vector<double> temp;
+    temp.resize(2);
+    temp[0] = double(_ex);
+    temp[1] = double(_zed);
+    std::cout << temp[1];
+    return temp;
+    std::cout << "rollandpitch" <<std::endl;
+}
+
+void JuceSynthFrameworkAudioProcessorEditor::controllerMove (const double& exEvent, const double& zedEvent)
+{
+    //if(KeyPress::isKeyCurrentlyDown(KeyPress::spaceKey))
+    
+        std::vector<double> input = rollAndPitch(theZed, theEx);
+        
+        std::cout<< input[0] <<std::endl;
+        std::cout<< input[0] <<std::endl;
+    
+    
+    //std::vector<double> input = rollAndPitch(theZed, theEx);
+    std::cout << "controllerMove" <<std::endl;
+    
 }
 
 

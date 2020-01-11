@@ -23,10 +23,12 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                      #endif
                        ),
 
-
+// pre defines
 treeState(*this, nullptr, "PARAMETERS", createParameterLayout()) 
 #endif
 {
+    //constuctor
+    
     //NormalisableRange<float> attackParam (0.1f, 5000.0f); //re-maps this to 0 and 1 (not defo true)
     
     

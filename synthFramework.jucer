@@ -4,6 +4,92 @@
               pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="OMnIBC" name="synthFramework">
     <GROUP id="{B7F7B41C-91B3-DF48-558F-005CE038E0FF}" name="Source">
+      <GROUP id="{46CBB5C4-D9C2-EC30-0C14-27DE605B7B19}" name="RapidLib">
+        <GROUP id="{DCC878A1-664E-5271-3F74-4FA72F7F45C4}" name="dependencies">
+          <GROUP id="{175EF088-2769-EC43-6584-02BA8A3005EB}" name="bayesfilter">
+            <GROUP id="{86080361-E163-4AA5-33DD-569AE5CD31F9}" name="doc">
+              <FILE id="AsfkcU" name="Doxyfile" compile="0" resource="1" file="../Libraries/RapidLib/dependencies/bayesfilter/doc/Doxyfile"/>
+            </GROUP>
+            <GROUP id="{F4EA1AB6-D862-AF57-A5CD-E0701B8758CE}" name="src">
+              <FILE id="wISNgw" name="BayesianFilter.cpp" compile="1" resource="0"
+                    file="../Libraries/RapidLib/dependencies/bayesfilter/src/BayesianFilter.cpp"/>
+              <FILE id="nGKVjH" name="BayesianFilter.h" compile="0" resource="0"
+                    file="../Libraries/RapidLib/dependencies/bayesfilter/src/BayesianFilter.h"/>
+              <FILE id="RVH98m" name="filter_utilities.cpp" compile="1" resource="0"
+                    file="../Libraries/RapidLib/dependencies/bayesfilter/src/filter_utilities.cpp"/>
+              <FILE id="Z3oZcY" name="filter_utilities.h" compile="0" resource="0"
+                    file="../Libraries/RapidLib/dependencies/bayesfilter/src/filter_utilities.h"/>
+            </GROUP>
+            <FILE id="EvfTiQ" name="README.md" compile="0" resource="1" file="../Libraries/RapidLib/dependencies/bayesfilter/README.md"/>
+          </GROUP>
+          <GROUP id="{0888CE33-5647-3996-E3A3-35BE01C15E8F}" name="json">
+            <FILE id="coyAw2" name="json-forwards.h" compile="0" resource="0" file="../Libraries/RapidLib/dependencies/json/json-forwards.h"/>
+            <FILE id="Bxp0Im" name="json.h" compile="0" resource="0" file="../Libraries/RapidLib/dependencies/json/json.h"/>
+          </GROUP>
+          <GROUP id="{77D648F4-507D-6C85-0971-5145E38A68F5}" name="libsvm">
+            <FILE id="sSh9B0" name="libsvm.cpp" compile="1" resource="0" file="../Libraries/RapidLib/dependencies/libsvm/libsvm.cpp"/>
+            <FILE id="CKHToZ" name="libsvm.h" compile="0" resource="0" file="../Libraries/RapidLib/dependencies/libsvm/libsvm.h"/>
+          </GROUP>
+          <FILE id="mZuKbp" name="jsoncpp.cpp" compile="1" resource="0" file="../Libraries/RapidLib/dependencies/jsoncpp.cpp"/>
+        </GROUP>
+        <GROUP id="{AAA6FC5B-56F6-41B3-09C0-8FD96726C8F5}" name="src">
+          <GROUP id="{92E266F5-8413-93D2-A650-DB593C5C0DE6}" name="emscripten">
+            <FILE id="LD3mSp" name="classificationEmbindings.h" compile="0" resource="0"
+                  file="../Libraries/RapidLib/src/emscripten/classificationEmbindings.h"/>
+            <FILE id="dXJPnF" name="knnEmbindings.h" compile="0" resource="0" file="../Libraries/RapidLib/src/emscripten/knnEmbindings.h"/>
+            <FILE id="eoP5mb" name="modelSetEmbindings.h" compile="0" resource="0"
+                  file="../Libraries/RapidLib/src/emscripten/modelSetEmbindings.h"/>
+            <FILE id="KTG96M" name="nnEmbindings.h" compile="0" resource="0" file="../Libraries/RapidLib/src/emscripten/nnEmbindings.h"/>
+            <FILE id="PXGFI0" name="nodeEnv.js" compile="0" resource="1" file="../Libraries/RapidLib/src/emscripten/nodeEnv.js"/>
+            <FILE id="L2gysB" name="rapidLibPost.js" compile="0" resource="1" file="../Libraries/RapidLib/src/emscripten/rapidLibPost.js"/>
+            <FILE id="xwKnLs" name="rapidStreamEmbindings.h" compile="0" resource="0"
+                  file="../Libraries/RapidLib/src/emscripten/rapidStreamEmbindings.h"/>
+            <FILE id="ftxeA2" name="regressionEmbindings.h" compile="0" resource="0"
+                  file="../Libraries/RapidLib/src/emscripten/regressionEmbindings.h"/>
+            <FILE id="g7BxPR" name="seriesClassificationEmbindings.h" compile="0"
+                  resource="0" file="../Libraries/RapidLib/src/emscripten/seriesClassificationEmbindings.h"/>
+            <FILE id="EwB7pS" name="svmEmbindings.h" compile="0" resource="0" file="../Libraries/RapidLib/src/emscripten/svmEmbindings.h"/>
+          </GROUP>
+          <FILE id="ONIYgV" name="baseModel.h" compile="0" resource="0" file="../Libraries/RapidLib/src/baseModel.h"/>
+          <FILE id="doK2En" name="classification.cpp" compile="1" resource="0"
+                file="../Libraries/RapidLib/src/classification.cpp"/>
+          <FILE id="yNCo42" name="classification.h" compile="0" resource="0"
+                file="../Libraries/RapidLib/src/classification.h"/>
+          <FILE id="jZLjom" name="dtw.cpp" compile="1" resource="0" file="../Libraries/RapidLib/src/dtw.cpp"/>
+          <FILE id="Rezx43" name="dtw.h" compile="0" resource="0" file="../Libraries/RapidLib/src/dtw.h"/>
+          <FILE id="IScCm2" name="fastDTW.cpp" compile="1" resource="0" file="../Libraries/RapidLib/src/fastDTW.cpp"/>
+          <FILE id="kE1EVJ" name="fastDTW.h" compile="0" resource="0" file="../Libraries/RapidLib/src/fastDTW.h"/>
+          <FILE id="gvkI9t" name="knnClassification.cpp" compile="1" resource="0"
+                file="../Libraries/RapidLib/src/knnClassification.cpp"/>
+          <FILE id="bvAuNJ" name="knnClassification.h" compile="0" resource="0"
+                file="../Libraries/RapidLib/src/knnClassification.h"/>
+          <FILE id="Lzdlof" name="modelSet.cpp" compile="1" resource="0" file="../Libraries/RapidLib/src/modelSet.cpp"/>
+          <FILE id="xrrjiG" name="modelSet.h" compile="0" resource="0" file="../Libraries/RapidLib/src/modelSet.h"/>
+          <FILE id="c1q1Og" name="neuralNetwork.cpp" compile="1" resource="0"
+                file="../Libraries/RapidLib/src/neuralNetwork.cpp"/>
+          <FILE id="ibJF8A" name="neuralNetwork.h" compile="0" resource="0" file="../Libraries/RapidLib/src/neuralNetwork.h"/>
+          <FILE id="pZeWNq" name="rapidStream.cpp" compile="1" resource="0" file="../Libraries/RapidLib/src/rapidStream.cpp"/>
+          <FILE id="qi2AwY" name="rapidStream.h" compile="0" resource="0" file="../Libraries/RapidLib/src/rapidStream.h"/>
+          <FILE id="peFgiN" name="regression.cpp" compile="1" resource="0" file="../Libraries/RapidLib/src/regression.cpp"/>
+          <FILE id="seUikj" name="regression.h" compile="0" resource="0" file="../Libraries/RapidLib/src/regression.h"/>
+          <FILE id="SWCtHT" name="searchWindow.cpp" compile="1" resource="0"
+                file="../Libraries/RapidLib/src/searchWindow.cpp"/>
+          <FILE id="UTNMDC" name="searchWindow.h" compile="0" resource="0" file="../Libraries/RapidLib/src/searchWindow.h"/>
+          <FILE id="uPjTP8" name="seriesClassification.cpp" compile="1" resource="0"
+                file="../Libraries/RapidLib/src/seriesClassification.cpp"/>
+          <FILE id="O7koKL" name="seriesClassification.h" compile="0" resource="0"
+                file="../Libraries/RapidLib/src/seriesClassification.h"/>
+          <FILE id="U9aTeC" name="svmClassification.cpp" compile="1" resource="0"
+                file="../Libraries/RapidLib/src/svmClassification.cpp"/>
+          <FILE id="nDESQe" name="svmClassification.h" compile="0" resource="0"
+                file="../Libraries/RapidLib/src/svmClassification.h"/>
+          <FILE id="YfBhFp" name="trainingExample.h" compile="0" resource="0"
+                file="../Libraries/RapidLib/src/trainingExample.h"/>
+          <FILE id="eiySJa" name="warpPath.cpp" compile="1" resource="0" file="../Libraries/RapidLib/src/warpPath.cpp"/>
+          <FILE id="PfVYEL" name="warpPath.h" compile="0" resource="0" file="../Libraries/RapidLib/src/warpPath.h"/>
+        </GROUP>
+        <FILE id="YHhhNS" name="README.md" compile="0" resource="1" file="../Libraries/RapidLib/README.md"/>
+      </GROUP>
       <GROUP id="{F759E9B3-7796-1915-8C2A-FFE1DB7A46DD}" name="Maximilian">
         <GROUP id="{00C377AD-3657-A512-7720-CE7CF0F61B33}" name="libs">
           <FILE id="iT74HG" name="fft.cpp" compile="1" resource="0" file="../Libraries/Maximilian/libs/fft.cpp"/>
@@ -50,7 +136,7 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" headerPath="/Users/martintownley/Development/Libraries/Maximilian"/>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="/Users/martintownley/Development/Libraries/Maximilian&#10;&#10;/Users/martintownley/Development/Libraries/RapidLib"/>
         <CONFIGURATION isDebug="0" name="Release"/>
       </CONFIGURATIONS>
       <MODULEPATHS>

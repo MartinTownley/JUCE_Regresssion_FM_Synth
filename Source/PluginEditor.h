@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include "../../Libraries/RapidLib/src/regression.h"
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "Oscillator.h"
@@ -37,8 +38,9 @@ public:
     void resized() override;
     void oscMessageReceived (const OSCMessage &message) override;
     
+    std::vector<double> rollAndPitch(const float& _ex, const float& _zed);
     
-    
+    void controllerMove (const double& exEvent, const double& zedEvent);
     
     
 
@@ -69,7 +71,9 @@ private:
     float theZed;
     float theEx;
     
-    
+    //RAPIDMIX
+    regression rapidRegression;
+    std::vector<trainingExample> trainingSet;
     
     
     TextButton onOff;
@@ -83,11 +87,6 @@ private:
 public:
     //Scoped pointer is deprecated!
     //ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> sliderTree;
-    
-    
-    
-    
-    
     
     // onoffAttach
     std::unique_ptr <AudioProcessorValueTreeState::ButtonAttachment> onOffAttach;
