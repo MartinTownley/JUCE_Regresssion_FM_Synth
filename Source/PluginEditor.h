@@ -20,7 +20,12 @@
 //==============================================================================
 /**
 */
-class JuceSynthFrameworkAudioProcessorEditor  : public AudioProcessorEditor
+class JuceSynthFrameworkAudioProcessorEditor  : public                  AudioProcessorEditor,
+        public OSCReceiver,
+        public OSCReceiver::ListenerWithOSCAddress<OSCReceiver::MessageLoopCallback>
+
+        //public OSCReceiver,
+//public OSCReceiver::ListenerWithOSCAddress<OSCReceiver::MessageLoopCallback>
 
 {
 public:
@@ -30,6 +35,8 @@ public:
     //==============================================================================
     void paint (Graphics&) override;
     void resized() override;
+    void oscMessageReceived (const OSCMessage &message) override;
+    
     
     
     
@@ -58,6 +65,9 @@ private:
     MLGui mlGUI;
 
     
+    //OSC params
+    float theZed;
+    float theEx;
     
     
     

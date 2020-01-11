@@ -27,11 +27,6 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     
     addAndMakeVisible(&mlGUI);
     
-    
-    
-    
-
-    
     //labels:
     //attack:
     addAndMakeVisible (&allLabels[0]);
@@ -71,8 +66,12 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     
     envGUI.releaseSlider.setValue(200);
    
-    
-    
+    //=========
+    //OSC STUFF:;
+    connect(6448);
+    //add this component as listener
+    addListener(this, "/juce");
+   //==========
     
     
 }
@@ -117,11 +116,20 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
     mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
-    
-    
-    
-    
-    
+}
+
+//implement the OSC receiver class as it's a pure virtual function so won't work uninitialised:
+void JuceSynthFrameworkAudioProcessorEditor::oscMessageReceived (const OSCMessage &message)
+{
+    if (message.size() == 2 && message[0].isFloat32())
+    {
+        theZed = message[0].getFloat32();
+        theEx = message[1].getFloat32();
+        
+        std::cout << "z: " << theZed
+        << std::endl << "x: " << theEx
+        << std::endl;
+    }
 }
 
 

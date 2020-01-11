@@ -22,7 +22,7 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
                        ),
-//attackTime(0.1f), //initialise attacktime
+
 
 treeState(*this, nullptr, "PARAMETERS", createParameterLayout()) 
 #endif
@@ -295,6 +295,8 @@ void JuceSynthFrameworkAudioProcessor::setStateInformation (const void* data, in
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
 }
+
+
 
 //==============================================================================
 // This creates new instances of the plugin..
