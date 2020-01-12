@@ -131,6 +131,9 @@
       <FILE id="qwarDA" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="GCpXuf" name="MLGui.cpp" compile="1" resource="0" file="Source/MLGui.cpp"/>
       <FILE id="gaAYNd" name="MLGui.h" compile="0" resource="0" file="Source/MLGui.h"/>
+      <FILE id="NdwtJ7" name="ControllerOSC.cpp" compile="1" resource="0"
+            file="Source/ControllerOSC.cpp"/>
+      <FILE id="CxW3X4" name="ControllerOSC.h" compile="0" resource="0" file="Source/ControllerOSC.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>

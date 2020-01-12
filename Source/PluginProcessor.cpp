@@ -38,6 +38,7 @@ treeState(*this, nullptr, "PARAMETERS", createParameterLayout())
     for (int i = 0; i < 10; i++)
     {
         mySynth.addVoice (new SynthVoice());
+        
     }
     
     //clear sounds
@@ -87,11 +88,12 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
     
     
     //params.push_back (std::move(choiceParam));
-    
+     
     //}
     
     return { params.begin(), params.end()};
     
+   
     
 }
 
@@ -176,6 +178,7 @@ void JuceSynthFrameworkAudioProcessor::prepareToPlay (double sampleRate, int sam
     
     
     
+    
 }
 
 void JuceSynthFrameworkAudioProcessor::releaseResources()
@@ -230,10 +233,7 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
             myVoice->getIndexModAmpFreq (treeState.getRawParameterValue (INDEXMODFREQ_ID));
             
             
-            
-            
-            
-        }
+            }
     }
     
     

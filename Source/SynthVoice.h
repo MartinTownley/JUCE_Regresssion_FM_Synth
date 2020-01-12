@@ -226,6 +226,9 @@ public:
     
     
     //==========================================
+public:
+    int _attack;
+    int _release;
     
 private:
     double level;
@@ -237,8 +240,7 @@ private:
     double mod1freq;
     int harmRatio;
     
-    int _attack;
-    int _release;
+    
     
     //targets
     int targetAttack;
