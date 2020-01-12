@@ -228,11 +228,16 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
             myVoice->getOscType (treeState.getRawParameterValue (OSCMENU_ID));
             
             myVoice->getIndexModAmpFreq (treeState.getRawParameterValue (INDEXMODFREQ_ID));
-                               
+            
+            
+            
             
             
         }
     }
+    
+    
+    
     
     //std::cout << treeState.getRawParameterValue(ONOFF_ID);
     //ScopedNoDenormals noDenormals;
@@ -283,6 +288,8 @@ AudioProcessorEditor* JuceSynthFrameworkAudioProcessor::createEditor()
 {
     return new JuceSynthFrameworkAudioProcessorEditor (*this);
 }
+
+
 
 //==============================================================================
 void JuceSynthFrameworkAudioProcessor::getStateInformation (MemoryBlock& destData)

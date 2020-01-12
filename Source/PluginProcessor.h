@@ -64,6 +64,7 @@ public:
     AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;
 
+   
     //==============================================================================
     const String getName() const override;
 

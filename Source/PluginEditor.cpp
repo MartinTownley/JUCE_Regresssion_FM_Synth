@@ -71,6 +71,8 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     connect(6448);
     //add this component as listener
     addListener(this, "/juce");
+    
+    addListener(this, "/train");
    //==========
     
     
@@ -125,16 +127,38 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
 //implement the OSC receiver class as it's a pure virtual function so won't work uninitialised:
 void JuceSynthFrameworkAudioProcessorEditor::oscMessageReceived (const OSCMessage &message)
 {
-    if (message.size() == 2 && message[0].isFloat32())
+    if (message.size() == 4 && message[0].isFloat32())
     {
         theZed = message[0].getFloat32();
         theEx = message[1].getFloat32();
         
+        //set recording and running booleans
+        isRecording = message[2].getInt32();
+        isRunning = message[3].getInt32();
+        
+        
+        
 //        std::cout << "z: " << theZed
 //        << std::endl << "x: " << theEx
 //        << std::endl;
+        
+        //std::cout << isRecording << std::endl;
+        
     }
-    //std::cout << "oscReceived" <<std::endl;
+    
+  
+    
+    controllerRecord(rollAndPitch(theEx, theZed));
+       
+        
+        //std::cout << rollAndPitch(theEx,theZed)[0] << std::endl;
+        //std::cout << rollAndPitch(theEx,theZed)[1] << std::endl;
+    
+    
+    
+    
+    
+    
 }
 
 std::vector<double> JuceSynthFrameworkAudioProcessorEditor::rollAndPitch(const float& _ex, const float& _zed)
@@ -143,25 +167,31 @@ std::vector<double> JuceSynthFrameworkAudioProcessorEditor::rollAndPitch(const f
     temp.resize(2);
     temp[0] = double(_ex);
     temp[1] = double(_zed);
-    std::cout << temp[1];
+    //std::cout << temp[1];
     return temp;
-    std::cout << "rollandpitch" <<std::endl;
+    //std::cout << "rollandpitch" <<std::endl;
 }
 
-void JuceSynthFrameworkAudioProcessorEditor::controllerMove (const double& exEvent, const double& zedEvent)
-{
-    //if(KeyPress::isKeyCurrentlyDown(KeyPress::spaceKey))
+void JuceSynthFrameworkAudioProcessorEditor::controllerRecord(const std::vector<double>& XandZ){
     
-        std::vector<double> input = rollAndPitch(theZed, theEx);
-        
-        std::cout<< input[0] <<std::endl;
-        std::cout<< input[0] <<std::endl;
+    if (isRecording)
+    {
     
+       
+    std::vector<double> input = XandZ;
+    std::cout<< "x= "<<  input[0] <<std::endl;
+        std::cout<< "z= " << input[1] << std::endl;
     
-    //std::vector<double> input = rollAndPitch(theZed, theEx);
-    std::cout << "controllerMove" <<std::endl;
+        trainingExample example;
+        example.input = { input[0], input[1]};
+        example.output = {};
+    
+    }
+
     
 }
+
+
 
 
 

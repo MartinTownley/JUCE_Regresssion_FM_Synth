@@ -40,7 +40,7 @@ public:
     
     std::vector<double> rollAndPitch(const float& _ex, const float& _zed);
     
-    void controllerMove (const double& exEvent, const double& zedEvent);
+    void controllerRecord (const std::vector<double>& XandZ);
     
     
 
@@ -65,6 +65,9 @@ private:
     FMod fmodGUI;
     
     MLGui mlGUI;
+    
+    bool isRecording; //triangle button
+    bool isRunning; //x button
 
     
     //OSC params
@@ -74,6 +77,7 @@ private:
     //RAPIDMIX
     regression rapidRegression;
     std::vector<trainingExample> trainingSet;
+    
     
     
     TextButton onOff;

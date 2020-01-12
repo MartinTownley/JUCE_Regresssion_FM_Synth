@@ -87,7 +87,13 @@ public:
     }
     
     
+    void getControllerData(float* CONTROLLER_Z)
     
+    {
+        float ZED = *CONTROLLER_Z;
+        std::cout << ZED << std::endl;
+        
+    }
     
     //==========================================
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition)
