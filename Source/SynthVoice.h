@@ -13,11 +13,15 @@
 
 #include "maximilian.h"
 
+#include "ControllerOSC.h"
+
+#include "MLGui.h"
+
+
 
 class SynthVoice : public SynthesiserVoice
 {
 public:
-    
     
     
     bool canPlaySound (SynthesiserSound* sound)
@@ -39,6 +43,7 @@ public:
         targetRelease = (int(*RELEASE_ID));
         
         
+        
     }
     
     //==========================================
@@ -50,6 +55,8 @@ public:
         
         // Modulation Index
         targetModIndex = (double(*MODINDEX_ID));
+        
+        //std::cout<<targetModIndex <<std::endl;
     }
     
     //==========================================
@@ -86,14 +93,30 @@ public:
         }
     }
     
-    
-    void getControllerData(float* CONTROLLER_Z)
-    
+    void getOSCData (bool ISRECORDINGBOOL_ID, bool ISRUNNINGBOOL_ID, float THEZED_ID, float THEEX_ID)
     {
-        float ZED = *CONTROLLER_Z;
-        std::cout << ZED << std::endl;
+        _isRecording =  ISRECORDINGBOOL_ID;
+        _isRunning = ISRUNNINGBOOL_ID;
+        _theZed = THEZED_ID;
+        _theEx = THEEX_ID;
         
+        //works
+        //std::cout << _theZed << std::endl;
     }
+    
+    
+//    void getTrained (float *TRAIN_ID)
+//    {
+//        
+//        
+//        
+//        
+//        _trained = *TRAIN_ID;
+//    
+//        
+//        
+//    }
+    
     
     //==========================================
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition)
@@ -109,8 +132,48 @@ public:
         //reset the lfo phase on keypress
         modulator1.phaseReset(0);
         
-        std::cout << midiNoteNumber << std::endl;
+        //std::cout << midiNoteNumber << std::endl;
+        
+        //std::cout << controller.getRecording() << std::endl;
+        
+        
+        
     }
+    
+    // Holding the triangle button records data into the regression model:
+    
+    //std::vector<double>& XandZ
+    
+    void controllerRecord ()
+    {
+        if(_isRecording)
+        {
+            
+            std::vector<double> ZandX = { _theZed, _theEx};
+            
+            //std::cout << ZandX[1] <<std::endl;
+            
+            std::vector<double>& input = ZandX;
+            
+            //std::cout << input.size() <<std::endl;
+//
+            trainingExample example;
+           example.input = { input[0], input[1]};
+            example.output = { static_cast<double>(_attack), static_cast<double>(_release), static_cast<double>(harmRatio), modIndex};
+            //std::cout<< example.input[0] <<std::endl;
+            trainingSet.push_back(example);
+        }
+        //std::cout << trainingSet.size() << std::endl;
+        
+    
+    }
+    
+    
+
+    
+
+    
+    
     
     //==========================================
     
@@ -145,6 +208,9 @@ public:
     }
     
     //==========================================
+    
+    
+                                         
     
     void renderNextBlock (AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
     {
@@ -224,23 +290,40 @@ public:
         
     }
     
+    //void getOSC
+    
     
     //==========================================
 public:
     int _attack;
     int _release;
     
+    //======
+    double modIndex;
+    int harmRatio;
+    //======
+    
+    
 private:
     double level;
     double carrierFreq;
     double mod0freq;
     double mod0amp;
-    double modIndex;
+    
+    regression rapidRegression;
+    std::vector<trainingExample> trainingSet;
+    
+    
+    
     double mod1amp;
     double mod1freq;
-    int harmRatio;
     
+    float _trained;
     
+    bool _isRecording;
+    int _isRunning;
+    float _theZed;
+    float _theEx;
     
     //targets
     int targetAttack;
@@ -259,4 +342,6 @@ private:
     
     maxiEnv env1;
     //maxiFilter filter1;
+    
+    //ControllerOSC controller;
 };

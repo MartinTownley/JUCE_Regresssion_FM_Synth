@@ -13,6 +13,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "SynthVoice.h"
 #include "SynthSound.h"
+#include "ControllerOSC.h"
+#include "MLGui.h"
 
 #define ATTACK_ID "attack"
 #define ATTACK_NAME "Attack"
@@ -36,6 +38,17 @@
 #define INDEXMODFREQ_ID "indexModFreq"
 #define INDEXMODFREQ_NAME "IndexModFreq"
 
+#define RECORDINGBOOL_ID "isRecording"
+#define RECORDINGBOOL_NAME "IsRecording"
+
+#define THEZED_ID "theZed"
+#define THEZED_NAME "TheZed"
+
+#define THEEX_ID "theEx"
+#define THEEX_NAME "TheEx"
+
+#define TRAIN_ID "trainButton"
+#define TRAIN_NAME "TrainButton"
 
 
 
@@ -94,10 +107,15 @@ public:
     // Create a parameter method
     AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
+    ControllerOSC controller;
+    //MLGui MLinstance;
+    
 
 private:
     Synthesiser mySynth;
     SynthVoice* myVoice;
+    
+    
     
     double lastSampleRate;
     

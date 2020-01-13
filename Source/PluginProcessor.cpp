@@ -75,6 +75,8 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
     
     
     auto indexModFreqParam = std::make_unique<AudioParameterFloat>(INDEXMODFREQ_ID, INDEXMODFREQ_NAME, 0.0f, 10.0f, 1.0f);
+    
+    auto trainButtonParam = std::make_unique<AudioParameterBool> (TRAIN_ID, TRAIN_NAME, false);
     //for (int i = 1; i < 9; ++i)
     //{
         // std::move actually moves the object, rather than making a copy then deleting it. More efficient:
@@ -85,6 +87,7 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
     params.push_back (std::move(modIndexParam));
     params.push_back (std::move(oscSelectParam));
     params.push_back (std::move(indexModFreqParam));
+    params.push_back (std::move(trainButtonParam));
     
     
     //params.push_back (std::move(choiceParam));
@@ -232,6 +235,12 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
             
             myVoice->getIndexModAmpFreq (treeState.getRawParameterValue (INDEXMODFREQ_ID));
             
+            myVoice->getOSCData(controller.getIsRecording(), controller.getIsRunning(), controller.getTheZed(), controller.getTheEx());
+            
+//
+            myVoice->controllerRecord();
+            
+            //myVoice->getTrained(MLinstance.getTestBool());
             
             }
     }

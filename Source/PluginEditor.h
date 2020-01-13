@@ -21,9 +21,7 @@
 //==============================================================================
 /**
 */
-class JuceSynthFrameworkAudioProcessorEditor  : public                  AudioProcessorEditor,
-        public OSCReceiver,
-        public OSCReceiver::ListenerWithOSCAddress<OSCReceiver::MessageLoopCallback>
+class JuceSynthFrameworkAudioProcessorEditor  : public                  AudioProcessorEditor
 
         //public OSCReceiver,
 //public OSCReceiver::ListenerWithOSCAddress<OSCReceiver::MessageLoopCallback>
@@ -36,7 +34,7 @@ public:
     //==============================================================================
     void paint (Graphics&) override;
     void resized() override;
-    void oscMessageReceived (const OSCMessage &message) override;
+    
     
     std::vector<double> rollAndPitch(const float& _ex, const float& _zed);
     
@@ -73,6 +71,8 @@ private:
     //OSC params
     float theZed;
     float theEx;
+    
+    //
     
     //RAPIDMIX
     regression rapidRegression;

@@ -34,7 +34,7 @@ private:
     // attach oscillator menu
     std::unique_ptr <AudioProcessorValueTreeState::ComboBoxAttachment> oscMenuAttach;
     
-    
+    bool test;
     
     
     // modindex amplitude modulator frequency dial

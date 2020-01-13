@@ -17,6 +17,8 @@ processor(p)
 {
     setSize(200, 200);
     
+   
+    
     // MENU
     oscMenu.addItem("OFF", 1);
     oscMenu.addItem("SINE", 2);
@@ -51,6 +53,8 @@ void Oscillator::paint (Graphics& g)
     g.setFont (14.0f);
     g.drawText ("FMod", getLocalBounds(),
                 Justification::centred, true);   // draw some placeholder text
+    
+    
 }
 
 void Oscillator::resized()
