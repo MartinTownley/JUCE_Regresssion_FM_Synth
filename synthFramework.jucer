@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="vtuibJ" name="synthFramework" projectType="audioplug" jucerVersion="5.4.5"
+<JUCERPROJECT id="vtuibJ" name="synthFramework" projectType="audioplug" jucerVersion="5.4.7"
               pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="OMnIBC" name="synthFramework">
     <GROUP id="{B7F7B41C-91B3-DF48-558F-005CE038E0FF}" name="Source">
