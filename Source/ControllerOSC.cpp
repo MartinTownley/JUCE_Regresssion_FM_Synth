@@ -40,8 +40,8 @@ void ControllerOSC::oscMessageReceived(const OSCMessage &message)
         isRunning = message[3].getInt32();
         
         
-        
-                //std::cout << isRecording << std::endl;
+        //DBG(isRecording);
+        //std::cout << theEx << std::endl;
         
         //std::cout << isRecording << std::endl;
         
@@ -56,14 +56,14 @@ void ControllerOSC::oscMessageReceived(const OSCMessage &message)
 
 
 // returns a temporary vector of x and z
-std::vector<double> rollAndPitch(const float& _ex, const float& _zed)
-{
-    std::vector<double> temp;
-    temp.resize(2);
-    temp[0] = double(_ex);
-    temp[1] = double(_zed);
-    return temp;
-}
+//std::vector<double> rollAndPitch(const float& _ex, const float& _zed)
+//{
+//    std::vector<double> temp;
+//    temp.resize(2);
+//    temp[0] = double(_ex);
+//    temp[1] = double(_zed);
+//    return temp;
+//}
 
 bool& ControllerOSC::getIsRecording(){
     

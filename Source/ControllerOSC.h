@@ -58,8 +58,9 @@ private:
     //double _harmRatio;
     //double _modIndex;
     
-    regression rapidRegression;
-    std::vector <trainingExample> trainingSet;
+    //These are in synthvoice.
+    //regression rapidRegression;
+    //std::vector <trainingExample> trainingSet;
     
     
 };

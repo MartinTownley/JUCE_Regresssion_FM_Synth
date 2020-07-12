@@ -125,7 +125,7 @@ public:
         _theEx = THEEX_ID;
         
         //works
-        //std::cout << _theZed << std::endl;
+        //std::cout << _theEx << std::endl;
     }
     
     
@@ -192,8 +192,10 @@ public:
             
             //std::cout<< example.input[0] <<std::endl;
             trainingSet.push_back(example);
+            
+            std::cout << trainingSet.size() << std::endl;
         }
-        //std::cout << trainingSet.size() << std::endl;
+        
         
     
     }
@@ -365,6 +367,7 @@ private:
     double mod0freq;
     double mod0amp;
     
+    // RapidLib Stuff.
     regression rapidRegression;
     std::vector<trainingExample> trainingSet;
     

@@ -13,8 +13,8 @@
 
 //==============================================================================
 JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (JuceSynthFrameworkAudioProcessor& p)
-: AudioProcessorEditor (&p), processor (p), oscGUI(p), envGUI(p), fmodGUI(p)
-//, mlGUI(p)
+: AudioProcessorEditor (&p), processor (p), oscGUI(p), envGUI(p), fmodGUI(p), mlGUI(p)
+
 {
     setSize(1000,300);
     
@@ -26,7 +26,7 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     
     addAndMakeVisible(&envGUI);
     
-    //addAndMakeVisible(&mlGUI);
+    addAndMakeVisible(&mlGUI);
     
     //labels:
     //attack:
@@ -121,9 +121,9 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     
     oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
-    //mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+    mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
-    std::cout << "resized" << std::endl;
+    //std::cout << "resized" << std::endl;
 }
 
 //implement the OSC receiver class as it's a pure virtual function so won't work uninitialised:
