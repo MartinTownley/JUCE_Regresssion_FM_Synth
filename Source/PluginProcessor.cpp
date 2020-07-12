@@ -24,12 +24,10 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                        ),
 
 // pre defines
-treeState(*this, nullptr, "PARAMETERS", createParameterLayout()) 
+mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout()) 
 #endif
 {
     //constuctor
-    
-    //NormalisableRange<float> attackParam (0.1f, 5000.0f); //re-maps this to 0 and 1 (not defo true)
     
     
     // Clear voices, get rid of garbage:
@@ -62,9 +60,35 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
     
     //create variable that will go inside the treeState argument:
     //auto deduces return type for us:
-    auto attackParam = std::make_unique<AudioParameterInt> (ATTACK_ID, ATTACK_NAME, 10, 5000, 10);
+    auto attackParam = std::make_unique<AudioParameterFloat> (ATTACK_ID,
+                                                              ATTACK_NAME,
+                                                              0.1f,
+                                                              5.0f,
+                                                              0.1f);
+    //someParam = attackParam.get();
     
-    auto releaseParam = std::make_unique<AudioParameterInt> (RELEASE_ID, RELEASE_NAME, 10, 5000, 10);
+    
+    
+    //decay range: 0.1 seconds to 2 seconds
+    auto decayParam = std::make_unique<AudioParameterFloat>(DECAY_ID,
+                                                            DECAY_NAME,
+                                                            0.1f,
+                                                            2.0f,
+                                                            0.1f);
+    
+    //sustain range is 0.0 to 1
+    auto sustainParam = std::make_unique<AudioParameterFloat>(SUSTAIN_ID,
+                                                              SUSTAIN_NAME,
+                                                              0.1f,
+                                                              1.0f,
+                                                              1.0f);
+    
+    //release range: 0.1 seconds to 5 seconds
+    auto releaseParam = std::make_unique<AudioParameterFloat> (RELEASE_ID,
+                                                               RELEASE_NAME,
+                                                               0.1f,
+                                                               5.0f,
+                                                               2.0f);
     
     auto harmDialParam = std::make_unique<AudioParameterInt>(HARMDIAL_ID, HARMDIAL_NAME, 1, 128, 1);
     
@@ -83,6 +107,8 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
     
     params.push_back (std::move(attackParam));
     params.push_back (std::move(releaseParam));
+    params.push_back (std::move(decayParam));
+    params.push_back (std::move(sustainParam));
     params.push_back (std::move(harmDialParam));
     params.push_back (std::move(modIndexParam));
     params.push_back (std::move(oscSelectParam));
@@ -226,14 +252,32 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
         // If the voice is dynamically cast as a synth voice, relay the information:
         if (myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i)))
         {
-            myVoice->getADSR (treeState.getRawParameterValue (ATTACK_ID),
-                              treeState.getRawParameterValue (RELEASE_ID));
-                              
-            myVoice->getFMParams(treeState.getRawParameterValue (HARMDIAL_ID), treeState.getRawParameterValue(MODINDEXDIAL_ID) );
+            myVoice->setADSRSampleRate(lastSampleRate);
             
-            myVoice->getOscType (treeState.getRawParameterValue (OSCMENU_ID));
             
-            myVoice->getIndexModAmpFreq (treeState.getRawParameterValue (INDEXMODFREQ_ID));
+//            myVoice-> setADSR (mAPVTS.getRawParameterValue (ATTACK_ID)->load(),
+//                               mAPVTS.getRawParameterValue (DECAY_ID)->load(),
+//                               mAPVTS.getRawParameterValue (SUSTAIN_ID)->load(),
+//                               mAPVTS.getRawParameterValue (RELEASE_ID)->load() );
+
+            
+            myVoice-> setADSR (mAPVTS.getRawParameterValue (ATTACK_ID)->load(),
+                               mAPVTS.getRawParameterValue (DECAY_ID)->load(),
+                               mAPVTS.getRawParameterValue (SUSTAIN_ID)->load(),
+                               mAPVTS.getRawParameterValue(RELEASE_ID)->load() );
+                               
+                               
+                               
+            
+            myVoice-> setFMParams(mAPVTS.getRawParameterValue (HARMDIAL_ID)-> load(),
+                                  mAPVTS.getRawParameterValue(MODINDEXDIAL_ID)->load());
+            
+            myVoice-> setOscType(mAPVTS.getRawParameterValue(OSCMENU_ID)-> load());
+            
+            myVoice-> setIndexModAmpFreq(mAPVTS.getRawParameterValue(INDEXMODFREQ_ID)-> load());
+            
+            
+            //CONTROLLER:
             
             myVoice->getOSCData(controller.getIsRecording(), controller.getIsRunning(), controller.getTheZed(), controller.getTheEx());
             

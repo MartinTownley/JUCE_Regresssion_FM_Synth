@@ -20,19 +20,21 @@ class FMod    : public Component
 public:
     FMod(JuceSynthFrameworkAudioProcessor&);
     ~FMod();
-
+    
     void paint (Graphics&) override;
     void resized() override;
-
+    
 private:
     Slider harmDial;
     Slider modIndexDial;
     
     // harmdialAttach
     std::unique_ptr <AudioProcessorValueTreeState::SliderAttachment> harmDialAttach;
+    Label harmLabel;
     
     // modindexAttach
     std::unique_ptr <AudioProcessorValueTreeState::SliderAttachment> modIndexDialAttach;
+    Label modIndexLabel;
     
     
     // This reference is provided as a quick way for your editor to

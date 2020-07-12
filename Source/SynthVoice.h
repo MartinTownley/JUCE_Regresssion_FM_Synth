@@ -15,7 +15,7 @@
 
 #include "ControllerOSC.h"
 
-#include "MLGui.h"
+//#include "MLGui.h"
 
 
 
@@ -31,46 +31,70 @@ public:
     }
     //==========================================
     
-    void getADSR (float* ATTACK_ID, float* RELEASE_ID)
+//    void setADSR (float ATTACK_ID, float DECAY_ID, float SUSTAIN_ID, float RELEASE_ID)
+//    {
+//        // get parameter from the slider and pass to the attack variable:
+//
+//        //env1.setAttack(int(*ATTACK_ID));
+//
+//        //env1.setRelease(int(*RELEASE_ID));
+//
+////        targetAttack = (int(ATTACK_ID));
+////        targetRelease = (int(RELEASE_ID));
+////
+////        targetDecay = DECAY_ID;
+////        targetSustain = SUSTAIN_ID;
+//
+//        //=============
+//        adsrParams.attack = ATTACK_ID;
+//        adsrParams.decay = DECAY_ID;
+//        adsrParams.sustain = SUSTAIN_ID;
+//        adsrParams.release = RELEASE_ID;
+//
+//
+//    }
+
+    void setADSR (float ATTACK_ID, float DECAY_ID, float SUSTAIN_ID, float RELEASE_ID)
     {
-        // get parameter from the slider and pass to the attack variable:
-        
-        //env1.setAttack(int(*ATTACK_ID));
-        
-        //env1.setRelease(int(*RELEASE_ID));
-        
-        targetAttack = (int(*ATTACK_ID));
-        targetRelease = (int(*RELEASE_ID));
-        
-        
-        
+        adsrParams.attack = ATTACK_ID;
+        adsrParams.decay = DECAY_ID;
+        adsrParams.sustain = SUSTAIN_ID;
+        adsrParams.release = RELEASE_ID;
     }
     
+    //=============================================
+    
+    void setADSRSampleRate (double sampleRate)
+    {
+        adsr.setSampleRate (sampleRate);
+    }
+    
+    
     //==========================================
-    void getFMParams (float* HARMDIAL_ID, float* MODINDEX_ID)
+    void setFMParams (float HARMDIAL_ID, float MODINDEX_ID)
     {
         // Harmonicity Radio
-        targetHarmRatio = (int(*HARMDIAL_ID));
+        targetHarmRatio = (int(HARMDIAL_ID));
         //harmRatio = 100;
         
         // Modulation Index
-        targetModIndex = (double(*MODINDEX_ID));
+        targetModIndex = (double(MODINDEX_ID));
         
         //std::cout<<targetModIndex <<std::endl;
     }
     
     //==========================================
     
-    void getOscType (float* selection)
+    void setOscType (float selection)
     {
 //        std::cout << *selection << std::endl;
-        modulator1Type = (int(*selection));
+        modulator1Type = (int(selection));
     }
     //==========================================
     
-    void getIndexModAmpFreq (float* INDEXMODFREQ_ID)
+    void setIndexModAmpFreq (float INDEXMODFREQ_ID)
     {
-        mod1freq = (int(* INDEXMODFREQ_ID));
+        mod1freq = (int( INDEXMODFREQ_ID));
     }
     //==========================================
     double setOscType ()
@@ -123,7 +147,9 @@ public:
     {
         // Velocity will be a value between 0 and 1, instantiated when you press a key:
         
-        env1.trigger = 1;
+        //env1.trigger = 1;
+        
+        adsr.noteOn();
         
         level = velocity;
         
@@ -159,7 +185,11 @@ public:
 //
             trainingExample example;
            example.input = { input[0], input[1]};
-            example.output = { static_cast<double>(_attack), static_cast<double>(_release), static_cast<double>(harmRatio), modIndex};
+            
+            //example.output = { static_cast<double>(_attack), static_cast<double>(_release), static_cast<double>(harmRatio), modIndex};
+            
+            example.output = { static_cast<double>(harmRatio), modIndex};
+            
             //std::cout<< example.input[0] <<std::endl;
             trainingSet.push_back(example);
         }
@@ -184,10 +214,15 @@ public:
         
         // When we release a key, we want to be able to use that voice for the next key we press.
         // Allow tailOff boolean
+        
+        adsr.noteOff();
+        
         allowTailOff = true;
         
         
-        env1.trigger = 0;
+        //env1.trigger = 0;
+        
+        
         
         if (velocity == 0)
         {clearCurrentNote();} // Unused voice can be allocated to next keypress
@@ -221,24 +256,32 @@ public:
        
         // May not be best place to set these variables:
         //env1.setAttack(2000);
-        env1.setDecay(500);
-        env1.setSustain(0.8);
+        
+        mod1amp = 19;
+
+        adsr.setParameters(adsrParams);
         
         //env1.setAttack(targetAttack);
         //env1.setRelease(targetRelease);
+        //adsrParams.attack = targetAttack;
+        //adsrParams.release = targetRelease;
+        //adsrParams.decay = targetDecay;
+        //adsrParams.sustain = targetRelease;
         
-        //mod1freq = 2;
         //Code below is taken from the JUCE Regression Synth in the RapidMix examples folder:
         
-        const int localTargetAttack = targetAttack;
-        const int localTargetRelease = targetRelease;
+        //const int localTargetAttack = targetAttack;
+        //const int localTargetRelease = targetRelease;
+        //const double localTargetDecay = targetDecay;
+        //const double localTargetSustain = targetSustain;
         
         const int localTargetHarmRatio = targetHarmRatio;
         const double localTargetModIndex = targetModIndex;
         
-        const int attackDelta = (localTargetAttack != _attack) ? (targetAttack - _attack) / numSamples : 0;
-        const int releaseDelta = (localTargetRelease != _release) ? (targetRelease - _release) / numSamples : 0;
-        
+        //const int attackDelta = (localTargetAttack != _attack) ? (targetAttack - _attack) / numSamples : 0;
+        //const int releaseDelta = (localTargetRelease != _release) ? (targetRelease - _release) / numSamples : 0;
+        //const double decayDelta = (localTargetDecay != _decay) ? (targetDecay - _decay) / numSamples : 0;
+        //const double sustainDelta = (localTargetSustain != _sustain) ? (targetSustain - _sustain) / numSamples : 0;
         
         
         const int harmRatioDelta = (localTargetHarmRatio != harmRatio) ? (targetHarmRatio - harmRatio) / numSamples : 0;
@@ -246,14 +289,21 @@ public:
         
         for (int sample = 0; sample < numSamples; ++sample)
         {
-            mod1amp = 19;
+//            mod1amp = 19;
             
-            _attack += attackDelta;
-            _release += releaseDelta;
+            //_attack += attackDelta;
+            //_release += releaseDelta;
+            //_decay += decayDelta;
+            //_sustain += sustainDelta;
             
             //
-            env1.setAttack(_attack);
-            env1.setRelease(_release);
+            //env1.setAttack(_attack);
+            //env1.setRelease(_release);
+            
+            //adsrParams.attack = _attack;
+            //adsrParams.decay = _decay;
+            //adsrParams.sustain = _sustain;
+            //adsrParams.release = _release;
             
             harmRatio += harmRatioDelta;
             modIndex += modIndexDelta;
@@ -269,7 +319,7 @@ public:
                                                     + (modulator0.sinewave(mod0freq)
                                                        * (mod0amp * setOscType() )));
             
-            const double theSound = (env1.adsr(theWave, env1.trigger) * level);
+            const double theSound = adsr.getNextSample() * theWave;
             
             
             // Iterate the channels
@@ -285,8 +335,11 @@ public:
         }
         harmRatio = localTargetHarmRatio;
         modIndex = localTargetModIndex;
-        _attack = localTargetAttack;
-        _release = localTargetRelease;
+        
+        //_attack = localTargetAttack;
+        //_release = localTargetRelease;
+        //_decay = localTargetDecay;
+        //_sustain = localTargetSustain;
         
     }
     
@@ -295,8 +348,10 @@ public:
     
     //==========================================
 public:
-    int _attack;
-    int _release;
+    //int _attack;
+    //double _decay;
+    //double _sustain;
+    //int _release;
     
     //======
     double modIndex;
@@ -313,7 +368,9 @@ private:
     regression rapidRegression;
     std::vector<trainingExample> trainingSet;
     
-    
+    //JUCE ADSR (not Maxi):
+    ADSR adsr;
+    ADSR::Parameters adsrParams;
     
     double mod1amp;
     double mod1freq;
@@ -326,8 +383,11 @@ private:
     float _theEx;
     
     //targets
-    int targetAttack;
-    int targetRelease;
+    //int targetAttack;
+    
+   // int targetRelease;
+    //double targetDecay;
+    //double targetSustain;
     
     double targetModIndex;
     int targetHarmRatio;
@@ -340,7 +400,7 @@ private:
     //Create an oscillator:
     maxiOsc carrier, modulator0, modulator1;
     
-    maxiEnv env1;
+    //maxiEnv env1;
     //maxiFilter filter1;
     
     //ControllerOSC controller;

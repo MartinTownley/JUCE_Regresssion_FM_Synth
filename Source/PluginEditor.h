@@ -16,7 +16,8 @@
 #include "Oscillator.h"
 #include "Envelope.h"
 #include "FMod.h"
-#include "MLGui.h"
+
+//#include "MLGui.h"
 
 //==============================================================================
 /**
@@ -62,7 +63,7 @@ private:
     
     FMod fmodGUI;
     
-    MLGui mlGUI;
+    //MLGui mlGUI;
     
     bool isRecording; //triangle button
     bool isRunning; //x button

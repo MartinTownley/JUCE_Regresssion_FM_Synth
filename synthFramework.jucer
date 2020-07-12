@@ -4,6 +4,8 @@
               pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="OMnIBC" name="synthFramework">
     <GROUP id="{B7F7B41C-91B3-DF48-558F-005CE038E0FF}" name="Source">
+      <FILE id="boaDIE" name="myMLGui.cpp" compile="1" resource="0" file="Source/myMLGui.cpp"/>
+      <FILE id="X1OBTS" name="myMLGui.h" compile="0" resource="0" file="Source/myMLGui.h"/>
       <GROUP id="{46CBB5C4-D9C2-EC30-0C14-27DE605B7B19}" name="RapidLib">
         <GROUP id="{DCC878A1-664E-5271-3F74-4FA72F7F45C4}" name="dependencies">
           <GROUP id="{175EF088-2769-EC43-6584-02BA8A3005EB}" name="bayesfilter">
@@ -129,8 +131,6 @@
             file="Source/PluginProcessor.h"/>
       <FILE id="WMpDkS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <FILE id="qwarDA" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
-      <FILE id="GCpXuf" name="MLGui.cpp" compile="1" resource="0" file="Source/MLGui.cpp"/>
-      <FILE id="gaAYNd" name="MLGui.h" compile="0" resource="0" file="Source/MLGui.h"/>
       <FILE id="NdwtJ7" name="ControllerOSC.cpp" compile="1" resource="0"
             file="Source/ControllerOSC.cpp"/>
       <FILE id="CxW3X4" name="ControllerOSC.h" compile="0" resource="0" file="Source/ControllerOSC.h"/>

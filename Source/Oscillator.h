@@ -17,30 +17,31 @@
 /*
 */
 class Oscillator    : public Component,
-                        private ComboBox::Listener
+private ComboBox::Listener
 {
 public:
     Oscillator(JuceSynthFrameworkAudioProcessor&);
     ~Oscillator();
-
+    
     void paint (Graphics&) override;
     void resized() override;
     
     void comboBoxChanged (ComboBox*) override;
-
+    
 private:
     // oscillator menu
     ComboBox oscMenu;
     // attach oscillator menu
     std::unique_ptr <AudioProcessorValueTreeState::ComboBoxAttachment> oscMenuAttach;
+    Label oscMenuLabel;
     
-    bool test;
     
     
     // modindex amplitude modulator frequency dial
     Slider indexAmpModFreqDial;
     // attach indexAmpModFreq dial
     std::unique_ptr <AudioProcessorValueTreeState::SliderAttachment> indexAmpModFreqAttach;
+    Label indexAmpModFreqDialLabel;
     
     
     // This reference is provided as a quick way for your editor to

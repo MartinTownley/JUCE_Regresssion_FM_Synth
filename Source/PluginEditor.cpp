@@ -13,7 +13,8 @@
 
 //==============================================================================
 JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (JuceSynthFrameworkAudioProcessor& p)
-: AudioProcessorEditor (&p), processor (p), oscGUI(p), envGUI(p), fmodGUI(p), mlGUI(p)
+: AudioProcessorEditor (&p), processor (p), oscGUI(p), envGUI(p), fmodGUI(p)
+//, mlGUI(p)
 {
     setSize(1000,300);
     
@@ -25,7 +26,7 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     
     addAndMakeVisible(&envGUI);
     
-    addAndMakeVisible(&mlGUI);
+    //addAndMakeVisible(&mlGUI);
     
     //labels:
     //attack:
@@ -64,7 +65,7 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
    
     //otherLookAndFeel.createSliderTextBox(dial);
     
-    envGUI.releaseSlider.setValue(200);
+    //envGUI.releaseSlider.setValue(200);
    
     //=========
     //OSC STUFF:;
@@ -113,13 +114,14 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     //const int componentWidth = 200;
     //const int componentHeight = 200;
     
-    envGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+    envGUI.setBounds(area.removeFromLeft(componentWidth*2).removeFromTop(componentHeight));
     
     fmodGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
+    
     oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
-    mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+    //mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
     std::cout << "resized" << std::endl;
 }

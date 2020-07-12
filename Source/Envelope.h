@@ -14,29 +14,41 @@
 #include "PluginProcessor.h"
 //==============================================================================
 /*
-*/
+ */
 class Envelope    : public Component
 {
 public:
     Envelope(JuceSynthFrameworkAudioProcessor&);
     ~Envelope();
-
+    
     void paint (Graphics&) override;
     void resized() override;
-
+    
+private:
+    //attackSlider & attachment
     Slider attackSlider;
     
-    Slider releaseSlider;
-
-protected:
-    
-    //attackAttach
     std::unique_ptr <AudioProcessorValueTreeState::SliderAttachment> attackAttach;
+    Label attackLabel;
+    
+    //decaySlider & attachment
+    Slider decaySlider;
+    std::unique_ptr <AudioProcessorValueTreeState::SliderAttachment> decayAttach;
+    Label decayLabel;
+    //
+    //
+    //sustainSlider & attachment
+    Slider sustainSlider;
+    std::unique_ptr <AudioProcessorValueTreeState::SliderAttachment> sustainAttach;
+    Label sustainLabel;
     
     
-    
-    //releaseAttach
+    //releaseSlider & attachment
+    Slider releaseSlider;
     std::unique_ptr <AudioProcessorValueTreeState::SliderAttachment> releaseAttach;
+    Label releaseLabel;
+    
+    
     
     
     

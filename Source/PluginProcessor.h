@@ -14,13 +14,20 @@
 #include "SynthVoice.h"
 #include "SynthSound.h"
 #include "ControllerOSC.h"
-#include "MLGui.h"
+
+//#include "MLGui.h"
 
 #define ATTACK_ID "attack"
 #define ATTACK_NAME "Attack"
 
  #define RELEASE_ID "release"
 #define RELEASE_NAME "Release"
+
+#define DECAY_ID "decay"
+#define DECAY_NAME "Decay"
+
+#define SUSTAIN_ID "sustain"
+#define SUSTAIN_NAME "Sustain"
 
 #define HARMDIAL_ID "harmDial"
 #define HARMDIAL_NAME "HarmDial"
@@ -101,11 +108,11 @@ public:
     //float releaseTime;
     
     
-    AudioProcessorValueTreeState treeState;
+    AudioProcessorValueTreeState& getAPVTS() {return mAPVTS;};
     
     // Tutorial 44- 21:52
     // Create a parameter method
-    AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    
     
     ControllerOSC controller;
     //MLGui MLinstance;
@@ -119,7 +126,8 @@ private:
     
     double lastSampleRate;
     
-    
+    AudioProcessorValueTreeState mAPVTS;
+    AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JuceSynthFrameworkAudioProcessor)
