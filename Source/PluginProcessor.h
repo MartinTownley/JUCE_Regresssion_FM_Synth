@@ -62,7 +62,8 @@
 //==============================================================================
 /**
 */
-class JuceSynthFrameworkAudioProcessor  : public AudioProcessor
+class JuceSynthFrameworkAudioProcessor  : public AudioProcessor,
+public Timer
 
 {
 public:
@@ -106,6 +107,8 @@ public:
     
     void testerButton();
     
+    //------Timer Callback
+    void timerCallback() override;
     
     //float attackTime;
     //float releaseTime;

@@ -27,7 +27,7 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
 mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout()) 
 #endif
 {
-    //constuctor
+    //constructor
     
     
     // Clear voices, get rid of garbage:
@@ -43,6 +43,9 @@ mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout())
     mySynth.clearSounds();
     //add sounds
     mySynth.addSound(new SynthSound());
+    
+    // Max msp hi object polls every 20ms, which is 50Hz
+    Timer::startTimerHz(50);
 }
 //===================================
 
@@ -290,9 +293,7 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
             }
     }
     
-    myVoice->controllerRecord();
     
-    myVoice->getOSCData(controller.getIsRecording(), controller.getIsRunning(), controller.getTheZed(), controller.getTheEx());
     
     
     //std::cout << treeState.getRawParameterValue(ONOFF_ID);
@@ -363,8 +364,19 @@ void JuceSynthFrameworkAudioProcessor::setStateInformation (const void* data, in
 
 void JuceSynthFrameworkAudioProcessor::testerButton ()
 {
-    std::cout << "working" << std::endl;
-    //myVoice->
+    
+    myVoice->trainModel();
+    // create function in myVoice that trains the model.
+}
+
+void JuceSynthFrameworkAudioProcessor::timerCallback()
+{
+    //std::cout << "timer Callback" << std::endl;
+    
+    myVoice->controllerRecord();
+    
+    myVoice->getOSCData(controller.getIsRecording(), controller.getIsRunning(), controller.getTheZed(), controller.getTheEx());
+    
 }
 
 

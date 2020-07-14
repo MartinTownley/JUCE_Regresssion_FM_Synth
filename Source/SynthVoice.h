@@ -217,7 +217,7 @@ public:
             
             if(input.size() > 0)
             {
-                std::cout << input[0] <<std::endl;
+                //std::cout << input[0] <<std::endl;
             }
         }
         
@@ -358,7 +358,12 @@ public:
         
     }
     
-    //void getOSC
+    void trainModel()
+    {
+        std::cout << _trained << std::endl;
+        _trained = rapidRegression.train(trainingSet);
+        std::cout <<_trained << std::endl;
+    }
     
     
     //==========================================
