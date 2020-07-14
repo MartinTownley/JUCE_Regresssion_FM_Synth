@@ -82,7 +82,7 @@ private:
     
     
     
-    TextButton onOff;
+    //TextButton onOff;
     
     //ComboBox modChoice;
     

@@ -59,22 +59,6 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     //attackSlider.setLookAndFeel(&otherLookAndFeel);
    
     
-
-    
-    // Mod index
-   
-    //otherLookAndFeel.createSliderTextBox(dial);
-    
-    //envGUI.releaseSlider.setValue(200);
-   
-    //=========
-    //OSC STUFF:;
-    //connect(6448);
-    //add this component as listener
-    //addListener(this, "/juce");
-    
-    //addListener(this, "/train");
-   //==========
     
     
 }

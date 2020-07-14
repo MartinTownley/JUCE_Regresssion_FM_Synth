@@ -245,6 +245,12 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
     
     // Iterate over the synth voices:
     
+    //CONTROLLER:
+    
+    //
+    
+    //
+    
     
     
     for (int i=0; i < mySynth.getNumVoices(); i++)
@@ -277,19 +283,16 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
             myVoice-> setIndexModAmpFreq(mAPVTS.getRawParameterValue(INDEXMODFREQ_ID)-> load());
             
             
-            //CONTROLLER:
             
-            myVoice->getOSCData(controller.getIsRecording(), controller.getIsRunning(), controller.getTheZed(), controller.getTheEx());
             
-//
-            myVoice->controllerRecord();
-            
-            //myVoice->getTrained(MLinstance.getTestBool());
+            //myVoice->setTrainState(mAPVTS.getRawParameterValue (TRAIN_ID)-> load());
             
             }
     }
     
+    myVoice->controllerRecord();
     
+    myVoice->getOSCData(controller.getIsRecording(), controller.getIsRunning(), controller.getTheZed(), controller.getTheEx());
     
     
     //std::cout << treeState.getRawParameterValue(ONOFF_ID);
@@ -356,6 +359,12 @@ void JuceSynthFrameworkAudioProcessor::setStateInformation (const void* data, in
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+}
+
+void JuceSynthFrameworkAudioProcessor::testerButton ()
+{
+    std::cout << "working" << std::endl;
+    //myVoice->
 }
 
 

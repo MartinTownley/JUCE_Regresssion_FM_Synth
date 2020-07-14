@@ -16,7 +16,8 @@
 //==============================================================================
 /*
 */
-class MLComponent    : public Component
+class MLComponent    : public Component,
+private Button::Listener
 {
 public:
     MLComponent(JuceSynthFrameworkAudioProcessor&);
@@ -24,8 +25,20 @@ public:
 
     void paint (Graphics&) override;
     void resized() override;
+    
+    void buttonClicked(Button* button) override;
+    
+    
 
 private:
+    TextButton trainButton;
+    
+    //trainButtonAttach
+    std::unique_ptr <AudioProcessorValueTreeState::ButtonAttachment> trainButtonAttach;
+    
+    //Label trainLabel;
+    
+    
     JuceSynthFrameworkAudioProcessor& processor;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MLComponent)

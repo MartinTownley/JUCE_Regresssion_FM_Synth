@@ -84,5 +84,6 @@ void Oscillator::resized()
 void Oscillator::comboBoxChanged(ComboBox* box)
 {
     //have to implement this function for it to work, but we're not going to be using it.
+    //std::cout<< "box changed" << std:: endl;
 }
 

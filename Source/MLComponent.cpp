@@ -17,7 +17,23 @@ processor(p)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
-
+    trainButton.setColour(TextButton::buttonColourId, Colours::wheat);
+    trainButton.setColour(TextButton::textColourOffId, Colours::white);
+    trainButton.setButtonText("Train");
+    
+    //Attach
+    //trainButton.setClickingToggleState (true);
+    addAndMakeVisible(&trainButton);
+    
+    trainButton.addListener(this);
+    
+    trainButtonAttach = std::make_unique <AudioProcessorValueTreeState::ButtonAttachment> (processor.getAPVTS(), TRAIN_ID, trainButton);
+    //Label
+    //addAndMakeVisible(trainLabel);
+    
+    trainButton.onClick = [&]() { processor.testerButton(); };
+    
+    
 }
 
 MLComponent::~MLComponent()
@@ -48,5 +64,20 @@ void MLComponent::resized()
 {
     // This method is where you should set the bounds of any child
     // components that your component contains..
+    auto bounds = getLocalBounds();
+    const int componentSize { 100 };
+    
+    trainButton.setBounds (bounds.removeFromLeft(100).withSizeKeepingCentre(componentSize, componentSize));
 
+}
+
+void MLComponent::buttonClicked(Button* button)
+{
+    //std::cout << "buttonclicked" <<std::endl;
+    if (button == &trainButton)
+    {
+        std::cout << "Button Clicked" << std::endl;
+    }
+    
+    
 }

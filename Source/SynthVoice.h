@@ -14,6 +14,7 @@
 #include "maximilian.h"
 
 #include "ControllerOSC.h"
+//#include "MLComponent.h"
 
 //#include "MLGui.h"
 
@@ -89,6 +90,8 @@ public:
     {
 //        std::cout << *selection << std::endl;
         modulator1Type = (int(selection));
+        
+        //std::cout<<modulator1Type<<std::endl;
     }
     //==========================================
     
@@ -97,6 +100,27 @@ public:
         mod1freq = (int( INDEXMODFREQ_ID));
     }
     //==========================================
+    
+    //Train button
+    
+    void setTrainState(bool TRAIN_ID)
+    {
+        _trained = (TRAIN_ID);
+
+//        if (trainingSet.size() > 2)
+//        {
+//        std::cout << _trained << std::endl;
+//        _trained = rapidRegression.train(trainingSet);
+//        std::cout << _trained << std:: endl;
+//
+//        }
+    }
+
+    
+    
+    
+    //==========================================
+    
     double setOscType ()
     {
 
@@ -125,7 +149,7 @@ public:
         _theEx = THEEX_ID;
         
         //works
-        //std::cout << _theEx << std::endl;
+        
     }
     
     
@@ -161,16 +185,11 @@ public:
         //std::cout << midiNoteNumber << std::endl;
         
         //std::cout << controller.getRecording() << std::endl;
-        
-        
-        
     }
     
     // Holding the triangle button records data into the regression model:
     
-    //std::vector<double>& XandZ
-    
-    void controllerRecord ()
+   void controllerRecord ()
     {
         if(_isRecording)
         {
@@ -182,9 +201,9 @@ public:
             std::vector<double>& input = ZandX;
             
             //std::cout << input.size() <<std::endl;
-//
+
             trainingExample example;
-           example.input = { input[0], input[1]};
+            example.input = { input[0], input[1]};
             
             //example.output = { static_cast<double>(_attack), static_cast<double>(_release), static_cast<double>(harmRatio), modIndex};
             
@@ -193,19 +212,18 @@ public:
             //std::cout<< example.input[0] <<std::endl;
             trainingSet.push_back(example);
             
-            std::cout << trainingSet.size() << std::endl;
+            //std::cout << trainingSet.size() << std::endl;
+            //std::cout << _trained << std::endl;
+            
+            if(input.size() > 0)
+            {
+                std::cout << input[0] <<std::endl;
+            }
         }
         
         
     
     }
-    
-    
-
-    
-
-    
-    
     
     //==========================================
     
@@ -220,11 +238,6 @@ public:
         adsr.noteOff();
         
         allowTailOff = true;
-        
-        
-        //env1.trigger = 0;
-        
-        
         
         if (velocity == 0)
         {clearCurrentNote();} // Unused voice can be allocated to next keypress
@@ -355,30 +368,44 @@ public:
     //double _sustain;
     //int _release;
     
-    //======
-    double modIndex;
-    int harmRatio;
-    //======
+    
     
     
 private:
+    
+    //== MACHINE LEARNABLE PARAMS ==
+    
+    // FM Synthesis parameters
+    double modIndex;
+    int harmRatio;
+    
+    double targetModIndex;
+    int targetHarmRatio;
+    
+    // LFO Parameter
+    double mod1freq;
+    
+    
+    
+    //== OTHER VARIABLES ==
     double level;
     double carrierFreq;
     double mod0freq;
     double mod0amp;
+    double mod1amp;
     
-    // RapidLib Stuff.
+    
+    //== RAPIDLIB ==
     regression rapidRegression;
     std::vector<trainingExample> trainingSet;
     
-    //JUCE ADSR (not Maxi):
+    //== JUCE ADSR (not Maxi) ==
     ADSR adsr;
     ADSR::Parameters adsrParams;
     
-    double mod1amp;
-    double mod1freq;
     
-    float _trained;
+    
+    bool _trained;
     
     bool _isRecording;
     int _isRunning;
@@ -392,19 +419,17 @@ private:
     //double targetDecay;
     //double targetSustain;
     
-    double targetModIndex;
-    int targetHarmRatio;
+    
     
     bool isModulator;
     //double mod1wave;
     
     int modulator1Type;
     
-    //Create an oscillator:
+    //== MAXI OSCILLATORS
     maxiOsc carrier, modulator0, modulator1;
     
-    //maxiEnv env1;
-    //maxiFilter filter1;
+    
     
     //ControllerOSC controller;
 };
