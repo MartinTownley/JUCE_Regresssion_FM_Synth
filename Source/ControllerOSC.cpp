@@ -111,9 +111,5 @@ std::vector<double>& ControllerOSC::rollAndPitch(const float& _zed, const float&
 //
 //}
 
-//void OSCtest()
-//{
-//    std::cout << "OSCTEST" << std::endl;
-//
-//}
+
 

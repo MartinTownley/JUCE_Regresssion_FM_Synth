@@ -15,6 +15,7 @@
 #include "SynthSound.h"
 #include "ControllerOSC.h"
 
+
 //#include "MLGui.h"
 
 #define ATTACK_ID "attack"
@@ -113,7 +114,10 @@ public:
     //------Timer Callback
     void timerCallback() override;
     
-    //float attackTime;
+    //------Get targets
+    void getTargets (int harmTarget, double modIndexTarget);
+    
+    
     //float releaseTime;
     
     

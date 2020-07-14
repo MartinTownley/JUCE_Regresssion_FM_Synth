@@ -293,14 +293,6 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
             }
     }
     
-    
-    
-    
-    //std::cout << treeState.getRawParameterValue(ONOFF_ID);
-    //ScopedNoDenormals noDenormals;
-    //auto totalNumInputChannels  = getTotalNumInputChannels();
-    //auto totalNumOutputChannels = getTotalNumOutputChannels();
-
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
@@ -373,14 +365,16 @@ void JuceSynthFrameworkAudioProcessor::timerCallback()
 {
     //std::cout << "timer Callback" << std::endl;
     
-    myVoice->getOSCData(controller.getIsTriangle(), controller.getIsCross(), controller.getTheZed(), controller.getTheEx());
+    myVoice->setOSCData(controller.getIsTriangle(), controller.getIsCross(), controller.getTheZed(), controller.getTheEx());
     
     myVoice->controllerRecord();
     
     myVoice->controllerRun();
-    
-    
-    
+}
+
+void JuceSynthFrameworkAudioProcessor::getTargets(int harmTarget, double modIndexTarget)
+{
+    //harmTarget = myVoice->
 }
 
 

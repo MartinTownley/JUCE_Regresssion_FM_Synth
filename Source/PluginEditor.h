@@ -17,6 +17,7 @@
 #include "Envelope.h"
 #include "FMod.h"
 #include "MLComponent.h"
+#include "SynthVoice.h"
 
 //#include "MLGui.h"
 
@@ -82,9 +83,7 @@ private:
     
     
     
-    //TextButton onOff;
     
-    //ComboBox modChoice;
     
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.

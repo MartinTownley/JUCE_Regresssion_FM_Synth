@@ -24,12 +24,15 @@ processor(p)
     addAndMakeVisible(&harmDial);
     harmDialAttach = std::make_unique <AudioProcessorValueTreeState::SliderAttachment> (processor.getAPVTS(), HARMDIAL_ID, harmDial);
     
+    //harmDial.setValue(100);
+    
     //modIndexDial slider
     modIndexDial.setSliderStyle (Slider::SliderStyle::RotaryVerticalDrag);
     modIndexDial.setTextBoxStyle (Slider::TextEntryBoxPosition::TextBoxBelow, true, 50, 15);
     addAndMakeVisible(&modIndexDial);
     modIndexDialAttach = std::make_unique <AudioProcessorValueTreeState::SliderAttachment> (processor.getAPVTS(), MODINDEXDIAL_ID, modIndexDial);
     
+    //modIndexDial.setValue(
     //LABELS
     
     addAndMakeVisible(&harmLabel);
@@ -79,5 +82,16 @@ void FMod::resized()
     
     // dial
     modIndexDial.setBounds (bounds.removeFromLeft(100).withSizeKeepingCentre(componentSize, componentSize));
+    
+}
+
+void FMod::setHarmDial(int _newHarm)
+{
+    harmDial.setValue( _newHarm );
+}
+
+void FMod::setModIndexDial(double _newModIndex)
+{
+    modIndexDial.setValue ( _newModIndex );
     
 }

@@ -14,6 +14,7 @@
 #include "maximilian.h"
 
 #include "ControllerOSC.h"
+
 //#include "MLComponent.h"
 
 //#include "MLGui.h"
@@ -141,7 +142,7 @@ public:
         }
     }
     
-    void getOSCData (bool TRIANGLE_ID, bool CROSS_ID, float THEZED_ID, float THEEX_ID)
+    void setOSCData (bool TRIANGLE_ID, bool CROSS_ID, float THEZED_ID, float THEEX_ID)
     {
         _isRecordButton =  TRIANGLE_ID;
         _isRunButton = CROSS_ID;
@@ -153,17 +154,7 @@ public:
     }
     
     
-//    void getTrained (float *TRAIN_ID)
-//    {
-//        
-//        
-//        
-//        
-//        _trained = *TRAIN_ID;
-//    
-//        
-//        
-//    }
+
     
     
     //==========================================
@@ -237,6 +228,12 @@ public:
             std::vector<double> output = rapidRegression.run(input);
             
             std::cout << "running" << std::endl;
+                
+                targetHarmRatio = output[0];
+                targetModIndex = output[1];
+                // Set sliders:
+                
+                
             
             }
             
@@ -383,10 +380,13 @@ public:
             std::cout << _trained << std::endl;
             _trained = rapidRegression.train(trainingSet);
             std::cout <<_trained << std::endl;
+            
+            
         }
         
     }
     
+    //void getTargets
     
     //==========================================
 public:
