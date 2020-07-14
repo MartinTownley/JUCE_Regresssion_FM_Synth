@@ -141,10 +141,10 @@ public:
         }
     }
     
-    void getOSCData (bool ISRECORDINGBOOL_ID, bool ISRUNNINGBOOL_ID, float THEZED_ID, float THEEX_ID)
+    void getOSCData (bool TRIANGLE_ID, bool CROSS_ID, float THEZED_ID, float THEEX_ID)
     {
-        _isRecording =  ISRECORDINGBOOL_ID;
-        _isRunning = ISRUNNINGBOOL_ID;
+        _isRecordButton =  TRIANGLE_ID;
+        _isRunButton = CROSS_ID;
         _theZed = THEZED_ID;
         _theEx = THEEX_ID;
         
@@ -191,7 +191,7 @@ public:
     
    void controllerRecord ()
     {
-        if(_isRecording)
+        if(_isRecordButton)
         {
             
             std::vector<double> ZandX = { _theZed, _theEx};
@@ -217,12 +217,30 @@ public:
             
             if(input.size() > 0)
             {
-                //std::cout << input[0] <<std::endl;
+                std::cout << "recording"  <<std::endl;
             }
         }
-        
-        
+    }
     
+    void controllerRun ()
+    {
+        if (_trained)
+        {
+            if (_isRunButton)
+            {
+                
+            
+            
+            std::vector<double> ZandX = { _theZed, _theEx};
+            std::vector<double>& input = ZandX;
+            
+            std::vector<double> output = rapidRegression.run(input);
+            
+            std::cout << "running" << std::endl;
+            
+            }
+            
+        }
     }
     
     //==========================================
@@ -360,9 +378,13 @@ public:
     
     void trainModel()
     {
-        std::cout << _trained << std::endl;
-        _trained = rapidRegression.train(trainingSet);
-        std::cout <<_trained << std::endl;
+        if (trainingSet.size() > 2)
+        {
+            std::cout << _trained << std::endl;
+            _trained = rapidRegression.train(trainingSet);
+            std::cout <<_trained << std::endl;
+        }
+        
     }
     
     
@@ -412,8 +434,8 @@ private:
     
     bool _trained;
     
-    bool _isRecording;
-    int _isRunning;
+    bool _isRecordButton;
+    int _isRunButton;
     float _theZed;
     float _theEx;
     

@@ -13,8 +13,8 @@
 
 ControllerOSC::ControllerOSC()
 {
-    isRecording = false;
-    isRunning = false;
+    isTriangle = false;
+    isCross = false;
     
     connect(6448);
     
@@ -36,12 +36,12 @@ void ControllerOSC::oscMessageReceived(const OSCMessage &message)
         theEx = message[1].getFloat32();
         
         //set recording and running booleans
-        isRecording = message[2].getInt32();
-        isRunning = message[3].getInt32();
+        isTriangle = message[2].getInt32();
+        isCross = message[3].getInt32();
         
         
         //DBG(isRecording);
-        //std::cout << theEx << std::endl;
+        //std::cout << isCross << std::endl;
         
         //std::cout << isRecording << std::endl;
         
@@ -65,15 +65,15 @@ void ControllerOSC::oscMessageReceived(const OSCMessage &message)
 //    return temp;
 //}
 
-bool& ControllerOSC::getIsRecording(){
+bool& ControllerOSC::getIsTriangle(){
     
     
-    return isRecording;
+    return isTriangle;
 }
 
-bool& ControllerOSC::getIsRunning(){
+bool& ControllerOSC::getIsCross(){
     
-    return isRunning;
+    return isCross;
 }
 
 float& ControllerOSC::getTheZed(){

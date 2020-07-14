@@ -45,8 +45,11 @@
 #define INDEXMODFREQ_ID "indexModFreq"
 #define INDEXMODFREQ_NAME "IndexModFreq"
 
-#define RECORDINGBOOL_ID "isRecording"
-#define RECORDINGBOOL_NAME "IsRecording"
+#define TRIANGLE_ID "isTriangle"
+#define TRIANGLE_NAME "IsTriangle"
+
+#define CROSS_ID "isCross"
+#define CROSS_NAME "IsCross"
 
 #define THEZED_ID "theZed"
 #define THEZED_NAME "TheZed"

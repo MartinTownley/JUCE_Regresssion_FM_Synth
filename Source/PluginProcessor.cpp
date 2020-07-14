@@ -373,9 +373,13 @@ void JuceSynthFrameworkAudioProcessor::timerCallback()
 {
     //std::cout << "timer Callback" << std::endl;
     
+    myVoice->getOSCData(controller.getIsTriangle(), controller.getIsCross(), controller.getTheZed(), controller.getTheEx());
+    
     myVoice->controllerRecord();
     
-    myVoice->getOSCData(controller.getIsRecording(), controller.getIsRunning(), controller.getTheZed(), controller.getTheEx());
+    myVoice->controllerRun();
+    
+    
     
 }
 

@@ -34,9 +34,9 @@ public:
     
     //void setBool(int _isRecording);
     
-    bool& getIsRecording();
+    bool& getIsTriangle();
     
-    bool& getIsRunning();
+    bool& getIsCross();
     
     float& getTheZed();
     float& getTheEx();
@@ -45,9 +45,10 @@ public:
     
 private:
     
-    
-    bool isRecording;
-    bool isRunning;
+    //Triangle on the controller records:
+    bool isTriangle;
+    // Cross on the controller runs:
+    bool isCross;
     
     float theZed;
     float theEx;
