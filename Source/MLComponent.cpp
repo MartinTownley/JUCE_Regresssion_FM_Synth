@@ -15,6 +15,9 @@
 MLComponent::MLComponent(JuceSynthFrameworkAudioProcessor& p) :
 processor(p)
 {
+    
+    //Timer::startTimerHz(50);
+    
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
     trainButton.setColour(TextButton::buttonColourId, Colours::wheat);
@@ -31,13 +34,18 @@ processor(p)
     //Label
     //addAndMakeVisible(trainLabel);
     
-    trainButton.onClick = [&]() { processor.testerButton(); processor.trainModel2(); };
+    //trainButton.onClick = [&]() { processor.testerButton(); processor.trainModel2(); };
     
+    trainButton.onClick = [&]() { this->trainModel3(); } ;
+    
+    _trained3 = false;
     
 }
 
 MLComponent::~MLComponent()
 {
+    //Timer::stopTimer();
+    
 }
 
 void MLComponent::paint (Graphics& g)
@@ -74,7 +82,78 @@ void MLComponent::resized()
 void MLComponent::buttonClicked(Button* button)
 {
     
+}
+
+
+
+void MLComponent::recordContData3()
+{
+    std::vector<double> ZandX = { controller2.getTheZed(),
+        controller2.getTheEx() };
     
+    std::vector<double>& input = ZandX;
+    
+    //std::cout<< "Editor: " <<input[0] <<std::endl;
+    
+    trainingExample example3;
+    
+    example3.input = { input[0], input[1]};
+    
+    example3.output = {static_cast<double> (processor.passHarmRatio()), processor.passModIndex() };
+    
+    trainingSet3.push_back(example3);
+    
+
+    std::cout << trainingSet3.size() << std::endl;
+    
+//    if (input.size() > 0)
+//    {
+//        std::cout << "Editor: " << input[0] << "  " << input[1] << std::endl;
+//    }
+}
+
+void MLComponent::trainModel3()
+
+{
+    if (trainingSet3.size() > 2)
+    {
+        std::cout << "editor trained: " << _trained3 << std::endl;
+        _trained3 = rapidRegression3.train(trainingSet3);
+        std::cout << "editor trained: " << _trained3 << std::endl;
+    }
+}
+
+void MLComponent::runModel3()
+{
+    if (_trained3)
+    {
+        //Make a vector of controller data:
+        std::vector<double> ZandX = {controller2.getTheZed(),
+            controller2.getTheEx() };
+        
+        std::vector<double>& input = ZandX;
+        
+        
+        // Run the model on the input data:
+        std::vector<double> output = rapidRegression3.run(input);
+        
+        //Set targetHarmRatio and targetModIndex to new values in synth voice
+        processor.setValues(output[0], output[1]);
+        
+        //Need to pass the variables from SynthVoice to the FMod GUI.
+        
+        copyValues();
+        
+    }
     
     
 }
+
+void MLComponent::copyValues() {
+    
+    newHarmTarget = processor.passHarmTarget();
+    newModIndexTarget = processor.passModIndexTarget();
+}
+
+
+

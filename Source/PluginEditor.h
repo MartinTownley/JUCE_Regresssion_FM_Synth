@@ -26,7 +26,8 @@
 /**
 */
 class JuceSynthFrameworkAudioProcessorEditor  : public AudioProcessorEditor,
-                                                public Timer
+    public Timer
+
 
         //public OSCReceiver,
 //public OSCReceiver::ListenerWithOSCAddress<OSCReceiver::MessageLoopCallback>
@@ -40,21 +41,12 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     
-    void testing();
+    //void testing();
     
-    
+    //void setValues();
     
     void timerCallback() override;
     
-    void recordContData3();
-    
-    void trainModel3();
-    
-    void runModel3();
-    
-    
-    
-
 private:
     
     
@@ -72,14 +64,6 @@ private:
     
     MLComponent mlGUI;
     
-    ControllerOSC controller2;
-    
-    //==RAPIDLIB==
-    regression rapidRegression3;
-    std::vector<trainingExample> traningSet3;
-    
-    bool _trained3;
-
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     JuceSynthFrameworkAudioProcessor& processor;

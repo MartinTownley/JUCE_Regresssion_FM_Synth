@@ -418,12 +418,12 @@ void JuceSynthFrameworkAudioProcessor::recordContData()
 
 void JuceSynthFrameworkAudioProcessor::trainModel2()
 {
-    if (trainingSet2.size() > 2)
-    {
-        std::cout << "editor trained: " << _trained2 << std::endl;
-        _trained2 = rapidRegression2.train(trainingSet2);
-        std::cout << "editor trained: " << _trained2 << std:: endl;
-    }
+//    if (trainingSet2.size() > 2)
+//    {
+//        std::cout << "editor trained: " << _trained2 << std::endl;
+//        _trained2 = rapidRegression2.train(trainingSet2);
+//        std::cout << "editor trained: " << _trained2 << std:: endl;
+//    }
 }
 
 void JuceSynthFrameworkAudioProcessor::runModel()
@@ -449,7 +449,12 @@ void JuceSynthFrameworkAudioProcessor::runModel()
 //    }
 }
 
-
+void JuceSynthFrameworkAudioProcessor::setValues(int _value0, double _value1)
+{
+    myVoice->setHarmTarget(_value0);
+    myVoice->setModIndexTarget(_value1);
+    
+}
 
 //==============================================================================
 // This creates new instances of the plugin..

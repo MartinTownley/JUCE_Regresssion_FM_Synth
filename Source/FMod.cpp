@@ -88,12 +88,12 @@ void FMod::resized()
 void FMod::setHarmDial(int _newHarm)
 {
    // harmDial.setValue( _newHarm );
-    harmDial.setValue( processor.passHarmTarget() );
+    harmDial.setValue( _newHarm );
     
 }
 
 void FMod::setModIndexDial(double _newModIndex)
 {
-    processor.passModIndexTarget();
+    modIndexDial.setValue( _newModIndex );
     
 }

@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "FMod.h"
 
 //==============================================================================
 /*
@@ -29,17 +30,46 @@ public:
     void buttonClicked(Button* button) override;
     
     
+    void recordContData3();
+    
+    void trainModel3();
+    
+    void runModel3();
+    
+    void copyValues();
+    
+    //double copyModIndexTarget();
+    
+    //This is so that Fmod can access it.
+    bool getTrained() { return _trained3; };
+    
+    bool passIsTriangle() { return controller2.getIsTriangle();
+    };
+    
+    bool passIsCross() { return controller2.getIsCross(); };
+    
+    int& getNewHarmTarget() {return newHarmTarget; };
+    double& getNewModIndexTarget() {return newModIndexTarget; };
 
 private:
     TextButton trainButton;
     
+    ControllerOSC controller2;
+    
     //trainButtonAttach
     std::unique_ptr <AudioProcessorValueTreeState::ButtonAttachment> trainButtonAttach;
     
-    //Label trainLabel;
+    //==RAPIDLIB==
+    regression rapidRegression3;
+    std::vector<trainingExample> trainingSet3;
     
+    bool _trained3;
     
     JuceSynthFrameworkAudioProcessor& processor;
+    
+    int newHarmTarget;
+    double newModIndexTarget;
+    
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MLComponent)
 };

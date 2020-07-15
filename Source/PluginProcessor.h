@@ -132,20 +132,14 @@ public:
     
     void runModel(); //aka controllerRun
     
+    void setValues(int _value0, double _value1);
     
     
-    
-    //float releaseTime;
     
     
     AudioProcessorValueTreeState& getAPVTS() {return mAPVTS;};
     
-    // Tutorial 44- 21:52
-    // Create a parameter method
     
-    
-    //ControllerOSC controller;
-    //MLGui MLinstance;
     
     
     

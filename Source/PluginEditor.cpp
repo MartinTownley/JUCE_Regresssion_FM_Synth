@@ -42,7 +42,7 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     
     
     
-    _trained3 = false;
+    
     
     
 }
@@ -78,73 +78,39 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
    
-    
-    
     envGUI.setBounds(area.removeFromLeft(componentWidth*2).removeFromTop(componentHeight));
     
     fmodGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
-    
     
     oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
     mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
-    //fmodGUI.setHarmDial(100);
     
-    //std::cout << "resized" << std::endl;
-}
-
-void JuceSynthFrameworkAudioProcessorEditor::testing()
-{
-    //std::cout << "Testing!" <<std::endl;
-    //processor.getNumPrograms();
-    
-    //fmodGUI.setHarmDial( processor.passHarmTarget() );
 }
 
 void JuceSynthFrameworkAudioProcessorEditor::timerCallback()
 {
-    if (controller2.getIsTriangle() == true)
-    {
-        recordContData3();
-    }
-    
-   
-}
-
-void JuceSynthFrameworkAudioProcessorEditor::recordContData3()
-{
-    std::vector<double> ZandX = { controller2.getTheZed(),
-        controller2.getTheEx() };
-    
-    std::vector<double>& input = ZandX;
-    
-    std::cout<< "Editor: " <<input[0] <<std::endl;
-    
-    trainingExample example3;
-    
-    example3.output = {static_cast<double> (processor.passHarmRatio()), processor.passModIndex() };
-    
-    if (input.size() > 0)
-    {
-    std::cout << "Editor: " << processor.passHarmRatio() << std::endl;
-    }
-    
-    
+    //make this a switch statement
+        
+        if ( mlGUI.passIsTriangle() == true)
+        {
+            //this->recordContData3();
+            //std::cout << "is triangle" <<std::endl;
+            mlGUI.recordContData3();
+        }
+        
+        if ( mlGUI.passIsCross() == true)
+        {
+            //this->runModel3();
+            //std::cout << "is cross" <<std::endl;
+            mlGUI.runModel3();
+            
+            fmodGUI.setHarmDial(mlGUI.getNewHarmTarget());
+            fmodGUI.setModIndexDial(mlGUI.getNewModIndexTarget());
+        }
     
 }
-
-void JuceSynthFrameworkAudioProcessorEditor::trainModel3()
-{
-    
-}
-
-void JuceSynthFrameworkAudioProcessorEditor::runModel3()
-{
-    
-    
-}
-
 
 
 
