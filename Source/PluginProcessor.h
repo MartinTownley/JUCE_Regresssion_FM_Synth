@@ -125,6 +125,10 @@ public:
     
     void recordContData();
     
+    void trainModel2();
+    
+    void runModel(); //aka controllerRun
+    
     
     //float releaseTime;
     
@@ -151,6 +155,12 @@ private:
     
     AudioProcessorValueTreeState mAPVTS;
     AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    
+    //== RAPIDLIB ==
+    regression rapidRegression2;
+    std::vector<trainingExample> trainingSet2;
+    
+    bool _trained2;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JuceSynthFrameworkAudioProcessor)

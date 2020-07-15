@@ -46,6 +46,8 @@ mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout())
     
     // Max msp hi object polls every 20ms, which is 50Hz
     Timer::startTimerHz(50);
+    
+    _trained2 = false;
 }
 //===================================
 
@@ -357,7 +359,7 @@ void JuceSynthFrameworkAudioProcessor::setStateInformation (const void* data, in
 void JuceSynthFrameworkAudioProcessor::testerButton ()
 {
     
-    myVoice->trainModel();
+    //myVoice->trainModel();
     
 }
 
@@ -365,9 +367,9 @@ void JuceSynthFrameworkAudioProcessor::timerCallback()
 {
     //std::cout << "timer Callback" << std::endl;
     
-    myVoice->setOSCData(controller.getIsTriangle(), controller.getIsCross(), controller.getTheZed(), controller.getTheEx());
+    //myVoice->setOSCData(controller.getIsTriangle(), controller.getIsCross(), controller.getTheZed(), controller.getTheEx());
     
-    myVoice->controllerRecord();
+    //myVoice->controllerRecord();
     
     // If controller isCross
     // myVoice->controllerRun (rename this function)
@@ -377,6 +379,11 @@ void JuceSynthFrameworkAudioProcessor::timerCallback()
     if (controller.getIsTriangle() == true)
     {
         recordContData();
+    }
+    
+    if (controller.getIsCross() == true)
+    {
+        runModel();
     }
     
     //myVoice->controllerRun();
@@ -396,11 +403,58 @@ void JuceSynthFrameworkAudioProcessor::recordContData()
     
     std::cout<< "Processor " <<input[0] <<std::endl;
     
+    //Create training example
+    trainingExample example2;
+
+    //Set input data for training:
+    example2.input = {input[0], input[1]};
     
+    //Set output:
+    // need to take the harmRatio and modeIndex from synthVoice.
+    // create getters in myVoice.
+    example2.output = {static_cast<double> (myVoice->getHarmRatio()), myVoice->getModIndex() };
     
+    trainingSet2.push_back(example2);
     
+    if (input.size() > 0)
+    {
+        //std::cout<< "editor: " << myVoice->getHarmRatio() << std::endl;
+    }
 }
 
+void JuceSynthFrameworkAudioProcessor::trainModel2()
+{
+    if (trainingSet2.size() > 2)
+    {
+        std::cout << "editor trained: " << _trained2 << std::endl;
+        _trained2 = rapidRegression2.train(trainingSet2);
+        std::cout << "editor trained: " << _trained2 << std:: endl;
+    }
+}
+
+void JuceSynthFrameworkAudioProcessor::runModel()
+{
+    if (_trained2)
+    {
+        
+        std::vector<double> ZandX = { controller.getTheZed(),
+                                        controller.getTheEx() };
+        
+        std::vector<double>& input = ZandX;
+        
+        std::vector<double> output = rapidRegression2.run(input);
+        
+        //Set targetHarmRatio and targetModIndex
+        myVoice->setHarmTarget(output[0]);
+        myVoice->setModIndexTarget(output[1]);
+        //Set sliders
+        
+        std::cout << myVoice-> getModIndexTarget() << std::endl;
+    }
+        
+        
+    
+}
 
 //==============================================================================
 // This creates new instances of the plugin..

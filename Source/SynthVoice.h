@@ -173,77 +173,75 @@ public:
         //reset the lfo phase on keypress
         modulator1.phaseReset(0);
         
-        //std::cout << midiNoteNumber << std::endl;
         
-        //std::cout << controller.getRecording() << std::endl;
     }
     
     // Holding the triangle button records data into the regression model:
     
-   void controllerRecord ()
-    {
-        if(_isRecordButton)
-        {
-            
-            std::vector<double> ZandX = { _theZed, _theEx};
-            
-            //std::cout << ZandX[1] <<std::endl;
-            
-            std::vector<double>& input = ZandX;
-            
-            //std::cout << input.size() <<std::endl;
-
-            trainingExample example;
-            example.input = { input[0], input[1]};
-            
-            //example.output = { static_cast<double>(_attack), static_cast<double>(_release), static_cast<double>(harmRatio), modIndex};
-            
-            example.output = { static_cast<double>(harmRatio), modIndex};
-            
-            //std::cout<< example.input[0] <<std::endl;
-            trainingSet.push_back(example);
-            
-            //std::cout << trainingSet.size() << std::endl;
-            //std::cout << _trained << std::endl;
-            
-            if(input.size() > 0)
-            {
-                //std::cout << input[0]  <<std::endl;
-            }
-        }
-    }
+//   void controllerRecord ()
+//    {
+//        if(_isRecordButton)
+//        {
+//
+//            std::vector<double> ZandX = { _theZed, _theEx};
+//
+//            //std::cout << ZandX[1] <<std::endl;
+//
+//            std::vector<double>& input = ZandX;
+//
+//            //std::cout << input.size() <<std::endl;
+//
+//            trainingExample example;
+//            example.input = { input[0], input[1]};
+//
+//            //example.output = { static_cast<double>(_attack), static_cast<double>(_release), static_cast<double>(harmRatio), modIndex};
+//
+//            example.output = { static_cast<double>(harmRatio), modIndex};
+//
+//            //std::cout<< example.input[0] <<std::endl;
+//            trainingSet.push_back(example);
+//
+//            //std::cout << trainingSet.size() << std::endl;
+//            //std::cout << _trained << std::endl;
+//
+//            if(input.size() > 0)
+//            {
+//                //std::cout << "myVoice: " << harmRatio <<std::endl;
+//            }
+//        }
+//    }
     
-    void trainModel()
-    {
-        if (trainingSet.size() > 2)
-        {
-            std::cout << "trained = " << _trained << std::endl;
-            _trained = rapidRegression.train(trainingSet);
-            std::cout << "trained = " << _trained << std::endl;
-        }
-    }
+//    void trainModel()
+//    {
+//        if (trainingSet.size() > 2)
+//        {
+//            std::cout << "trained = " << _trained << std::endl;
+//            _trained = rapidRegression.train(trainingSet);
+//            std::cout << "trained = " << _trained << std::endl;
+//        }
+//    }
     
-    void controllerRun ()
-    {
-        if (_trained)
-        {
-            
-                
-            std::vector<double> ZandX = { _theZed, _theEx};
-            std::vector<double>& input = ZandX;
-            
-            std::vector<double> output = rapidRegression.run(input);
-            
-            //std::cout << "running" << std::endl;
-                
-            targetHarmRatio = output[0];
-            targetModIndex = output[1];
-                // Set sliders:
-            
-            std::cout << targetHarmRatio << std::endl;
-                
-        }
-    }
+//    void controllerRun ()
+//    {
+//        if (_trained)
+//        {
+//
+//
+//            std::vector<double> ZandX = { _theZed, _theEx};
+//            std::vector<double>& input = ZandX;
+//
+//            std::vector<double> output = rapidRegression.run(input);
+//
+//            //std::cout << "running" << std::endl;
+//
+//            targetHarmRatio = output[0];
+//            targetModIndex = output[1];
+//                // Set sliders:
+//
+//            //std::cout << targetHarmRatio << std::endl;
+//
+//        }
+//    }
     
     //==========================================
     
@@ -324,7 +322,7 @@ public:
         
         for (int sample = 0; sample < numSamples; ++sample)
         {
-//            mod1amp = 19;
+//           
             
             //_attack += attackDelta;
             //_release += releaseDelta;
@@ -378,6 +376,16 @@ public:
         
     }
     
+    double& getModIndex()
+    {
+        return modIndex;
+    }
+    
+    int& getHarmRatio()
+    {
+        return harmRatio;
+    }
+    
     double& getModIndexTarget()
     {
         return targetModIndex;
@@ -397,6 +405,16 @@ public:
     {
         return _isRunButton;
         
+    }
+    
+    void setHarmTarget(int _value)
+    {
+        targetHarmRatio = _value;
+    }
+    
+    void setModIndexTarget(double _value)
+    {
+        targetModIndex = _value;
     }
     
     //==========================================

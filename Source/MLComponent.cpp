@@ -31,7 +31,7 @@ processor(p)
     //Label
     //addAndMakeVisible(trainLabel);
     
-    trainButton.onClick = [&]() { processor.testerButton(); };
+    trainButton.onClick = [&]() { processor.testerButton(); processor.trainModel2(); };
     
     
 }
