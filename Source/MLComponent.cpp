@@ -73,11 +73,8 @@ void MLComponent::resized()
 
 void MLComponent::buttonClicked(Button* button)
 {
-    //std::cout << "buttonclicked" <<std::endl;
-    if (button == &trainButton)
-    {
-        std::cout << "Button Clicked" << std::endl;
-    }
+    
+    
     
     
 }

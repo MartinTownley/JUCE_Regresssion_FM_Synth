@@ -18,6 +18,8 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
 {
     setSize(1000,300);
     
+    Timer::startTimerHz(50);
+    
     // Add the oscillator gui
     addAndMakeVisible(&oscGUI);
     // Add the envelope GUI
@@ -40,10 +42,13 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     
     
     
+    _trained3 = false;
+    
     
 }
 JuceSynthFrameworkAudioProcessorEditor::~JuceSynthFrameworkAudioProcessorEditor()
 {
+    Timer::stopTimer();
 }
 
 //==============================================================================
@@ -91,13 +96,54 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
 
 void JuceSynthFrameworkAudioProcessorEditor::testing()
 {
-    std::cout << "Testing!" <<std::endl;
-    processor.getNumPrograms();
+    //std::cout << "Testing!" <<std::endl;
+    //processor.getNumPrograms();
+    
+    //fmodGUI.setHarmDial( processor.passHarmTarget() );
 }
 
+void JuceSynthFrameworkAudioProcessorEditor::timerCallback()
+{
+    if (controller2.getIsTriangle() == true)
+    {
+        recordContData3();
+    }
+    
+   
+}
 
+void JuceSynthFrameworkAudioProcessorEditor::recordContData3()
+{
+    std::vector<double> ZandX = { controller2.getTheZed(),
+        controller2.getTheEx() };
+    
+    std::vector<double>& input = ZandX;
+    
+    std::cout<< "Editor: " <<input[0] <<std::endl;
+    
+    trainingExample example3;
+    
+    example3.output = {static_cast<double> (processor.passHarmRatio()), processor.passModIndex() };
+    
+    if (input.size() > 0)
+    {
+    std::cout << "Editor: " << processor.passHarmRatio() << std::endl;
+    }
+    
+    
+    
+}
 
+void JuceSynthFrameworkAudioProcessorEditor::trainModel3()
+{
+    
+}
 
+void JuceSynthFrameworkAudioProcessorEditor::runModel3()
+{
+    
+    
+}
 
 
 

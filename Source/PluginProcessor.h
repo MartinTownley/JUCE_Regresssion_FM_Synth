@@ -121,6 +121,9 @@ public:
     
     double& passModIndexTarget() {return myVoice->getModIndexTarget(); };
     
+    int& passHarmRatio() {return myVoice->getHarmRatio(); };
+    
+    double& passModIndex() {return myVoice->getModIndex(); };
     
     
     void recordContData();
@@ -128,6 +131,8 @@ public:
     void trainModel2();
     
     void runModel(); //aka controllerRun
+    
+    
     
     
     //float releaseTime;
@@ -139,7 +144,7 @@ public:
     // Create a parameter method
     
     
-    ControllerOSC controller;
+    //ControllerOSC controller;
     //MLGui MLinstance;
     
     

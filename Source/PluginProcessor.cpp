@@ -286,13 +286,7 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
             myVoice-> setOscType(mAPVTS.getRawParameterValue(OSCMENU_ID)-> load());
             
             myVoice-> setIndexModAmpFreq(mAPVTS.getRawParameterValue(INDEXMODFREQ_ID)-> load());
-            
-            
-            
-            
-            //myVoice->setTrainState(mAPVTS.getRawParameterValue (TRAIN_ID)-> load());
-            
-            }
+        }
     }
     
     // In case we have more outputs than inputs, this code clears any output
@@ -365,61 +359,61 @@ void JuceSynthFrameworkAudioProcessor::testerButton ()
 
 void JuceSynthFrameworkAudioProcessor::timerCallback()
 {
-    //std::cout << "timer Callback" << std::endl;
     
-    //myVoice->setOSCData(controller.getIsTriangle(), controller.getIsCross(), controller.getTheZed(), controller.getTheEx());
-    
+
+//    myVoice->setOSCData(controller.getIsTriangle(), controller.getIsCross(), controller.getTheZed(), controller.getTheEx());
+
     //myVoice->controllerRecord();
+
     
-    // If controller isCross
-    // myVoice->controllerRun (rename this function)
+
     
-    //if (isCross)
-    
-    if (controller.getIsTriangle() == true)
-    {
-        recordContData();
-    }
-    
-    if (controller.getIsCross() == true)
-    {
-        runModel();
-    }
-    
-    //myVoice->controllerRun();
-    
-    
+
+//    if (controller.getIsTriangle() == true)
+//    {
+//        //recordContData();
+//        //std::cout << "mfasdkl" << std::endl;
+//    }
+//
+//    if (controller.getIsCross() == true)
+//    {
+//        runModel();
+//    }
+//
+//    myVoice->controllerRun();
+
+
 }
 
 
 void JuceSynthFrameworkAudioProcessor::recordContData()
 {
     //same as controller record:
-    
-    std::vector<double> ZandX = { controller.getTheZed(),
-                                    controller.getTheEx() };
-    
-    std::vector<double>& input = ZandX;
-    
-    std::cout<< "Processor " <<input[0] <<std::endl;
-    
-    //Create training example
-    trainingExample example2;
 
-    //Set input data for training:
-    example2.input = {input[0], input[1]};
-    
-    //Set output:
-    // need to take the harmRatio and modeIndex from synthVoice.
-    // create getters in myVoice.
-    example2.output = {static_cast<double> (myVoice->getHarmRatio()), myVoice->getModIndex() };
-    
-    trainingSet2.push_back(example2);
-    
-    if (input.size() > 0)
-    {
-        //std::cout<< "editor: " << myVoice->getHarmRatio() << std::endl;
-    }
+//    std::vector<double> ZandX = { controller.getTheZed(),
+//                                    controller.getTheEx() };
+
+//    std::vector<double>& input = ZandX;
+//
+//    //std::cout<< "Processor " <<input[0] <<std::endl;
+//
+//    //Create training example
+//    trainingExample example2;
+//
+//    //Set input data for training:
+//    example2.input = {input[0], input[1]};
+//
+//    //Set output:
+//    // need to take the harmRatio and modeIndex from synthVoice.
+//    // create getters in myVoice.
+//    example2.output = {static_cast<double> (myVoice->getHarmRatio()), myVoice->getModIndex() };
+//
+//    trainingSet2.push_back(example2);
+//
+//    if (input.size() > 0)
+//    {
+//        std::cout<< "Processor: " << myVoice->getHarmRatio() << std::endl;
+//    }
 }
 
 void JuceSynthFrameworkAudioProcessor::trainModel2()
@@ -434,27 +428,28 @@ void JuceSynthFrameworkAudioProcessor::trainModel2()
 
 void JuceSynthFrameworkAudioProcessor::runModel()
 {
-    if (_trained2)
-    {
-        
-        std::vector<double> ZandX = { controller.getTheZed(),
-                                        controller.getTheEx() };
-        
-        std::vector<double>& input = ZandX;
-        
-        std::vector<double> output = rapidRegression2.run(input);
-        
-        //Set targetHarmRatio and targetModIndex
-        myVoice->setHarmTarget(output[0]);
-        myVoice->setModIndexTarget(output[1]);
-        //Set sliders
-        
-        std::cout << myVoice-> getModIndexTarget() << std::endl;
-    }
-        
-        
-    
+//    if (_trained2)
+//    {
+//
+//        std::vector<double> ZandX = { controller.getTheZed(),
+//                                        controller.getTheEx() };
+//
+//        std::vector<double>& input = ZandX;
+//
+//        std::vector<double> output = rapidRegression2.run(input);
+//
+//        //Set targetHarmRatio and targetModIndex
+//        myVoice->setHarmTarget(output[0]);
+//        myVoice->setModIndexTarget(output[1]);
+//        //Set sliders
+//
+//        //std::cout << myVoice-> getModIndexTarget() << std::endl;
+//
+//
+//    }
 }
+
+
 
 //==============================================================================
 // This creates new instances of the plugin..

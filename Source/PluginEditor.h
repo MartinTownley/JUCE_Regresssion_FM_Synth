@@ -18,13 +18,15 @@
 #include "FMod.h"
 #include "MLComponent.h"
 #include "SynthVoice.h"
+#include "ControllerOSC.h"
 
 //#include "MLGui.h"
 
 //==============================================================================
 /**
 */
-class JuceSynthFrameworkAudioProcessorEditor  : public                  AudioProcessorEditor
+class JuceSynthFrameworkAudioProcessorEditor  : public AudioProcessorEditor,
+                                                public Timer
 
         //public OSCReceiver,
 //public OSCReceiver::ListenerWithOSCAddress<OSCReceiver::MessageLoopCallback>
@@ -39,6 +41,17 @@ public:
     void resized() override;
     
     void testing();
+    
+    
+    
+    void timerCallback() override;
+    
+    void recordContData3();
+    
+    void trainModel3();
+    
+    void runModel3();
+    
     
     
 
@@ -59,22 +72,23 @@ private:
     
     MLComponent mlGUI;
     
-    //bool isRecording; //triangle button
-    //bool isRunning; //x button
+    ControllerOSC controller2;
+    
+    //==RAPIDLIB==
+    regression rapidRegression3;
+    std::vector<trainingExample> traningSet3;
+    
+    bool _trained3;
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     JuceSynthFrameworkAudioProcessor& processor;
 
-public:
+//public:
     //Scoped pointer is deprecated!
     //ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> sliderTree;
     
-    // onoffAttach
-    //std::unique_ptr <AudioProcessorValueTreeState::ButtonAttachment> onOffAttach;
     
-//    // choiceBoxAttach
-//    std::unique_ptr <AudioProcessorValueTreeState::ComboBoxAttachment> modChoiceAttach;
     
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JuceSynthFrameworkAudioProcessorEditor)
