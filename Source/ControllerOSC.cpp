@@ -40,30 +40,11 @@ void ControllerOSC::oscMessageReceived(const OSCMessage &message)
         isCross = message[3].getInt32();
         
         
-        //DBG(isRecording);
-        //std::cout << isCross << std::endl;
-        
-        //std::cout << isRecording << std::endl;
-        
     }
     
     
     
 }
-
-
-
-
-
-// returns a temporary vector of x and z
-//std::vector<double> rollAndPitch(const float& _ex, const float& _zed)
-//{
-//    std::vector<double> temp;
-//    temp.resize(2);
-//    temp[0] = double(_ex);
-//    temp[1] = double(_zed);
-//    return temp;
-//}
 
 bool& ControllerOSC::getIsTriangle(){
     
@@ -85,31 +66,8 @@ float& ControllerOSC::getTheEx(){
     return theEx;
 }
 
-std::vector<double>& ControllerOSC::rollAndPitch(const float& _zed, const float& _ex)
-{
-    std::vector<double> temp;
-    temp.resize(2);
-    temp[0] = double(_zed);
-    temp[1] = double(_ex);
-    //std::cout << temp[1];
-    return temp;
-    //std::cout << "rollandpitch" <<std::endl;
-}
 
 
-//void ControllerOSC::controllerRecord (const std::vector<double>& XandZ)
-//{
-//    if(isRecording)
-//    {
-//        std::vector<double> input = XandZ;
-//
-//        trainingExample example;
-//        example.input = { input[0], input[1]};
-//        example.output = { _attack, _release, _harmRatio, _modIndex};
-//        trainingSet.push_back(example);
-//    }
-//
-//}
 
 
 

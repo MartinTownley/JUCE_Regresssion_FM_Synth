@@ -22,18 +22,7 @@ public:
     
     void oscMessageReceived (const OSCMessage &message) override;
     
-    std::vector<double>& rollAndPitch(const float& _ex, const float& _zed);
-    
-    void controllerRecord (const std::vector<double>& XandZ);
-    
-    //void OSCtest();
-    
-//    void getData(bool& isRecording, bool& isRunning, float& theZed, float& theEx)
-    
-    //int getIsRecording(bool _isRecording);
-    
-    //void setBool(int _isRecording);
-    
+    //GETTERS
     bool& getIsTriangle();
     
     bool& getIsCross();

@@ -358,7 +358,7 @@ void JuceSynthFrameworkAudioProcessor::testerButton ()
 {
     
     myVoice->trainModel();
-    // create function in myVoice that trains the model.
+    
 }
 
 void JuceSynthFrameworkAudioProcessor::timerCallback()
@@ -369,14 +369,37 @@ void JuceSynthFrameworkAudioProcessor::timerCallback()
     
     myVoice->controllerRecord();
     
-    myVoice->controllerRun();
+    // If controller isCross
+    // myVoice->controllerRun (rename this function)
+    
+    //if (isCross)
+    
+    if (controller.getIsTriangle() == true)
+    {
+        recordContData();
+    }
+    
+    //myVoice->controllerRun();
+    
+    
 }
 
-void JuceSynthFrameworkAudioProcessor::getTargets(int harmTarget, double modIndexTarget)
+
+void JuceSynthFrameworkAudioProcessor::recordContData()
 {
-    //harmTarget = myVoice->
+    //same as controller record:
+    
+    std::vector<double> ZandX = { controller.getTheZed(),
+                                    controller.getTheEx() };
+    
+    std::vector<double>& input = ZandX;
+    
+    std::cout<< "Processor " <<input[0] <<std::endl;
+    
+    
+    
+    
 }
-
 
 
 //==============================================================================

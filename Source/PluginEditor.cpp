@@ -38,6 +38,9 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     allLabels[4].setText("Mod Index Amp Mod Wave Select", dontSendNotification);
     allLabels[4].attachToComponent (&oscGUI, false);
     
+    
+    
+    
 }
 JuceSynthFrameworkAudioProcessorEditor::~JuceSynthFrameworkAudioProcessorEditor()
 {
@@ -53,7 +56,7 @@ void JuceSynthFrameworkAudioProcessorEditor::paint (Graphics& g)
     g.setFont (15.0f);
     
     //=====
-   // fmodGUI.setHarmDial(processor.
+    
     
     
 }
@@ -81,9 +84,16 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     
     mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
+    //fmodGUI.setHarmDial(100);
+    
     //std::cout << "resized" << std::endl;
 }
 
+void JuceSynthFrameworkAudioProcessorEditor::testing()
+{
+    std::cout << "Testing!" <<std::endl;
+    processor.getNumPrograms();
+}
 
 
 

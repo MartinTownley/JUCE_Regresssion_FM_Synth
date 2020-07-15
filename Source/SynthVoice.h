@@ -208,8 +208,18 @@ public:
             
             if(input.size() > 0)
             {
-                std::cout << "recording"  <<std::endl;
+                //std::cout << input[0]  <<std::endl;
             }
+        }
+    }
+    
+    void trainModel()
+    {
+        if (trainingSet.size() > 2)
+        {
+            std::cout << "trained = " << _trained << std::endl;
+            _trained = rapidRegression.train(trainingSet);
+            std::cout << "trained = " << _trained << std::endl;
         }
     }
     
@@ -217,26 +227,21 @@ public:
     {
         if (_trained)
         {
-            if (_isRunButton)
-            {
+            
                 
-            
-            
             std::vector<double> ZandX = { _theZed, _theEx};
             std::vector<double>& input = ZandX;
             
             std::vector<double> output = rapidRegression.run(input);
             
-            std::cout << "running" << std::endl;
+            //std::cout << "running" << std::endl;
                 
-                targetHarmRatio = output[0];
-                targetModIndex = output[1];
+            targetHarmRatio = output[0];
+            targetModIndex = output[1];
                 // Set sliders:
-                
-                
             
-            }
-            
+            std::cout << targetHarmRatio << std::endl;
+                
         }
     }
     
@@ -373,20 +378,26 @@ public:
         
     }
     
-    void trainModel()
+    double& getModIndexTarget()
     {
-        if (trainingSet.size() > 2)
-        {
-            std::cout << _trained << std::endl;
-            _trained = rapidRegression.train(trainingSet);
-            std::cout <<_trained << std::endl;
-            
-            
-        }
-        
+        return targetModIndex;
     }
     
-    //void getTargets
+    int& getHarmTarget()
+    {
+        return targetHarmRatio;
+    }
+    
+    bool& getTrained()
+    {
+        return _trained;
+    }
+    
+    bool& getIsRun()
+    {
+        return _isRunButton;
+        
+    }
     
     //==========================================
 public:
@@ -435,7 +446,7 @@ private:
     bool _trained;
     
     bool _isRecordButton;
-    int _isRunButton;
+    bool _isRunButton;
     float _theZed;
     float _theEx;
     

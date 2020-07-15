@@ -38,10 +38,7 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     
-    
-    std::vector<double> rollAndPitch(const float& _ex, const float& _zed);
-    
-    void controllerRecord (const std::vector<double>& XandZ);
+    void testing();
     
     
 
@@ -52,11 +49,6 @@ private:
     // Could make a vector of sliders..
     Label allLabels[5];
     
-    //std::vector<Slider> allSliders;
-    
-    
-    //int numADSR{ static_cast<int>(std::size(ADSR))};
-    //Label ADSRLabels[2];
     
     // oscillator class instance:
     Oscillator oscGUI;
@@ -67,24 +59,9 @@ private:
     
     MLComponent mlGUI;
     
-    bool isRecording; //triangle button
-    bool isRunning; //x button
+    //bool isRecording; //triangle button
+    //bool isRunning; //x button
 
-    
-    //OSC params
-    float theZed;
-    float theEx;
-    
-    //
-    
-    //RAPIDMIX
-    regression rapidRegression;
-    std::vector<trainingExample> trainingSet;
-    
-    
-    
-    
-    
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     JuceSynthFrameworkAudioProcessor& processor;
@@ -94,7 +71,7 @@ public:
     //ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> sliderTree;
     
     // onoffAttach
-    std::unique_ptr <AudioProcessorValueTreeState::ButtonAttachment> onOffAttach;
+    //std::unique_ptr <AudioProcessorValueTreeState::ButtonAttachment> onOffAttach;
     
 //    // choiceBoxAttach
 //    std::unique_ptr <AudioProcessorValueTreeState::ComboBoxAttachment> modChoiceAttach;

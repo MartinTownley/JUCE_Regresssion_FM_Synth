@@ -114,8 +114,16 @@ public:
     //------Timer Callback
     void timerCallback() override;
     
-    //------Get targets
-    void getTargets (int harmTarget, double modIndexTarget);
+    //------set targets
+    //void passTargets (int harmTarget, double modIndexTarget);
+    
+    int& passHarmTarget() {return myVoice->getHarmTarget(); };
+    
+    double& passModIndexTarget() {return myVoice->getModIndexTarget(); };
+    
+    
+    
+    void recordContData();
     
     
     //float releaseTime;
@@ -129,6 +137,8 @@ public:
     
     ControllerOSC controller;
     //MLGui MLinstance;
+    
+    
     
 
 private:
