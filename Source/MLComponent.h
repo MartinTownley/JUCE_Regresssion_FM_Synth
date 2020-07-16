@@ -38,8 +38,6 @@ public:
     
     void copyValues();
     
-    //double copyModIndexTarget();
-    
     //This is so that Fmod can access it.
     bool getTrained() { return _trained3; };
     
@@ -47,10 +45,13 @@ public:
     };
     
     bool passIsCross() { return controller2.getIsCross(); };
-    
+    //------------
     int& getNewHarmTarget() {return newHarmTarget; };
+    
     double& getNewModIndexTarget() {return newModIndexTarget; };
 
+    double& getNewMod1freqTarget() {return newMod1freqTarget; };
+    
 private:
     TextButton trainButton;
     
@@ -69,7 +70,7 @@ private:
     
     int newHarmTarget;
     double newModIndexTarget;
-    
+    double newMod1freqTarget;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MLComponent)
 };

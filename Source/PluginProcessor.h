@@ -66,8 +66,8 @@
 //==============================================================================
 /**
 */
-class JuceSynthFrameworkAudioProcessor  : public AudioProcessor,
-public Timer
+class JuceSynthFrameworkAudioProcessor  : public AudioProcessor
+
 
 {
 public:
@@ -109,41 +109,22 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     
-    void testerButton();
-    
-    //------Timer Callback
-    void timerCallback() override;
-    
-    //------set targets
-    //void passTargets (int harmTarget, double modIndexTarget);
-    
     int& passHarmTarget() {return myVoice->getHarmTarget(); };
     
     double& passModIndexTarget() {return myVoice->getModIndexTarget(); };
     
+    double& passMod1freqTarget() {return myVoice->getMod1freqTarget(); };
+    //--------------
     int& passHarmRatio() {return myVoice->getHarmRatio(); };
     
     double& passModIndex() {return myVoice->getModIndex(); };
     
-    
-    void recordContData();
-    
-    void trainModel2();
-    
-    void runModel(); //aka controllerRun
-    
-    void setValues(int _value0, double _value1);
-    
-    
-    
+    double& passMod1freq() {return myVoice->getMod1freq(); };
+    //--------------
+    void setValues(int _value0, double _value1, double _value2);
     
     AudioProcessorValueTreeState& getAPVTS() {return mAPVTS;};
     
-    
-    
-    
-    
-
 private:
     Synthesiser mySynth;
     SynthVoice* myVoice;
@@ -154,12 +135,6 @@ private:
     
     AudioProcessorValueTreeState mAPVTS;
     AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    
-    //== RAPIDLIB ==
-    regression rapidRegression2;
-    std::vector<trainingExample> trainingSet2;
-    
-    bool _trained2;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JuceSynthFrameworkAudioProcessor)

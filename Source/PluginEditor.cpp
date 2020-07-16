@@ -39,12 +39,6 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     addAndMakeVisible(&allLabels[4]);
     allLabels[4].setText("Mod Index Amp Mod Wave Select", dontSendNotification);
     allLabels[4].attachToComponent (&oscGUI, false);
-    
-    
-    
-    
-    
-    
 }
 JuceSynthFrameworkAudioProcessorEditor::~JuceSynthFrameworkAudioProcessorEditor()
 {
@@ -95,19 +89,17 @@ void JuceSynthFrameworkAudioProcessorEditor::timerCallback()
         
         if ( mlGUI.passIsTriangle() == true)
         {
-            //this->recordContData3();
-            //std::cout << "is triangle" <<std::endl;
             mlGUI.recordContData3();
         }
         
         if ( mlGUI.passIsCross() == true)
         {
-            //this->runModel3();
-            //std::cout << "is cross" <<std::endl;
+            
             mlGUI.runModel3();
             
             fmodGUI.setHarmDial(mlGUI.getNewHarmTarget());
             fmodGUI.setModIndexDial(mlGUI.getNewModIndexTarget());
+            oscGUI.setIndexAmpModFreqDial(mlGUI.getNewMod1freqTarget());
         }
     
 }

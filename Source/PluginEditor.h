@@ -29,9 +29,6 @@ class JuceSynthFrameworkAudioProcessorEditor  : public AudioProcessorEditor,
     public Timer
 
 
-        //public OSCReceiver,
-//public OSCReceiver::ListenerWithOSCAddress<OSCReceiver::MessageLoopCallback>
-
 {
 public:
     JuceSynthFrameworkAudioProcessorEditor (JuceSynthFrameworkAudioProcessor&);
@@ -40,10 +37,6 @@ public:
     //==============================================================================
     void paint (Graphics&) override;
     void resized() override;
-    
-    //void testing();
-    
-    //void setValues();
     
     void timerCallback() override;
     
@@ -68,9 +61,7 @@ private:
     // access the processor object that created it.
     JuceSynthFrameworkAudioProcessor& processor;
 
-//public:
-    //Scoped pointer is deprecated!
-    //ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> sliderTree;
+
     
     
     

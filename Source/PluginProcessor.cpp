@@ -44,10 +44,7 @@ mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout())
     //add sounds
     mySynth.addSound(new SynthSound());
     
-    // Max msp hi object polls every 20ms, which is 50Hz
-    Timer::startTimerHz(50);
     
-    _trained2 = false;
 }
 //===================================
 
@@ -67,12 +64,9 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
     //auto deduces return type for us:
     auto attackParam = std::make_unique<AudioParameterFloat> (ATTACK_ID,
                                                               ATTACK_NAME,
-                                                              0.1f,
+                                                              0.01f,
                                                               5.0f,
-                                                              0.1f);
-    //someParam = attackParam.get();
-    
-    
+                                                              0.01f);
     
     //decay range: 0.1 seconds to 2 seconds
     auto decayParam = std::make_unique<AudioParameterFloat>(DECAY_ID,
@@ -93,11 +87,11 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
                                                                RELEASE_NAME,
                                                                0.1f,
                                                                5.0f,
-                                                               2.0f);
+                                                               1.0f);
     
     auto harmDialParam = std::make_unique<AudioParameterInt>(HARMDIAL_ID, HARMDIAL_NAME, 1, 128, 1);
     
-    auto modIndexParam = std::make_unique<AudioParameterFloat>(MODINDEXDIAL_ID, MODINDEXDIAL_NAME, 1.0f, 200.0f, 1.0f);
+    auto modIndexParam = std::make_unique<AudioParameterFloat>(MODINDEXDIAL_ID, MODINDEXDIAL_NAME, 1.0f, 100.0f, 1.0f);
     
     
     auto oscSelectParam = std::make_unique<AudioParameterChoice>(OSCMENU_ID, OSCMENU_NAME, StringArray ("OFFS", "SINE", "SQUARE", "SAW"), 1);
@@ -250,27 +244,12 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
     
     // Iterate over the synth voices:
     
-    //CONTROLLER:
-    
-    //
-    
-    //
-    
-    
-    
     for (int i=0; i < mySynth.getNumVoices(); i++)
     {
         // If the voice is dynamically cast as a synth voice, relay the information:
         if (myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i)))
         {
             myVoice->setADSRSampleRate(lastSampleRate);
-            
-            
-//            myVoice-> setADSR (mAPVTS.getRawParameterValue (ATTACK_ID)->load(),
-//                               mAPVTS.getRawParameterValue (DECAY_ID)->load(),
-//                               mAPVTS.getRawParameterValue (SUSTAIN_ID)->load(),
-//                               mAPVTS.getRawParameterValue (RELEASE_ID)->load() );
-
             
             myVoice-> setADSR (mAPVTS.getRawParameterValue (ATTACK_ID)->load(),
                                mAPVTS.getRawParameterValue (DECAY_ID)->load(),
@@ -283,9 +262,11 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
             myVoice-> setFMParams(mAPVTS.getRawParameterValue (HARMDIAL_ID)-> load(),
                                   mAPVTS.getRawParameterValue(MODINDEXDIAL_ID)->load());
             
+            myVoice-> setIndexModAmpfreq(mAPVTS.getRawParameterValue(INDEXMODFREQ_ID)-> load());
+            
             myVoice-> setOscType(mAPVTS.getRawParameterValue(OSCMENU_ID)-> load());
             
-            myVoice-> setIndexModAmpFreq(mAPVTS.getRawParameterValue(INDEXMODFREQ_ID)-> load());
+            
         }
     }
     
@@ -306,13 +287,7 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
     
-//    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-//    {
-//        auto* channelData = buffer.getWritePointer (channel);
-//
-//        // ..do something to the data...
-//    }
-    
+
     //=============================================================
     // the above code is not necessary, since DSP is now happening in the render nextblock of mySnyth, so we call that instead:
     
@@ -350,109 +325,12 @@ void JuceSynthFrameworkAudioProcessor::setStateInformation (const void* data, in
     // whose contents will have been created by the getStateInformation() call.
 }
 
-void JuceSynthFrameworkAudioProcessor::testerButton ()
+
+void JuceSynthFrameworkAudioProcessor::setValues(int _value0, double _value1, double _value2)
 {
-    
-    //myVoice->trainModel();
-    
-}
-
-void JuceSynthFrameworkAudioProcessor::timerCallback()
-{
-    
-
-//    myVoice->setOSCData(controller.getIsTriangle(), controller.getIsCross(), controller.getTheZed(), controller.getTheEx());
-
-    //myVoice->controllerRecord();
-
-    
-
-    
-
-//    if (controller.getIsTriangle() == true)
-//    {
-//        //recordContData();
-//        //std::cout << "mfasdkl" << std::endl;
-//    }
-//
-//    if (controller.getIsCross() == true)
-//    {
-//        runModel();
-//    }
-//
-//    myVoice->controllerRun();
-
-
-}
-
-
-void JuceSynthFrameworkAudioProcessor::recordContData()
-{
-    //same as controller record:
-
-//    std::vector<double> ZandX = { controller.getTheZed(),
-//                                    controller.getTheEx() };
-
-//    std::vector<double>& input = ZandX;
-//
-//    //std::cout<< "Processor " <<input[0] <<std::endl;
-//
-//    //Create training example
-//    trainingExample example2;
-//
-//    //Set input data for training:
-//    example2.input = {input[0], input[1]};
-//
-//    //Set output:
-//    // need to take the harmRatio and modeIndex from synthVoice.
-//    // create getters in myVoice.
-//    example2.output = {static_cast<double> (myVoice->getHarmRatio()), myVoice->getModIndex() };
-//
-//    trainingSet2.push_back(example2);
-//
-//    if (input.size() > 0)
-//    {
-//        std::cout<< "Processor: " << myVoice->getHarmRatio() << std::endl;
-//    }
-}
-
-void JuceSynthFrameworkAudioProcessor::trainModel2()
-{
-//    if (trainingSet2.size() > 2)
-//    {
-//        std::cout << "editor trained: " << _trained2 << std::endl;
-//        _trained2 = rapidRegression2.train(trainingSet2);
-//        std::cout << "editor trained: " << _trained2 << std:: endl;
-//    }
-}
-
-void JuceSynthFrameworkAudioProcessor::runModel()
-{
-//    if (_trained2)
-//    {
-//
-//        std::vector<double> ZandX = { controller.getTheZed(),
-//                                        controller.getTheEx() };
-//
-//        std::vector<double>& input = ZandX;
-//
-//        std::vector<double> output = rapidRegression2.run(input);
-//
-//        //Set targetHarmRatio and targetModIndex
-//        myVoice->setHarmTarget(output[0]);
-//        myVoice->setModIndexTarget(output[1]);
-//        //Set sliders
-//
-//        //std::cout << myVoice-> getModIndexTarget() << std::endl;
-//
-//
-//    }
-}
-
-void JuceSynthFrameworkAudioProcessor::setValues(int _value0, double _value1)
-{
-    myVoice->setHarmTarget(_value0);
+    myVoice->setHarmTarget(_value0); //passing values to synth voice
     myVoice->setModIndexTarget(_value1);
+    myVoice->setMod1freqTarget(_value2);
     
 }
 

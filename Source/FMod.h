@@ -24,8 +24,6 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     
-    //void getSlider(Slider slider){ return slider; } ;
-    
     void setHarmDial (int _newHarm);
     void setModIndexDial (double _newModIndex);
     

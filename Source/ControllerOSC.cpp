@@ -38,12 +38,7 @@ void ControllerOSC::oscMessageReceived(const OSCMessage &message)
         //set recording and running booleans
         isTriangle = message[2].getInt32();
         isCross = message[3].getInt32();
-        
-        
     }
-    
-    
-    
 }
 
 bool& ControllerOSC::getIsTriangle(){

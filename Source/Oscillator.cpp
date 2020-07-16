@@ -87,3 +87,8 @@ void Oscillator::comboBoxChanged(ComboBox* box)
     //std::cout<< "box changed" << std:: endl;
 }
 
+void Oscillator::setIndexAmpModFreqDial(double _newMod1freq)
+{
+    indexAmpModFreqDial.setValue( _newMod1freq );
+    
+}

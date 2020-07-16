@@ -15,9 +15,6 @@
 MLComponent::MLComponent(JuceSynthFrameworkAudioProcessor& p) :
 processor(p)
 {
-    
-    //Timer::startTimerHz(50);
-    
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
     trainButton.setColour(TextButton::buttonColourId, Colours::wheat);
@@ -25,7 +22,6 @@ processor(p)
     trainButton.setButtonText("Train");
     
     //Attach
-    //trainButton.setClickingToggleState (true);
     addAndMakeVisible(&trainButton);
     
     trainButton.addListener(this);
@@ -44,8 +40,7 @@ processor(p)
 
 MLComponent::~MLComponent()
 {
-    //Timer::stopTimer();
-    
+   
 }
 
 void MLComponent::paint (Graphics& g)
@@ -93,23 +88,15 @@ void MLComponent::recordContData3()
     
     std::vector<double>& input = ZandX;
     
-    //std::cout<< "Editor: " <<input[0] <<std::endl;
-    
     trainingExample example3;
     
     example3.input = { input[0], input[1]};
     
-    example3.output = {static_cast<double> (processor.passHarmRatio()), processor.passModIndex() };
+    example3.output = {static_cast<double> (processor.passHarmRatio()), processor.passModIndex(), processor.passMod1freq() };
     
     trainingSet3.push_back(example3);
     
-
     std::cout << trainingSet3.size() << std::endl;
-    
-//    if (input.size() > 0)
-//    {
-//        std::cout << "Editor: " << input[0] << "  " << input[1] << std::endl;
-//    }
 }
 
 void MLComponent::trainModel3()
@@ -133,15 +120,13 @@ void MLComponent::runModel3()
         
         std::vector<double>& input = ZandX;
         
-        
         // Run the model on the input data:
         std::vector<double> output = rapidRegression3.run(input);
         
         //Set targetHarmRatio and targetModIndex to new values in synth voice
-        processor.setValues(output[0], output[1]);
+        processor.setValues(output[0], output[1], output[3]);
         
         //Need to pass the variables from SynthVoice to the FMod GUI.
-        
         copyValues();
         
     }
@@ -153,6 +138,7 @@ void MLComponent::copyValues() {
     
     newHarmTarget = processor.passHarmTarget();
     newModIndexTarget = processor.passModIndexTarget();
+    newMod1freqTarget = processor.passMod1freqTarget();
 }
 
 

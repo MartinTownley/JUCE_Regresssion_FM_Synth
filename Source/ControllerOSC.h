@@ -43,14 +43,5 @@ private:
     float theEx;
     
     
-    //double _attack;
-    //double _release;
-    //double _harmRatio;
-    //double _modIndex;
-    
-    //These are in synthvoice.
-    //regression rapidRegression;
-    //std::vector <trainingExample> trainingSet;
-    
     
 };

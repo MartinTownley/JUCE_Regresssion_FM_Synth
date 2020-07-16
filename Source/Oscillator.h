@@ -28,6 +28,8 @@ public:
     
     void comboBoxChanged (ComboBox*) override;
     
+    void setIndexAmpModFreqDial(double _newMod1freq);
+    
 private:
     // oscillator menu
     ComboBox oscMenu;
