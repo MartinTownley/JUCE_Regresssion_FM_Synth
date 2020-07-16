@@ -17,8 +17,8 @@ processor(p)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
-    trainButton.setColour(TextButton::buttonColourId, Colours::wheat);
-    trainButton.setColour(TextButton::textColourOffId, Colours::white);
+    trainButton.setColour(TextButton::buttonColourId, Colours::lightyellow);
+    trainButton.setColour(TextButton::textColourOffId, Colours::black);
     trainButton.setButtonText("Train");
     
     //Attach
@@ -59,8 +59,10 @@ void MLComponent::paint (Graphics& g)
 
     g.setColour (Colours::white);
     g.setFont (14.0f);
-    g.drawText ("MLComponent", getLocalBounds(),
+    g.drawText ("MACHINE LEARNING", getLocalBounds().removeFromBottom(30),
                 Justification::centred, true);   // draw some placeholder text
+    
+    //g.drawText("ENVELOPE", 10, 175, 200, 10, Justification::centred);
 }
 
 void MLComponent::resized()
@@ -70,7 +72,7 @@ void MLComponent::resized()
     auto bounds = getLocalBounds();
     const int componentSize { 100 };
     
-    trainButton.setBounds (bounds.removeFromLeft(100).withSizeKeepingCentre(componentSize, componentSize));
+    trainButton.setBounds (bounds.removeFromLeft(200).withSizeKeepingCentre(componentSize, componentSize));
 
 }
 
@@ -124,7 +126,7 @@ void MLComponent::runModel3()
         std::vector<double> output = rapidRegression3.run(input);
         
         //Set targetHarmRatio and targetModIndex to new values in synth voice
-        processor.setValues(output[0], output[1], output[3]);
+        processor.setValues(output[0], output[1], output[2]);
         
         //Need to pass the variables from SynthVoice to the FMod GUI.
         copyValues();
