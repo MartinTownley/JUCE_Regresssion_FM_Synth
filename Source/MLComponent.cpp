@@ -36,6 +36,9 @@ processor(p)
     
     _trained3 = false;
     
+    
+    
+    
 }
 
 MLComponent::~MLComponent()
@@ -59,7 +62,7 @@ void MLComponent::paint (Graphics& g)
 
     g.setColour (Colours::white);
     g.setFont (14.0f);
-    g.drawText ("MACHINE LEARNING", getLocalBounds().removeFromBottom(30),
+    g.drawText ("REGRESSION MODEL", getLocalBounds().removeFromBottom(30),
                 Justification::centred, true);   // draw some placeholder text
     
     //g.drawText("ENVELOPE", 10, 175, 200, 10, Justification::centred);
@@ -72,7 +75,14 @@ void MLComponent::resized()
     auto bounds = getLocalBounds();
     const int componentSize { 100 };
     
+    juce::Rectangle<int> area(getLocalBounds());
+
+    
     trainButton.setBounds (bounds.removeFromLeft(200).withSizeKeepingCentre(componentSize, componentSize));
+    
+    const int headerFooterHeight = 36;
+    //header.setBounds(area.removeFromTop(headerFooterHeight));
+    //footer.setBounds(area.removeFromBottom(headerFooterHeight));
 
 }
 
@@ -98,7 +108,13 @@ void MLComponent::recordContData3()
     
     trainingSet3.push_back(example3);
     
-    std::cout << trainingSet3.size() << std::endl;
+    if (input.size() > 0)
+    {
+        //footer.setButtonText("When you have finished mapping your gestures, press train!");
+        //std::cout << trainingSet3.size() << std::endl;
+        
+    }
+    
 }
 
 void MLComponent::trainModel3()
@@ -109,6 +125,8 @@ void MLComponent::trainModel3()
         std::cout << "editor trained: " << _trained3 << std::endl;
         _trained3 = rapidRegression3.train(trainingSet3);
         std::cout << "editor trained: " << _trained3 << std::endl;
+        
+        //footer.setButtonText("Now drag the moues to play!");
     }
 }
 
@@ -131,8 +149,9 @@ void MLComponent::runModel3()
         //Need to pass the variables from SynthVoice to the FMod GUI.
         copyValues();
         
+    } else {
+        //AlertWindow::showMessageBoxAsync(AlertWindow::AlertIconType::WarningIcon, "Error", "Please train the model before trying to run it!", "ok");
     }
-    
     
 }
 

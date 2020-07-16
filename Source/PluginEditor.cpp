@@ -39,6 +39,15 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     addAndMakeVisible(&allLabels[4]);
     allLabels[4].setText("Mod Index Amp Mod Wave Select", dontSendNotification);
     allLabels[4].attachToComponent (&oscGUI, false);
+    
+    footer.setColour(TextButton::buttonColourId, Colours::wheat);
+    footer.setColour(TextButton::textColourOffId, Colours::white);
+    footer.setEnabled(false);
+    footer.setButtonText("Select the synth parameters you like, then move the mouse to an area and hold space to associate that space with that sound. Repeat with a few sounds");
+    addAndMakeVisible(footer);
+    
+    
+    
 }
 JuceSynthFrameworkAudioProcessorEditor::~JuceSynthFrameworkAudioProcessorEditor()
 {
@@ -48,14 +57,17 @@ JuceSynthFrameworkAudioProcessorEditor::~JuceSynthFrameworkAudioProcessorEditor(
 //==============================================================================
 void JuceSynthFrameworkAudioProcessorEditor::paint (Graphics& g)
 {
+    
+    Rectangle<int> area = getLocalBounds();
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
 
     g.setColour (Colours::white);
-    g.setFont (15.0f);
+    g.setFont (juce::Font ("consolas", 40.0f, juce::Font::italic) );
+    
     
     //=====
-    
+    g.drawText("DUALSHOCK 4 REGRESSION FM SYNTH", 100, 250, 800, 10, Justification::centred);
     
     
 }
@@ -66,6 +78,7 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     
     const int componentWidth = 200;
     const int componentHeight = 200;
+    const int headerFooterHeight = 36;
     
     auto bounds = getLocalBounds();
     const int componentSize { 100 };
@@ -80,6 +93,7 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     
     mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
+    footer.setBounds(area.removeFromBottom(headerFooterHeight));
     
 }
 

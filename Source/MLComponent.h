@@ -55,6 +55,7 @@ public:
 private:
     TextButton trainButton;
     
+    
     ControllerOSC controller2;
     
     //trainButtonAttach
