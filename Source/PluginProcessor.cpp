@@ -89,19 +89,37 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
                                                                5.0f,
                                                                1.0f);
     
-    auto harmDialParam = std::make_unique<AudioParameterInt>(HARMDIAL_ID, HARMDIAL_NAME, 1, 128, 1);
+    auto harmDialParam = std::make_unique<AudioParameterInt>(HARMDIAL_ID,
+                                                             HARMDIAL_NAME,
+                                                             1,
+                                                             128,
+                                                             1);
     
-    auto modIndexParam = std::make_unique<AudioParameterFloat>(MODINDEXDIAL_ID, MODINDEXDIAL_NAME, 1.0f, 100.0f, 1.0f);
+    auto modIndexParam = std::make_unique<AudioParameterFloat>(MODINDEXDIAL_ID,
+                                                               MODINDEXDIAL_NAME,
+                                                               1.0f,
+                                                               100.0f,
+                                                               1.0f);
     
     
-    auto oscSelectParam = std::make_unique<AudioParameterChoice>(OSCMENU_ID, OSCMENU_NAME, StringArray ("OFFS", "SINE", "SQUARE", "SAW"), 1);
+    auto oscSelectParam = std::make_unique<AudioParameterChoice>(OSCMENU_ID,
+                                                                 OSCMENU_NAME,
+                                                                 StringArray ("OFFS",
+                                                                              "SINE",
+                                                                              "SQUARE",
+                                                                              "SAW"), 1);
     
     
-    auto indexModFreqParam = std::make_unique<AudioParameterFloat>(INDEXMODFREQ_ID, INDEXMODFREQ_NAME, 0.0f, 10.0f, 1.0f);
+    auto indexModFreqParam = std::make_unique<AudioParameterFloat>(INDEXMODFREQ_ID,
+                                                                   INDEXMODFREQ_NAME,
+                                                                   0.0f,
+                                                                   10.0f,
+                                                                   1.0f);
     
-    auto trainButtonParam = std::make_unique<AudioParameterBool> (TRAIN_ID, TRAIN_NAME, false);
-    //for (int i = 1; i < 9; ++i)
-    //{
+    auto trainButtonParam = std::make_unique<AudioParameterBool> (TRAIN_ID,
+                                                                  TRAIN_NAME,
+                                                                  false);
+    
         // std::move actually moves the object, rather than making a copy then deleting it. More efficient:
     
     params.push_back (std::move(attackParam));

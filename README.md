@@ -32,24 +32,3 @@ Assuming that you have both of these:
 
 
 
-
-
-
-
-
-
-
-
-Student No: 33537140
-Module: Data and Machine Learning for Creative Practice
-Coursework: Project
-
-Please see the gitHub repository for the code of my work:
-
-https://github.com/MartinTownley/DAML_Project
-
-
-For documentation, please refer to the following blog:
-
-https://damlproject.art.blog
-
