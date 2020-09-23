@@ -126,7 +126,6 @@ void MLComponent::trainModel3()
         _trained3 = rapidRegression3.train(trainingSet3);
         std::cout << "editor trained: " << _trained3 << std::endl;
         
-        
     }
 }
 

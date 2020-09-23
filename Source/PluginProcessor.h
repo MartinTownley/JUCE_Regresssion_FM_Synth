@@ -21,7 +21,7 @@
 #define ATTACK_ID "attack"
 #define ATTACK_NAME "Attack"
 
- #define RELEASE_ID "release"
+#define RELEASE_ID "release"
 #define RELEASE_NAME "Release"
 
 #define DECAY_ID "decay"

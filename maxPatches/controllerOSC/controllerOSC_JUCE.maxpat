@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 97.0, 86.0, 1045.0, 788.0 ],
+		"rect" : [ 1977.0, 40.0, 1283.0, 977.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -60,7 +60,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 393.0, 500.5, 122.0, 33.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Send to JUCE application via OSC"
 				}
 
@@ -2159,13 +2158,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-83",
-					"linecount" : 5,
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 1665.0, 50.0, 76.0 ],
-					"text" : "128. 125. 123. 126. 0. 0."
+					"patching_rect" : [ 15.0, 1665.0, 50.0, 35.0 ],
+					"text" : "0. 0. 0. 0. 0. 0."
 				}
 
 			}
@@ -2560,6 +2559,8 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.811765, 0.576471, 0.866667, 1.0 ],
+					"fontsize" : 18.0,
 					"format" : 6,
 					"id" : "obj-33",
 					"maxclass" : "flonum",
@@ -2567,7 +2568,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 447.0, 274.0, 50.0, 22.0 ]
+					"patching_rect" : [ 447.0, 274.0, 69.0, 29.0 ]
 				}
 
 			}
@@ -2586,6 +2587,8 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.811765, 0.576471, 0.866667, 1.0 ],
+					"fontsize" : 18.0,
 					"format" : 6,
 					"id" : "obj-30",
 					"maxclass" : "flonum",
@@ -2593,7 +2596,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 250.0, 274.0, 50.0, 22.0 ]
+					"patching_rect" : [ 250.0, 274.0, 67.0, 29.0 ]
 				}
 
 			}
@@ -2854,7 +2857,7 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-1",
-					"items" : [ "BM30X mouse", ",", "Wired Keyboard", ",", "Wired Keyboard 2", ",", "Wireless Controller", ",", "Apple Internal Keyboard / Trackpad", ",", "Apple Internal Keyboard / Trackpad 2", ",", "Apple Internal Keyboard / Trackpad 3" ],
+					"items" : [ "BM30X mouse", ",", "Wireless Controller", ",", "Apple Internal Keyboard / Trackpad", ",", "Apple Internal Keyboard / Trackpad 2", ",", "Apple Internal Keyboard / Trackpad 3" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -3422,8 +3425,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
