@@ -54,17 +54,18 @@ Oscillator::~Oscillator()
 
 void Oscillator::paint (Graphics& g)
 {
-    g.fillAll (Colours::red);   // clear the background
+    auto bounds = getLocalBounds().toFloat().reduced (0.5f, 0.5f);
     
-    g.setColour (Colours::grey);
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    
+    g.setColour (juce::Colours::grey);
+    
     g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
     
-    g.setColour (Colours::white);
-    g.setFont (14.0f);
-    //g.drawText ("FMod", getLocalBounds(),
-    //Justification::centred, true);
-    g.drawText("FMOD AMPLITUDE LFO", 10, 175, 200, 10, Justification::centred);
-    // draw some placeholder text
+    g.setColour (juce::Colours::lightseagreen);
+    //g.fillRoundedRectangle (bounds, 6.0f);
+    
+    g.drawRoundedRectangle (bounds, 10.0f, 1.0f);
 }
 
 void Oscillator::resized()

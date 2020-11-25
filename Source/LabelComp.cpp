@@ -12,11 +12,13 @@
 #include "LabelComp.h"
 
 //==============================================================================
-LabelComp::LabelComp(JuceSynthFrameworkAudioProcessor& p) :
-processor(p)
+LabelComp::LabelComp(JuceSynthFrameworkAudioProcessor& p, std::string& str_) :
+processor(p), str(str_)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
+    
+    std::cout << str << std::endl;
 
 }
 
@@ -35,12 +37,23 @@ void LabelComp::paint (juce::Graphics& g)
 
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
 
+    auto bounds = getLocalBounds().toFloat().reduced (0.5f, 0.5f);
+    
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    
     g.setColour (juce::Colours::grey);
+    g.setOpacity (0.5);
+    
     g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
+    
+    g.setColour (juce::Colours::lightseagreen);
+    //g.fillRoundedRectangle (bounds, 6.0f);
+    
+    g.drawRoundedRectangle (bounds, 10.0f, 1.0f);
 
     g.setColour (juce::Colours::white);
     g.setFont (14.0f);
-    g.drawText ("LabelComp", getLocalBounds(),
+    g.drawText (str, getLocalBounds(),
                 juce::Justification::centred, true);   // draw some placeholder text
 }
 

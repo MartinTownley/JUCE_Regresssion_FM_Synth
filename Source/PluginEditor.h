@@ -49,20 +49,16 @@ private:
     // Could make a vector of sliders..
     Label allLabels[5];
     
-    // oscillator class instance:
-    Oscillator oscGUI;
     
-    Envelope envGUI;
+    std::string envStr = "ENVELOPE";
+    std::string fmodStr = "FREQUENCY MODULATION";
+    std::string oscStr = "LFO";
+    std::string mlStr = "GESTURE MAP";
     
-    FMod fmodGUI;
-    
-    MLComponent mlGUI;
-    
-    //-------
-    
-    //ParentComponent parent;
-    
-    SuperComponent <FMod>test;
+    SuperComponent <Envelope> envGUI;
+    SuperComponent <FMod> fmodGUI;
+    SuperComponent <Oscillator> oscGUI;
+    SuperComponent <MLComponent> mlGUI;
     
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.

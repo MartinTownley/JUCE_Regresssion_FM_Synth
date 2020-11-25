@@ -13,26 +13,21 @@
 
 //==============================================================================
 JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (JuceSynthFrameworkAudioProcessor& p)
-: AudioProcessorEditor (&p), processor (p), oscGUI(p), envGUI(p), fmodGUI(p), mlGUI(p), test(p)
+: AudioProcessorEditor (&p), processor (p), envGUI(p, envStr), fmodGUI(p, fmodStr), oscGUI(p, oscStr), mlGUI(p, mlStr)
 
 {
     setSize(1300,300);
     
     Timer::startTimerHz(50);
     
-    // Add the oscillator gui
-    addAndMakeVisible(&oscGUI);
-    // Add the envelope GUI
-    // Add Fmod GUI
-    //addAndMakeVisible(&fmodGUI);
-    
     addAndMakeVisible(&envGUI);
-    
+    addAndMakeVisible(&fmodGUI);
+    addAndMakeVisible(&oscGUI);
     addAndMakeVisible(&mlGUI);
     
     //--------
     
-    addAndMakeVisible(&test);
+    //addAndMakeVisible(&test);
     
     //labels:
     //attack:
@@ -99,8 +94,7 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     
     footer.setBounds(area.removeFromBottom(headerFooterHeight));
     
-    //============
-    test.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+ 
     
 }
 
@@ -108,19 +102,19 @@ void JuceSynthFrameworkAudioProcessorEditor::timerCallback()
 {
     //make this a switch statement
         
-        if ( mlGUI.passIsTriangle() == true)
+        if ( mlGUI.getControlPanel().passIsTriangle() == true)
         {
-            mlGUI.recordContData3();
+            mlGUI.getControlPanel().recordContData3();
         }
         
-        if ( mlGUI.passIsCross() == true)
+        if ( mlGUI.getControlPanel().passIsCross() == true)
         {
             
-            mlGUI.runModel3();
+            mlGUI.getControlPanel().runModel3();
             
-            fmodGUI.setHarmDial(mlGUI.getNewHarmTarget());
-            fmodGUI.setModIndexDial(mlGUI.getNewModIndexTarget());
-            oscGUI.setIndexAmpModFreqDial(mlGUI.getNewMod1freqTarget());
+            fmodGUI.getControlPanel().setHarmDial(mlGUI.getControlPanel().getNewHarmTarget());
+            fmodGUI.getControlPanel().setModIndexDial(mlGUI.getControlPanel().getNewModIndexTarget());
+            oscGUI.getControlPanel().setIndexAmpModFreqDial(mlGUI.getControlPanel().getNewMod1freqTarget());
         }
     
 }

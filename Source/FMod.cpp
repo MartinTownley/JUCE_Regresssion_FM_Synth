@@ -52,21 +52,19 @@ FMod::~FMod()
 
 void FMod::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-     draws some placeholder text to get you started.
-     
-     You should replace everything in this method with your own
-     drawing code..
-     */
+    auto bounds = getLocalBounds().toFloat().reduced (0.5f, 0.5f);
     
-    g.fillAll (Colours::green);   // clear the background
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
     
-    g.setColour (Colours::grey);
+    g.setColour (juce::Colours::grey);
+    
     g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
     
-    g.setColour (Colours::white);
-    g.setFont (14.0f);
-    g.drawText("FREQUENCY MODULATION", 10, 175, 200, 10, Justification::centred);  // draw some placeholder text
+    g.setColour (juce::Colours::lightseagreen);
+    //g.fillRoundedRectangle (bounds, 6.0f);
+    
+    g.drawRoundedRectangle (bounds, 10.0f, 1.0f);
+    
 }
 
 void FMod::resized()

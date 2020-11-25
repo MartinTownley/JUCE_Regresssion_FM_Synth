@@ -19,13 +19,14 @@
 class LabelComp  : public juce::Component
 {
 public:
-    LabelComp(JuceSynthFrameworkAudioProcessor&);
+    LabelComp(JuceSynthFrameworkAudioProcessor&, std::string& str_);
     ~LabelComp() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
+    std::string& str; //label / title
     
     JuceSynthFrameworkAudioProcessor& processor;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LabelComp)

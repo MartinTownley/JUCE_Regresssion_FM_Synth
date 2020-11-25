@@ -21,14 +21,16 @@ template <typename T>
 class SuperComponent  : public juce::Component
 {
 public:
-    SuperComponent(JuceSynthFrameworkAudioProcessor& p) : processor(p), labelPanel(p), comp(p)
+    SuperComponent(JuceSynthFrameworkAudioProcessor& p, std::string& str_) : processor(p), labelPanel(p, str_), controlPanel(p), str(str_)
     {
         // In your constructor, you should add any child components, and
         // initialise any special settings that your component needs.
         addAndMakeVisible(&labelPanel);
         
-        addAndMakeVisible(&comp);
-
+        addAndMakeVisible(&controlPanel);
+        
+        //std::cout << str <<std::endl;
+        
     }
 
     ~SuperComponent() override
@@ -44,7 +46,9 @@ public:
            drawing code..
         */
 
-        g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+        //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+        
+        g.fillAll (juce::Colours::white);
 
         g.setColour (juce::Colours::grey);
         g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
@@ -62,21 +66,23 @@ public:
         
         auto bounds = getLocalBounds();
         //const int componentSize { 100 };
-        const int labelHeight = bounds.getHeight() / 4;
+        const int labelHeight = bounds.getHeight() / 5;
         
         labelPanel.setBounds (bounds.removeFromTop (labelHeight));
         
-        comp.setBounds ( bounds.removeFromTop (labelHeight));
+        controlPanel.setBounds ( bounds );
 
     }
     
+    T& getControlPanel() { return controlPanel; }
     
-
 private:
     
-    T comp;
+    T controlPanel;
     
     LabelComp labelPanel;
+    
+    std::string& str; //reference member. str is now a reference to what gets passed in.
     
     JuceSynthFrameworkAudioProcessor& processor;
     

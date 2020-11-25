@@ -45,22 +45,22 @@ MLComponent::~MLComponent()
 
 void MLComponent::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
-
-    g.setColour (Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("REGRESSION MODEL", getLocalBounds().removeFromBottom(30),
-                Justification::centred, true);   // draw some placeholder text
+    
+    auto bounds = getLocalBounds().toFloat().reduced (0.5f, 0.5f);
+    
+    //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    
+    g.setOpacity(0.2);
+    g.fillAll (juce::Colours::lightseagreen);
+    
+    g.setColour (juce::Colours::grey);
+    
+    //g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
+    
+    //g.setColour (juce::Colours::lightseagreen);
+    //g.fillRoundedRectangle (bounds, 6.0f);
+    
+    g.drawRoundedRectangle (bounds, 10.0f, 1.0f);
     
     //g.drawText("ENVELOPE", 10, 175, 200, 10, Justification::centred);
 }
