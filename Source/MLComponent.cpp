@@ -36,9 +36,6 @@ processor(p)
     
     _trained3 = false;
     
-    
-    
-    
 }
 
 MLComponent::~MLComponent()

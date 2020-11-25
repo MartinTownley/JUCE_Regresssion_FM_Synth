@@ -24,7 +24,7 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                        ),
 
 // pre defines
-mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout() ) 
+mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout()  ) 
 #endif
 {
     //constructor

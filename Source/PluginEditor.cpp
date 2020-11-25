@@ -13,10 +13,10 @@
 
 //==============================================================================
 JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (JuceSynthFrameworkAudioProcessor& p)
-: AudioProcessorEditor (&p), processor (p), oscGUI(p), envGUI(p), fmodGUI(p), mlGUI(p)
+: AudioProcessorEditor (&p), processor (p), oscGUI(p), envGUI(p), fmodGUI(p), mlGUI(p), test(p)
 
 {
-    setSize(1000,300);
+    setSize(1300,300);
     
     Timer::startTimerHz(50);
     
@@ -24,11 +24,15 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     addAndMakeVisible(&oscGUI);
     // Add the envelope GUI
     // Add Fmod GUI
-    addAndMakeVisible(&fmodGUI);
+    //addAndMakeVisible(&fmodGUI);
     
     addAndMakeVisible(&envGUI);
     
     addAndMakeVisible(&mlGUI);
+    
+    //--------
+    
+    addAndMakeVisible(&test);
     
     //labels:
     //attack:
@@ -94,6 +98,9 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
     footer.setBounds(area.removeFromBottom(headerFooterHeight));
+    
+    //============
+    test.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="vtuibJ" name="synthFramework" projectType="audioplug" jucerVersion="5.4.7"
-              pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
+<JUCERPROJECT id="vtuibJ" name="synthFramework" projectType="audioplug" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
+              displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="OMnIBC" name="synthFramework">
     <GROUP id="{B7F7B41C-91B3-DF48-558F-005CE038E0FF}" name="Source">
       <GROUP id="{46CBB5C4-D9C2-EC30-0C14-27DE605B7B19}" name="RapidLib">
@@ -114,6 +114,8 @@
         <FILE id="gdGOH1" name="stb_vorbis.c" compile="1" resource="0" file="../Libraries/Maximilian/stb_vorbis.c"/>
         <FILE id="QiOuFc" name="stb_vorbis.h" compile="0" resource="0" file="../Libraries/Maximilian/stb_vorbis.h"/>
       </GROUP>
+      <FILE id="h9UqT7" name="LabelComp.cpp" compile="1" resource="0" file="Source/LabelComp.cpp"/>
+      <FILE id="DmcVgK" name="LabelComp.h" compile="0" resource="0" file="Source/LabelComp.h"/>
       <FILE id="ckD7CN" name="Envelope.cpp" compile="1" resource="0" file="Source/Envelope.cpp"/>
       <FILE id="AThHch" name="Envelope.h" compile="0" resource="0" file="Source/Envelope.h"/>
       <FILE id="oPm2HS" name="FMod.cpp" compile="1" resource="0" file="Source/FMod.cpp"/>
@@ -134,6 +136,8 @@
       <FILE id="CxW3X4" name="ControllerOSC.h" compile="0" resource="0" file="Source/ControllerOSC.h"/>
       <FILE id="pO3xVF" name="MLComponent.cpp" compile="1" resource="0" file="Source/MLComponent.cpp"/>
       <FILE id="aFyIb6" name="MLComponent.h" compile="0" resource="0" file="Source/MLComponent.h"/>
+      <FILE id="oB81iC" name="SuperComponent.h" compile="0" resource="0"
+            file="Source/SuperComponent.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>

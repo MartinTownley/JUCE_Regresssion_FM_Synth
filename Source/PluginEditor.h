@@ -19,6 +19,8 @@
 #include "MLComponent.h"
 #include "SynthVoice.h"
 #include "ControllerOSC.h"
+#include "SuperComponent.h"
+
 
 //#include "MLGui.h"
 
@@ -47,7 +49,6 @@ private:
     // Could make a vector of sliders..
     Label allLabels[5];
     
-    
     // oscillator class instance:
     Oscillator oscGUI;
     
@@ -56,6 +57,12 @@ private:
     FMod fmodGUI;
     
     MLComponent mlGUI;
+    
+    //-------
+    
+    //ParentComponent parent;
+    
+    SuperComponent <FMod>test;
     
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
