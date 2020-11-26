@@ -57,18 +57,22 @@ processor(p)
     //LABELS
     addAndMakeVisible(&attackLabel);
     attackLabel.setText("Attack Time", dontSendNotification);
+    attackLabel.setJustificationType(juce::Justification::centred);
     attackLabel.attachToComponent(&attackSlider, false);
     
     addAndMakeVisible(&decayLabel);
     decayLabel.setText("Decay Time", dontSendNotification);
+    decayLabel.setJustificationType(juce::Justification::centred);
     decayLabel.attachToComponent(&decaySlider, false);
     
     addAndMakeVisible(&sustainLabel);
     sustainLabel.setText("Sustain Level", dontSendNotification);
+    sustainLabel.setJustificationType(juce::Justification::centred);
     sustainLabel.attachToComponent(&sustainSlider, false);
     
     addAndMakeVisible(&releaseLabel);
     releaseLabel.setText("Release Time", dontSendNotification);
+    releaseLabel.setJustificationType(juce::Justification::centred);
     releaseLabel.attachToComponent(&releaseSlider, false);
     
     
@@ -80,22 +84,25 @@ Envelope::~Envelope()
 
 void Envelope::paint (Graphics& g)
 {
-//    g.fillAll (Colours::purple);   // clear the background
-//
-//    g.setColour (Colours::grey);
-//    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-     auto bounds = getLocalBounds().toFloat().reduced (0.5f, 0.5f);
+    auto bounds = getLocalBounds().toFloat().reduced (0.5f, 0.5f);
+    
+    float scaler = 0.99f;
+    float mover = (1.0f - scaler) / 2;
     
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
     
-    g.setColour (juce::Colours::grey);
+    //------
     
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
+    //fill rectangle
+    g.setColour (bgCol);
+    g.fillRoundedRectangle (bounds * scaler, 10.0f);
     
+    //border rectangle
     g.setColour (juce::Colours::lightseagreen);
-    //g.fillRoundedRectangle (bounds, 6.0f);
+    g.setOrigin(getWidth() * mover, getHeight() * mover );
+    g.drawRoundedRectangle (bounds * scaler, 10.0f, 1.0f);
     
-    g.drawRoundedRectangle (bounds, 10.0f, 1.0f);
+
 }
 
 void Envelope::resized()
@@ -117,8 +124,10 @@ void Envelope::resized()
     
     //releaseSlider
     releaseSlider.setBounds (bounds.removeFromLeft(100).withSizeKeepingCentre(componentSize, componentSize));
-    
-    
-    
+}
+
+void Envelope::setBGColour(juce::Colour colour)
+{
+    bgCol = colour;
 }
 

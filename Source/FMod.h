@@ -27,6 +27,8 @@ public:
     void setHarmDial (int _newHarm);
     void setModIndexDial (double _newModIndex);
     
+    void setBGColour (juce::Colour colour);
+    
 private:
     Slider harmDial;
     Slider modIndexDial;
@@ -39,6 +41,7 @@ private:
     std::unique_ptr <AudioProcessorValueTreeState::SliderAttachment> modIndexDialAttach;
     Label modIndexLabel;
     
+    juce::Colour bgCol;
     
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.

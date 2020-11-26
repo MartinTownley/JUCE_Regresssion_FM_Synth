@@ -37,10 +37,12 @@ processor(p)
     
     addAndMakeVisible(&harmLabel);
     harmLabel.setText("Harmonicity", dontSendNotification);
+    harmLabel.setJustificationType(juce::Justification::centred);
     harmLabel.attachToComponent(&harmDial, false);
     
     addAndMakeVisible(&modIndexLabel);
     modIndexLabel.setText("Mod Index", dontSendNotification);
+    modIndexLabel.setJustificationType(juce::Justification::centred);
     modIndexLabel.attachToComponent(&modIndexDial, false);
     
     
@@ -54,16 +56,21 @@ void FMod::paint (Graphics& g)
 {
     auto bounds = getLocalBounds().toFloat().reduced (0.5f, 0.5f);
     
+    float scaler = 0.99f;
+    float mover = (1.0f - scaler) / 2;
+    
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
     
-    g.setColour (juce::Colours::grey);
+    //------
     
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
+    //fill rectangle
+    g.setColour (bgCol);
+    g.fillRoundedRectangle (bounds * scaler, 10.0f);
     
+    //border rectangle
     g.setColour (juce::Colours::lightseagreen);
-    //g.fillRoundedRectangle (bounds, 6.0f);
-    
-    g.drawRoundedRectangle (bounds, 10.0f, 1.0f);
+    g.setOrigin(getWidth() * mover, getHeight() * mover );
+    g.drawRoundedRectangle (bounds * scaler, 10.0f, 1.0f);
     
 }
 
@@ -94,4 +101,9 @@ void FMod::setModIndexDial(double _newModIndex)
 {
     modIndexDial.setValue( _newModIndex );
     
+}
+
+void FMod::setBGColour (juce::Colour colour)
+{
+    bgCol = colour;
 }

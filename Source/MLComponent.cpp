@@ -45,24 +45,23 @@ MLComponent::~MLComponent()
 
 void MLComponent::paint (Graphics& g)
 {
-    
     auto bounds = getLocalBounds().toFloat().reduced (0.5f, 0.5f);
     
-    //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    float scaler = 0.99f;
+    float mover = (1.0f - scaler) / 2;
     
-    g.setOpacity(0.2);
-    g.fillAll (juce::Colours::lightseagreen);
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
     
-    g.setColour (juce::Colours::grey);
+    //------
     
-    //g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
+    //fill rectangle
+    g.setColour (bgCol);
+    g.fillRoundedRectangle (bounds * scaler, 10.0f);
     
-    //g.setColour (juce::Colours::lightseagreen);
-    //g.fillRoundedRectangle (bounds, 6.0f);
-    
-    g.drawRoundedRectangle (bounds, 10.0f, 1.0f);
-    
-    //g.drawText("ENVELOPE", 10, 175, 200, 10, Justification::centred);
+    //border rectangle
+    g.setColour (juce::Colours::lightseagreen);
+    g.setOrigin(getWidth() * mover, getHeight() * mover );
+    g.drawRoundedRectangle (bounds * scaler, 10.0f, 1.0f);
 }
 
 void MLComponent::resized()
@@ -156,6 +155,11 @@ void MLComponent::copyValues() {
     newHarmTarget = processor.passHarmTarget();
     newModIndexTarget = processor.passModIndexTarget();
     newMod1freqTarget = processor.passMod1freqTarget();
+}
+
+void MLComponent::setBGColour(juce::Colour colour)
+{
+    bgCol = colour;
 }
 
 

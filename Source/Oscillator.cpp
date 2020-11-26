@@ -39,13 +39,15 @@ processor(p)
     
     
     //LABELS
-    addAndMakeVisible(&oscMenuLabel);
-    oscMenuLabel.setText("LFO Type", dontSendNotification);
-    oscMenuLabel.attachToComponent(&oscMenu, false);
+    addAndMakeVisible (&oscMenuLabel);
+    oscMenuLabel.setText ("Wave", dontSendNotification);
+    oscMenuLabel.setJustificationType (juce::Justification::centred);
+    oscMenuLabel.attachToComponent (&oscMenu, false);
     
-    addAndMakeVisible(&indexAmpModFreqDialLabel);
-    indexAmpModFreqDialLabel.setText("LFO Frequency", dontSendNotification);
-    indexAmpModFreqDialLabel.attachToComponent(&indexAmpModFreqDial, false);
+    addAndMakeVisible (&indexAmpModFreqDialLabel);
+    indexAmpModFreqDialLabel.setText ("Freq", dontSendNotification);
+    indexAmpModFreqDialLabel.setJustificationType (juce::Justification::centred);
+    indexAmpModFreqDialLabel.attachToComponent (&indexAmpModFreqDial, false);
 }
 
 Oscillator::~Oscillator()
@@ -56,16 +58,21 @@ void Oscillator::paint (Graphics& g)
 {
     auto bounds = getLocalBounds().toFloat().reduced (0.5f, 0.5f);
     
+    float scaler = 0.99f;
+    float mover = (1.0f - scaler) / 2;
+    
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
     
-    g.setColour (juce::Colours::grey);
+    //------
     
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
+    //fill rectangle
+    g.setColour (bgCol);
+    g.fillRoundedRectangle (bounds * scaler, 10.0f);
     
+    //border rectangle
     g.setColour (juce::Colours::lightseagreen);
-    //g.fillRoundedRectangle (bounds, 6.0f);
-    
-    g.drawRoundedRectangle (bounds, 10.0f, 1.0f);
+    g.setOrigin(getWidth() * mover, getHeight() * mover );
+    g.drawRoundedRectangle (bounds * scaler, 10.0f, 1.0f);
 }
 
 void Oscillator::resized()
@@ -92,4 +99,9 @@ void Oscillator::setIndexAmpModFreqDial(double _newMod1freq)
 {
     indexAmpModFreqDial.setValue( _newMod1freq );
     
+}
+
+void Oscillator::setBGColour(juce::Colour colour)
+{
+    bgCol = colour;
 }

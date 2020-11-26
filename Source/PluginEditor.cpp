@@ -16,7 +16,16 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
 : AudioProcessorEditor (&p), processor (p), envGUI(p, envStr), fmodGUI(p, fmodStr), oscGUI(p, oscStr), mlGUI(p, mlStr)
 
 {
-    setSize(1300,300);
+    auto logoImage = ImageCache::getFromMemory (BinaryData::fmPNG_png, BinaryData::fmPNG_pngSize);
+    
+    if (! logoImage.isNull())
+        mImageComp.setImage (logoImage, RectanglePlacement::stretchToFit);
+    else
+        jassert (! logoImage.isNull());
+    
+    addAndMakeVisible(mImageComp);
+    
+    setSize(1000,300);
     
     Timer::startTimerHz(50);
     
@@ -26,6 +35,11 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     addAndMakeVisible(&mlGUI);
     
     //--------
+    //set Colours:
+    fmodGUI.getControlPanel().setBGColour (juce::Colours::rebeccapurple);
+    envGUI.getControlPanel().setBGColour (juce::Colours::rebeccapurple);
+    oscGUI.getControlPanel().setBGColour (juce::Colours::rebeccapurple);
+    mlGUI.getControlPanel().setBGColour (juce::Colours::rebeccapurple);
     
     //addAndMakeVisible(&test);
     
@@ -66,7 +80,7 @@ void JuceSynthFrameworkAudioProcessorEditor::paint (Graphics& g)
     
     
     //=====
-    g.drawText("DUALSHOCK 4 REGRESSION FM SYNTH", 100, 250, 800, 10, Justification::centred);
+    //g.drawText("DUALSHOCK 4 REGRESSION FM SYNTH", 100, 250, 800, 10, Justification::centred);
     
     
 }
@@ -92,7 +106,11 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     
     mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
-    footer.setBounds(area.removeFromBottom(headerFooterHeight));
+    
+    mImageComp.setBounds(300, 200, 400, 100);
+    
+    //g.drawText("DUALSHOCK 4 REGRESSION FM SYNTH", 100, 250, 800, 10, Justification::centred);
+    //footer.setBounds(area.removeFromBottom(headerFooterHeight));
     
  
     

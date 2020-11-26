@@ -3,6 +3,11 @@
 <JUCERPROJECT id="vtuibJ" name="synthFramework" projectType="audioplug" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
               displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="OMnIBC" name="synthFramework">
+    <GROUP id="{5CE4C8DA-698D-196F-96F0-7BC66F5767BB}" name="Resources">
+      <FILE id="U8PCoz" name="fmPNG.png" compile="0" resource="1" file="Resources/fmPNG.png"/>
+      <FILE id="zgQGyR" name="freakMod.docx" compile="0" resource="1" file="Resources/freakMod.docx"/>
+      <FILE id="ZcBqVv" name="freakMod.pdf" compile="0" resource="1" file="Resources/freakMod.pdf"/>
+    </GROUP>
     <GROUP id="{B7F7B41C-91B3-DF48-558F-005CE038E0FF}" name="Source">
       <GROUP id="{46CBB5C4-D9C2-EC30-0C14-27DE605B7B19}" name="RapidLib">
         <GROUP id="{DCC878A1-664E-5271-3F74-4FA72F7F45C4}" name="dependencies">

@@ -27,6 +27,8 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     
+    void setBGColour(juce::Colour colour);
+    
     void buttonClicked(Button* button) override;
     
     
@@ -53,6 +55,9 @@ public:
     double& getNewMod1freqTarget() {return newMod1freqTarget; };
     
 private:
+    
+    juce::Colour bgCol;
+    
     TextButton trainButton;
     
     ControllerOSC controller2;

@@ -24,6 +24,8 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     
+    void setBGColour (juce::Colour colour);
+    
 private:
     //attackSlider & attachment
     Slider attackSlider;
@@ -50,10 +52,11 @@ private:
     
     
     
+    const Colour lightPGrn
+    { 0xffaae9e1 };
     
     
-    
-    
+    juce::Colour bgCol;
     
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.

@@ -26,6 +26,11 @@ public:
     void resized() override;
 
 private:
+    const Colour pastelGrn { 0xff81dfd2 };
+    
+    const Colour lightPGrn
+    { 0xffaae9e1 };
+    
     std::string& str; //label / title
     
     JuceSynthFrameworkAudioProcessor& processor;

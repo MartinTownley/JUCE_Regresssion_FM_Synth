@@ -30,6 +30,8 @@ public:
     
     void setIndexAmpModFreqDial(double _newMod1freq);
     
+    void setBGColour(juce::Colour colour);
+    
 private:
     // oscillator menu
     ComboBox oscMenu;
@@ -37,7 +39,7 @@ private:
     std::unique_ptr <AudioProcessorValueTreeState::ComboBoxAttachment> oscMenuAttach;
     Label oscMenuLabel;
     
-    
+    juce::Colour bgCol;
     
     // modindex amplitude modulator frequency dial
     Slider indexAmpModFreqDial;

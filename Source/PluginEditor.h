@@ -42,7 +42,12 @@ public:
     
     void timerCallback() override;
     
+    const Colour lightseagreen        { 0xff20b2aa };
+    
+    
 private:
+    
+    ImageComponent mImageComp;
     
     TextButton footer;
     
