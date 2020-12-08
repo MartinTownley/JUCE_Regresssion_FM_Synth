@@ -29,8 +29,6 @@ public:
         
         addAndMakeVisible(&controlPanel);
         
-        //std::cout << str <<std::endl;
-        
     }
 
     ~SuperComponent() override
@@ -39,15 +37,7 @@ public:
 
     void paint (juce::Graphics& g) override
     {
-
-        //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
-        
-        //g.fillAll (juce::Colours::white);
-
         g.setColour (juce::Colours::grey);
-        
-        //g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
         g.setColour (juce::Colours::white);
         g.setFont (14.0f);
         g.drawText ("SuperComponent", getLocalBounds(),

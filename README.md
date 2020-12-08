@@ -4,6 +4,8 @@
 
 An FM synthesiser plugin programmed in JUCE, utilising RapidLib machine learning functions to allow gesture->parameter mappings with a games controller.
 
+![FreakMod_Img](/images/freakmod_image.png)
+
 ### How to run:
 
 The machine learning gesture-mapping functionality of this software requires a Sony DualShock 4 controller, as well as Max/MSP to run the patch that extracts the data from the controller.

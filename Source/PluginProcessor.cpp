@@ -29,7 +29,6 @@ mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout()  )
 {
     //constructor
     
-    
     // Clear voices, get rid of garbage:
     mySynth.clearVoices();
     
@@ -132,19 +131,8 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
     params.push_back (std::move(indexModFreqParam));
     params.push_back (std::move(trainButtonParam));
     
-    
-    //params.push_back (std::move(choiceParam));
-     
-    //}
-    
     return { params.begin(), params.end()};
-    
-   
-    
 }
-
-
-
 
 //==============================================================================
 const String JuceSynthFrameworkAudioProcessor::getName() const
