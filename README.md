@@ -1,4 +1,4 @@
-## DualShock 4 Regression FM Synth
+## FreakMod: Regression FM Synth
 
 An FM synthesiser plugin programmed in JUCE, utilising RapidLib machine learning functions to allow gesture -> parameter mappings with a games controller.
 
