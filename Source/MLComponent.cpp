@@ -108,7 +108,7 @@ void MLComponent::recordContData3()
     {
         //footer.setButtonText("When you have finished mapping your gestures, press train!");
         //std::cout << trainingSet3.size() << std::endl;
-        8
+        
     }
     
 }
