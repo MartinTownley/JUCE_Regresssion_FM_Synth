@@ -101,8 +101,6 @@ void MLComponent::recordContData0()
     if (input.size() > 0)
     {
         //footer.setButtonText("When you have finished mapping your gestures, press train!");
-        //std::cout << trainingSet3.size() << std::endl;
-        
     }
     
 }

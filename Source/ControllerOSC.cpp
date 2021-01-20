@@ -40,6 +40,7 @@ void ControllerOSC::oscMessageReceived(const OSCMessage &message)
     }
 }
 
+// Are the cross or triangle buttons being pressed?
 bool& ControllerOSC::getIsTriangle(){
     
     return isTriangle;
@@ -50,6 +51,7 @@ bool& ControllerOSC::getIsCross(){
     return isCross;
 }
 
+// X and Z gyroscope data
 float& ControllerOSC::getTheZed(){
     
     return theZed;

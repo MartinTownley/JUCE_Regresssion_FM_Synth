@@ -207,10 +207,6 @@ void JuceSynthFrameworkAudioProcessor::prepareToPlay (double sampleRate, int sam
     // Set sample rate:
     lastSampleRate = sampleRate;
     mySynth.setCurrentPlaybackSampleRate(lastSampleRate);
-    
-    
-    
-    
 }
 
 void JuceSynthFrameworkAudioProcessor::releaseResources()

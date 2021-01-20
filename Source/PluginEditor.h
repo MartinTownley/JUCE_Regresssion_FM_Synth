@@ -53,7 +53,6 @@ private:
     
     Label allLabels[5];
     
-    
     std::string envStr = "ENVELOPE";
     std::string fmodStr = "FREQUENCY MODULATION";
     std::string oscStr = "LFO";

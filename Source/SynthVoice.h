@@ -19,7 +19,6 @@ class SynthVoice : public SynthesiserVoice
 {
 public:
     
-    
     bool canPlaySound (SynthesiserSound* sound)
     {
         // Trying to cast the sound as the class SynthSound, if it's successful it'll return true.
@@ -27,8 +26,6 @@ public:
     }
     //==========================================
     
-
-
     void setADSR (float ATTACK_ID, float DECAY_ID, float SUSTAIN_ID, float RELEASE_ID)
     {
         adsrParams.attack = ATTACK_ID;
@@ -43,7 +40,6 @@ public:
     {
         adsr.setSampleRate (sampleRate);
     }
-    
     
     //==========================================
     void setFMParams (float HARMDIAL_ID, float MODINDEX_ID)
@@ -65,19 +61,15 @@ public:
     
     void setIndexModAmpfreq (float INDEXMODFREQ_ID)
     {
-        
         targetMod1freq = (double(INDEXMODFREQ_ID) );
-        
-        
     }
     //==========================================
     
    //==========================================
     
-    double setOscType ()
+    double switchOscType ()
     {
-
-        switch (modulator1Type) {
+            switch (modulator1Type) {
             case 0:
                 return 1;
                 break;
@@ -98,19 +90,14 @@ public:
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition)
     {
         // Velocity will be a value between 0 and 1, instantiated when you press a key:
-        
-        //env1.trigger = 1;
-        
         adsr.noteOn();
         
         level = velocity;
         
         carrierFreq = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
         
-        //reset the lfo phase on keypress
+        //reset the lfo phase on note press
         modulator1.phaseReset(0);
-        
-        
     }
     
     //==========================================
@@ -152,12 +139,11 @@ public:
         // This gets called in the process block of PluginProcessor
         // This is where we'll put our audio callback.
         
-        mod1amp = 19;
-
         adsr.setParameters(adsrParams);
         
-        //Code below is taken from the JUCE Regression Synth in the RapidMix examples folder:
         
+        //Code on lines 147 - 156 is taken from the JUCE Regression Synth in the RapidMix examples folder:
+        //============================
         const int localTargetHarmRatio = targetHarmRatio;
         const double localTargetModIndex = targetModIndex;
         const double localTargetMod1freq = targetMod1freq;
@@ -168,42 +154,49 @@ public:
         const double modIndexDelta = (localTargetModIndex != modIndex) ? (targetModIndex - modIndex) / numSamples : 0;
         
         const double mod1freqDelta = (localTargetMod1freq != mod1freq) ? (targetMod1freq - mod1freq) / numSamples : 0;
+        //==============================
+        
         
         //----Iterate samples
         for (int sample = 0; sample < numSamples; ++sample)
         {
-//           
+            // Update changes:
             harmRatio += harmRatioDelta;
             modIndex += modIndexDelta;
             mod1freq += mod1freqDelta;
             
-            //FM Synthesis
+            //--FM Synthesis--
+            // Define first modulator's frequency:
             mod0freq = harmRatio * carrierFreq;
             
+            // Define first modulator's amplitude:
             mod0amp = mod0freq * modIndex;
             
-            //Frequency modulation happens below
+            // Perform FM synthesis using Maxi oscillators:
             const double theWave = carrier.sinewave(carrierFreq
                                                     + (modulator0.sinewave(mod0freq)
-                                                       * (mod0amp * setOscType() )));
+                                                       * (mod0amp * switchOscType() )));
             
+            // Multiply the synthesised output by the ADSR:
             const double theSound = adsr.getNextSample() * theWave;
             
-            // Iterate the channels
+            // Iterate the channels & add samples:
             for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
             {
-                
-                outputBuffer.addSample(channel, startSample, (theSound * 0.1)); //args: (destChannel, destSample, valueToAdd)
+                outputBuffer.addSample (channel, startSample, (theSound * level * 0.2)); //args: (destChannel, destSample, valueToAdd)
             }
             // Advance startSample after channel iterator:
             ++startSample;
         }
+        
+        // Set variables to their locals:
         harmRatio = localTargetHarmRatio;
         modIndex = localTargetModIndex;
         mod1freq = localTargetMod1freq;
         
     }
     //--------------------
+    // Variables for passing data from this class to the machine learning component:
     double& getModIndex()
     {
         return modIndex;
@@ -268,11 +261,10 @@ private:
     double targetMod1freq;
     
     //== OTHER VARIABLES ==
-    double level;
-    double carrierFreq;
-    double mod0freq;
-    double mod0amp;
-    double mod1amp;
+    double level;           // Output level of the synth
+    double carrierFreq;     // Carrier frequency
+    double mod0freq;        // Modulating frequency
+    double mod0amp;         // Modulating amplitude
     
     //== JUCE ADSR (not Maxi) ==
     ADSR adsr;
@@ -283,6 +275,8 @@ private:
     int modulator1Type;
     
     //== MAXI OSCILLATORS 
-    maxiOsc carrier, modulator0, modulator1;
+    maxiOsc carrier,
+            modulator0,
+            modulator1;
     
 };

@@ -65,7 +65,7 @@ private:
     
     LabelComp labelPanel;
     
-    std::string& str; //reference member. str is now a reference to what gets passed in.
+    std::string& str; 
     
     JuceSynthFrameworkAudioProcessor& processor;
     

@@ -30,5 +30,10 @@ Assuming that you have both of these:
 
 8) Hold the X/Cross button on the games controller to run the model. Move the controller between the positions you have mapped to recall the parameter settings. Try new positions and see what happens!
 
+### Dependencies
 
+The following dependencies are included in this repository as submodules:
+
+* _Maximilian_ audio library 
+* _RapidLib_ machine learning library
 
