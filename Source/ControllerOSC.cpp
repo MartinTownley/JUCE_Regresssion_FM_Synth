@@ -19,8 +19,6 @@ ControllerOSC::ControllerOSC()
     connect(6448);
     
     addListener(this, "/juce");
-    
-    
 }
 
 ControllerOSC::~ControllerOSC()
@@ -32,6 +30,7 @@ void ControllerOSC::oscMessageReceived(const OSCMessage &message)
 {
     if (message.size() == 4 && message[0].isFloat32())
     {
+        //retrieve x & z gyroscope data
         theZed = message[0].getFloat32();
         theEx = message[1].getFloat32();
         
@@ -42,7 +41,6 @@ void ControllerOSC::oscMessageReceived(const OSCMessage &message)
 }
 
 bool& ControllerOSC::getIsTriangle(){
-    
     
     return isTriangle;
 }
@@ -58,6 +56,7 @@ float& ControllerOSC::getTheZed(){
 }
 
 float& ControllerOSC::getTheEx(){
+    
     return theEx;
 }
 

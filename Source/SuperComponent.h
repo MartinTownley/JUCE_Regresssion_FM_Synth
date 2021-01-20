@@ -23,8 +23,6 @@ class SuperComponent  : public juce::Component
 public:
     SuperComponent(JuceSynthFrameworkAudioProcessor& p, std::string& str_) : processor(p), labelPanel(p, str_), controlPanel(p), str(str_)
     {
-        // In your constructor, you should add any child components, and
-        // initialise any special settings that your component needs.
         addAndMakeVisible(&labelPanel);
         
         addAndMakeVisible(&controlPanel);

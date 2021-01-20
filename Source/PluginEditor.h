@@ -51,7 +51,6 @@ private:
     
     TextButton footer;
     
-    // Could make a vector of sliders..
     Label allLabels[5];
     
     

@@ -70,19 +70,10 @@ JuceSynthFrameworkAudioProcessorEditor::~JuceSynthFrameworkAudioProcessorEditor(
 //==============================================================================
 void JuceSynthFrameworkAudioProcessorEditor::paint (Graphics& g)
 {
-    
-    Rectangle<int> area = getLocalBounds();
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
+    // (Our component is opaque, so fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-
     g.setColour (Colours::white);
     g.setFont (juce::Font ("consolas", 40.0f, juce::Font::italic) );
-    
-    
-    //=====
-    //g.drawText("DUALSHOCK 4 REGRESSION FM SYNTH", 100, 250, 800, 10, Justification::centred);
-    
-    
 }
 
 void JuceSynthFrameworkAudioProcessorEditor::resized()
@@ -91,48 +82,39 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     
     const int componentWidth = 200;
     const int componentHeight = 200;
-    const int headerFooterHeight = 36;
-    
-    auto bounds = getLocalBounds();
-    const int componentSize { 100 };
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
    
-    envGUI.setBounds(area.removeFromLeft(componentWidth*2).removeFromTop(componentHeight));
+    envGUI.setBounds (area.removeFromLeft (componentWidth*2).removeFromTop(componentHeight));
     
-    fmodGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+    fmodGUI.setBounds (area.removeFromLeft (componentWidth).removeFromTop(componentHeight));
+
+    oscGUI.setBounds (area.removeFromLeft (componentWidth).removeFromTop(componentHeight));
     
-    oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
-    
-    mlGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
-    
+    mlGUI.setBounds (area.removeFromLeft (componentWidth).removeFromTop(componentHeight));
     
     mImageComp.setBounds(300, 200, 400, 100);
-    
-    //g.drawText("DUALSHOCK 4 REGRESSION FM SYNTH", 100, 250, 800, 10, Justification::centred);
-    //footer.setBounds(area.removeFromBottom(headerFooterHeight));
-    
- 
-    
 }
 
 void JuceSynthFrameworkAudioProcessorEditor::timerCallback()
 {
-    //make this a switch statement
-        
+    
+    
         if ( mlGUI.getControlPanel().passIsTriangle() == true)
         {
-            mlGUI.getControlPanel().recordContData3();
+            mlGUI.getControlPanel().recordContData0();
         }
         
         if ( mlGUI.getControlPanel().passIsCross() == true)
         {
             
-            mlGUI.getControlPanel().runModel3();
+            mlGUI.getControlPanel().runModel0();
             
-            fmodGUI.getControlPanel().setHarmDial(mlGUI.getControlPanel().getNewHarmTarget());
-            fmodGUI.getControlPanel().setModIndexDial(mlGUI.getControlPanel().getNewModIndexTarget());
-            oscGUI.getControlPanel().setIndexAmpModFreqDial(mlGUI.getControlPanel().getNewMod1freqTarget());
+            fmodGUI.getControlPanel().setHarmDial (mlGUI.getControlPanel().getNewHarmTarget());
+            
+            fmodGUI.getControlPanel().setModIndexDial (mlGUI.getControlPanel().getNewModIndexTarget());
+            
+            oscGUI.getControlPanel().setIndexAmpModFreqDial (mlGUI.getControlPanel().getNewMod1freqTarget());
         }
     
 }

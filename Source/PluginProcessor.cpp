@@ -23,7 +23,7 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                      #endif
                        ),
 
-// pre defines
+// Pre-definitions
 mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout()  ) 
 #endif
 {
@@ -32,18 +32,16 @@ mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout()  )
     // Clear voices, get rid of garbage:
     mySynth.clearVoices();
     
+    // Add voices:
     for (int i = 0; i < 10; i++)
     {
         mySynth.addVoice (new SynthVoice());
-        
     }
     
     //clear sounds
     mySynth.clearSounds();
     //add sounds
     mySynth.addSound(new SynthSound());
-    
-    
 }
 //===================================
 
@@ -56,11 +54,11 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
     //Create parameterlayout gets used as an argument for treeState at the top of this file (scroll up)
     
     
-    // Making a vector of audioParameter unique pointers:
+    //Making a vector of audioParameter unique pointers:
     std::vector <std::unique_ptr <RangedAudioParameter> > params;
     
     //create variable that will go inside the treeState argument:
-    //auto deduces return type for us:
+    //auto deduces return type:
     auto attackParam = std::make_unique<AudioParameterFloat> (ATTACK_ID,
                                                               ATTACK_NAME,
                                                               0.01f,
@@ -74,7 +72,7 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
                                                             2.0f,
                                                             0.1f);
     
-    //sustain range is 0.0 to 1
+    //sustain range: 0.0 to 1
     auto sustainParam = std::make_unique<AudioParameterFloat>(SUSTAIN_ID,
                                                               SUSTAIN_NAME,
                                                               0.1f,
@@ -119,7 +117,7 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
                                                                   TRAIN_NAME,
                                                                   false);
     
-        // std::move actually moves the object, rather than making a copy then deleting it. More efficient:
+    // std::move actually moves the object, rather than making a copy then deleting it:
     
     params.push_back (std::move(attackParam));
     params.push_back (std::move(releaseParam));
@@ -255,22 +253,19 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
         // If the voice is dynamically cast as a synth voice, relay the information:
         if (myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i)))
         {
-            myVoice->setADSRSampleRate(lastSampleRate);
+            myVoice-> setADSRSampleRate (lastSampleRate);
             
             myVoice-> setADSR (mAPVTS.getRawParameterValue (ATTACK_ID)->load(),
                                mAPVTS.getRawParameterValue (DECAY_ID)->load(),
                                mAPVTS.getRawParameterValue (SUSTAIN_ID)->load(),
                                mAPVTS.getRawParameterValue(RELEASE_ID)->load() );
                                
-                               
-                               
-            
-            myVoice-> setFMParams(mAPVTS.getRawParameterValue (HARMDIAL_ID)-> load(),
+            myVoice-> setFMParams (mAPVTS.getRawParameterValue (HARMDIAL_ID)-> load(),
                                   mAPVTS.getRawParameterValue(MODINDEXDIAL_ID)->load());
             
-            myVoice-> setIndexModAmpfreq(mAPVTS.getRawParameterValue(INDEXMODFREQ_ID)-> load());
+            myVoice-> setIndexModAmpfreq (mAPVTS.getRawParameterValue(INDEXMODFREQ_ID)-> load());
             
-            myVoice-> setOscType(mAPVTS.getRawParameterValue(OSCMENU_ID)-> load());
+            myVoice-> setOscType (mAPVTS.getRawParameterValue(OSCMENU_ID)-> load());
             
             
         }
@@ -296,8 +291,6 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
 
     //=============================================================
     // the above code is not necessary, since DSP is now happening in the render nextblock of mySnyth, so we call that instead:
-    
-   
     
     buffer.clear();
     

@@ -152,12 +152,7 @@ public:
         // This gets called in the process block of PluginProcessor
         // This is where we'll put our audio callback.
         
-        // Set arguments for envelope:
-       
-        // May not be best place to set these variables:
-        //env1.setAttack(2000);
-        
-       mod1amp = 19;
+        mod1amp = 19;
 
         adsr.setParameters(adsrParams);
         
@@ -174,9 +169,6 @@ public:
         
         const double mod1freqDelta = (localTargetMod1freq != mod1freq) ? (targetMod1freq - mod1freq) / numSamples : 0;
         
-        
-        
-        
         //----Iterate samples
         for (int sample = 0; sample < numSamples; ++sample)
         {
@@ -185,18 +177,17 @@ public:
             modIndex += modIndexDelta;
             mod1freq += mod1freqDelta;
             
-            
+            //FM Synthesis
             mod0freq = harmRatio * carrierFreq;
             
             mod0amp = mod0freq * modIndex;
             
-            //frequency modulation happens below
+            //Frequency modulation happens below
             const double theWave = carrier.sinewave(carrierFreq
                                                     + (modulator0.sinewave(mod0freq)
                                                        * (mod0amp * setOscType() )));
             
             const double theSound = adsr.getNextSample() * theWave;
-            
             
             // Iterate the channels
             for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
@@ -259,9 +250,7 @@ public:
         targetMod1freq = _value;
     }
     //==========================================
-public:
-    
-    
+
 private:
     
     //== MACHINE LEARNABLE PARAMS ==
@@ -293,7 +282,7 @@ private:
     
     int modulator1Type;
     
-    //== MAXI OSCILLATORS
+    //== MAXI OSCILLATORS 
     maxiOsc carrier, modulator0, modulator1;
     
 };

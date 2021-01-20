@@ -19,7 +19,7 @@
 class LabelComp  : public juce::Component
 {
 public:
-    LabelComp(JuceSynthFrameworkAudioProcessor&, std::string& str_);
+    LabelComp (JuceSynthFrameworkAudioProcessor&, std::string& str_);
     ~LabelComp() override;
 
     void paint (juce::Graphics&) override;

@@ -31,22 +31,21 @@ public:
     
     void buttonClicked(Button* button) override;
     
+    void recordContData0();
     
-    void recordContData3();
+    void trainModel0();
     
-    void trainModel3();
-    
-    void runModel3();
+    void runModel0();
     
     void copyValues();
     
     //This is so that Fmod can access it.
-    bool getTrained() { return _trained3; };
+    bool getTrained() { return _trained0; };
     
-    bool passIsTriangle() { return controller2.getIsTriangle();
+    bool passIsTriangle() { return controller0.getIsTriangle();
     };
     
-    bool passIsCross() { return controller2.getIsCross(); };
+    bool passIsCross() { return controller0.getIsCross(); };
     //------------
     int& getNewHarmTarget() {return newHarmTarget; };
     
@@ -60,16 +59,16 @@ private:
     
     TextButton trainButton;
     
-    ControllerOSC controller2;
+    ControllerOSC controller0;
     
     //trainButtonAttach
     std::unique_ptr <AudioProcessorValueTreeState::ButtonAttachment> trainButtonAttach;
     
     //==RAPIDLIB==
-    regression rapidRegression3;
-    std::vector<trainingExample> trainingSet3;
+    regression rapidRegression0;
+    std::vector<trainingExample> trainingSet0;
     
-    bool _trained3;
+    bool _trained0;
     
     JuceSynthFrameworkAudioProcessor& processor;
     

@@ -27,14 +27,10 @@ processor(p)
     trainButton.addListener(this);
     
     trainButtonAttach = std::make_unique <AudioProcessorValueTreeState::ButtonAttachment> (processor.getAPVTS(), TRAIN_ID, trainButton);
-    //Label
-    //addAndMakeVisible(trainLabel);
     
-    //trainButton.onClick = [&]() { processor.testerButton(); processor.trainModel2(); };
+    trainButton.onClick = [&]() { this->trainModel0(); } ;
     
-    trainButton.onClick = [&]() { this->trainModel3(); } ;
-    
-    _trained3 = false;
+    _trained0 = false;
     
 }
 
@@ -73,13 +69,12 @@ void MLComponent::resized()
     
     juce::Rectangle<int> area(getLocalBounds());
 
-    
     trainButton.setBounds (bounds.removeFromLeft(200).withSizeKeepingCentre(componentSize, componentSize));
     
     const int headerFooterHeight = 36;
     //header.setBounds(area.removeFromTop(headerFooterHeight));
     //footer.setBounds(area.removeFromBottom(headerFooterHeight));
-
+    
 }
 
 void MLComponent::buttonClicked(Button* button)
@@ -87,22 +82,21 @@ void MLComponent::buttonClicked(Button* button)
     
 }
 
-
-
-void MLComponent::recordContData3()
+void MLComponent::recordContData0()
 {
-    std::vector<double> ZandX = { controller2.getTheZed(),
-        controller2.getTheEx() };
+    
+    std::vector<double> ZandX = { controller0.getTheZed(),
+        controller0.getTheEx() };
     
     std::vector<double>& input = ZandX;
     
-    trainingExample example3;
+    trainingExample example0;
     
-    example3.input = { input[0], input[1]};
+    example0.input = { input[0], input[1]};
     
-    example3.output = {static_cast<double> (processor.passHarmRatio()), processor.passModIndex(), processor.passMod1freq() };
+    example0.output = {static_cast<double> (processor.passHarmRatio()), processor.passModIndex(), processor.passMod1freq() };
     
-    trainingSet3.push_back(example3);
+    trainingSet0.push_back(example0);
     
     if (input.size() > 0)
     {
@@ -113,30 +107,28 @@ void MLComponent::recordContData3()
     
 }
 
-void MLComponent::trainModel3()
+void MLComponent::trainModel0()
 
 {
-    if (trainingSet3.size() > 2)
+    if (trainingSet0.size() > 2)
     {
-        std::cout << "editor trained: " << _trained3 << std::endl;
-        _trained3 = rapidRegression3.train(trainingSet3);
-        std::cout << "editor trained: " << _trained3 << std::endl;
-        
+        std::cout << "editor trained: " << _trained0 << std::endl;
+        _trained0 = rapidRegression0.train(trainingSet0);
     }
 }
 
-void MLComponent::runModel3()
+void MLComponent::runModel0()
 {
-    if (_trained3)
+    if (_trained0)
     {
         //Make a vector of controller data:
-        std::vector<double> ZandX = {controller2.getTheZed(),
-            controller2.getTheEx() };
+        std::vector<double> ZandX = {controller0.getTheZed(),
+            controller0.getTheEx() };
         
         std::vector<double>& input = ZandX;
         
         // Run the model on the input data:
-        std::vector<double> output = rapidRegression3.run(input);
+        std::vector<double> output = rapidRegression0.run(input);
         
         //Set targetHarmRatio and targetModIndex to new values in synth voice
         processor.setValues(output[0], output[1], output[2]);
@@ -145,7 +137,7 @@ void MLComponent::runModel3()
         copyValues();
         
     } else {
-        //AlertWindow::showMessageBoxAsync(AlertWindow::AlertIconType::WarningIcon, "Error", "Please train the model before trying to run it!", "ok");
+        AlertWindow::showMessageBoxAsync(AlertWindow::AlertIconType::WarningIcon, "Error", "Please train the model before trying to run it!", "ok");
     }
     
 }

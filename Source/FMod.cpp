@@ -21,31 +21,25 @@ processor(p)
     //harmdial slider
     harmDial.setSliderStyle (Slider::SliderStyle::RotaryVerticalDrag);
     harmDial.setTextBoxStyle (Slider::TextEntryBoxPosition::TextBoxBelow, true, 50, 15);
-    addAndMakeVisible(&harmDial);
+    addAndMakeVisible (&harmDial);
     harmDialAttach = std::make_unique <AudioProcessorValueTreeState::SliderAttachment> (processor.getAPVTS(), HARMDIAL_ID, harmDial);
-    
-    
     
     //modIndexDial slider
     modIndexDial.setSliderStyle (Slider::SliderStyle::RotaryVerticalDrag);
     modIndexDial.setTextBoxStyle (Slider::TextEntryBoxPosition::TextBoxBelow, true, 50, 15);
-    addAndMakeVisible(&modIndexDial);
+    addAndMakeVisible (&modIndexDial);
     modIndexDialAttach = std::make_unique <AudioProcessorValueTreeState::SliderAttachment> (processor.getAPVTS(), MODINDEXDIAL_ID, modIndexDial);
     
-    
-    //LABELS
-    
-    addAndMakeVisible(&harmLabel);
-    harmLabel.setText("Harmonicity", dontSendNotification);
-    harmLabel.setJustificationType(juce::Justification::centred);
+    //labels
+    addAndMakeVisible (&harmLabel);
+    harmLabel.setText ("Harmonicity", dontSendNotification);
+    harmLabel.setJustificationType (juce::Justification::centred);
     harmLabel.attachToComponent(&harmDial, false);
     
     addAndMakeVisible(&modIndexLabel);
     modIndexLabel.setText("Mod Index", dontSendNotification);
-    modIndexLabel.setJustificationType(juce::Justification::centred);
-    modIndexLabel.attachToComponent(&modIndexDial, false);
-    
-    
+    modIndexLabel.setJustificationType (juce::Justification::centred);
+    modIndexLabel.attachToComponent (&modIndexDial, false);
 }
 
 FMod::~FMod()

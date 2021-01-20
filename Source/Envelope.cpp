@@ -45,37 +45,34 @@ processor(p)
                                                                                        SUSTAIN_ID,
                                                                                        sustainSlider);
     
-    
     //release slider
     releaseSlider.setSliderStyle (Slider::SliderStyle::LinearVertical);
     releaseSlider.setTextBoxStyle (Slider::TextEntryBoxPosition::TextBoxBelow, true, 50, 15);
-    addAndMakeVisible(&releaseSlider);
+    addAndMakeVisible (&releaseSlider);
     releaseAttach = std::make_unique <AudioProcessorValueTreeState::SliderAttachment> (processor.getAPVTS(),
                                                                                        RELEASE_ID,
                                                                                        releaseSlider);
     
     //LABELS
-    addAndMakeVisible(&attackLabel);
-    attackLabel.setText("Attack Time", dontSendNotification);
-    attackLabel.setJustificationType(juce::Justification::centred);
+    addAndMakeVisible (&attackLabel);
+    attackLabel.setText ("Attack Time", dontSendNotification);
+    attackLabel.setJustificationType (juce::Justification::centred);
     attackLabel.attachToComponent(&attackSlider, false);
     
-    addAndMakeVisible(&decayLabel);
-    decayLabel.setText("Decay Time", dontSendNotification);
-    decayLabel.setJustificationType(juce::Justification::centred);
-    decayLabel.attachToComponent(&decaySlider, false);
+    addAndMakeVisible (&decayLabel);
+    decayLabel.setText ("Decay Time", dontSendNotification);
+    decayLabel.setJustificationType (juce::Justification::centred);
+    decayLabel.attachToComponent (&decaySlider, false);
     
-    addAndMakeVisible(&sustainLabel);
-    sustainLabel.setText("Sustain Level", dontSendNotification);
-    sustainLabel.setJustificationType(juce::Justification::centred);
-    sustainLabel.attachToComponent(&sustainSlider, false);
+    addAndMakeVisible (&sustainLabel);
+    sustainLabel.setText ("Sustain Level", dontSendNotification);
+    sustainLabel.setJustificationType (juce::Justification::centred);
+    sustainLabel.attachToComponent (&sustainSlider, false);
     
-    addAndMakeVisible(&releaseLabel);
-    releaseLabel.setText("Release Time", dontSendNotification);
-    releaseLabel.setJustificationType(juce::Justification::centred);
-    releaseLabel.attachToComponent(&releaseSlider, false);
-    
-    
+    addAndMakeVisible (&releaseLabel);
+    releaseLabel.setText ("Release Time", dontSendNotification);
+    releaseLabel.setJustificationType (juce::Justification::centred);
+    releaseLabel.attachToComponent (&releaseSlider, false);
 }
 
 Envelope::~Envelope()
@@ -89,9 +86,8 @@ void Envelope::paint (Graphics& g)
     float scaler = 0.99f;
     float mover = (1.0f - scaler) / 2;
     
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
-    
-    //------
+    // clear the background
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
     
     //fill rectangle
     g.setColour (bgCol);
@@ -101,8 +97,6 @@ void Envelope::paint (Graphics& g)
     g.setColour (juce::Colours::lightseagreen);
     g.setOrigin(getWidth() * mover, getHeight() * mover );
     g.drawRoundedRectangle (bounds * scaler, 10.0f, 1.0f);
-    
-
 }
 
 void Envelope::resized()

@@ -15,9 +15,6 @@
 #include "SynthSound.h"
 #include "ControllerOSC.h"
 
-
-//#include "MLGui.h"
-
 #define ATTACK_ID "attack"
 #define ATTACK_NAME "Attack"
 
@@ -128,8 +125,6 @@ public:
 private:
     Synthesiser mySynth;
     SynthVoice* myVoice;
-    
-    
     
     double lastSampleRate;
     

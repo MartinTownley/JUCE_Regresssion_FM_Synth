@@ -22,15 +22,12 @@ public:
     
     void oscMessageReceived (const OSCMessage &message) override;
     
-    //GETTERS
+    //Getters
     bool& getIsTriangle();
-    
     bool& getIsCross();
     
     float& getTheZed();
     float& getTheEx();
-    
-    
     
 private:
     
@@ -41,7 +38,4 @@ private:
     
     float theZed;
     float theEx;
-    
-    
-    
 };
