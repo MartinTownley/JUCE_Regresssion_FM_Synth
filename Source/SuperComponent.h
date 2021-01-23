@@ -16,10 +16,14 @@
 
 //==============================================================================
 /*
+ A template for creating a generic component type, consisting of two subcomponents: a label component (displaying the component name e.g. "Envelope") and a control panel component (containing the sliders/dials etc.)
 */
+// Template argument accepts a typename. When a SuperComponent object is created, specify its type there. T will get replaced by this type.
 template <typename T>
 class SuperComponent  : public juce::Component
 {
+    
+// T will be substituted at compile time by whatever
 public:
     SuperComponent(JuceSynthFrameworkAudioProcessor& p, std::string& str_) : processor(p), labelPanel(p, str_), controlPanel(p), str(str_)
     {
@@ -37,7 +41,8 @@ public:
     {
         g.setColour (juce::Colours::grey);
         g.setColour (juce::Colours::white);
-        g.setFont (14.0f);
+        //g.setFont (14.0f);
+        
         g.drawText ("SuperComponent", getLocalBounds(),
                     juce::Justification::centred, true);
     }
@@ -60,9 +65,10 @@ public:
     T& getControlPanel() { return controlPanel; }
     
 private:
-    
+    // T will be replaced by whichever type is specified when a controlPanel object is created
     T controlPanel;
     
+    // Label panel remains the same
     LabelComp labelPanel;
     
     std::string& str; 

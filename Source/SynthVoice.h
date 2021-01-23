@@ -45,10 +45,10 @@ public:
     void setFMParams (float HARMDIAL_ID, float MODINDEX_ID)
     {
         // Harmonicity Ratio
-        targetHarmRatio = (int(HARMDIAL_ID));
+        targetHarmRatio = (float(HARMDIAL_ID));
         
         // Modulation Index
-        targetModIndex = (double(MODINDEX_ID));
+        targetModIndex = (float(MODINDEX_ID));
     }
     
     //==========================================
@@ -61,7 +61,7 @@ public:
     
     void setIndexModAmpfreq (float INDEXMODFREQ_ID)
     {
-        targetMod1freq = (double(INDEXMODFREQ_ID) );
+        targetMod1freq = (float(INDEXMODFREQ_ID) );
     }
     //==========================================
     
@@ -141,19 +141,18 @@ public:
         
         adsr.setParameters(adsrParams);
         
-        
         //Code on lines 147 - 156 is taken from the JUCE Regression Synth in the RapidMix examples folder:
         //============================
-        const int localTargetHarmRatio = targetHarmRatio;
-        const double localTargetModIndex = targetModIndex;
-        const double localTargetMod1freq = targetMod1freq;
+        const float localTargetHarmRatio = targetHarmRatio;
+        const float localTargetModIndex = targetModIndex;
+        const float localTargetMod1freq = targetMod1freq;
         
         //---DELTAS---
-        const int harmRatioDelta = (localTargetHarmRatio != harmRatio) ? (targetHarmRatio - harmRatio) / numSamples : 0;
+        const float harmRatioDelta = (localTargetHarmRatio != harmRatio) ? (targetHarmRatio - harmRatio) / numSamples : 0;
         
-        const double modIndexDelta = (localTargetModIndex != modIndex) ? (targetModIndex - modIndex) / numSamples : 0;
+        const float modIndexDelta = (localTargetModIndex != modIndex) ? (targetModIndex - modIndex) / numSamples : 0;
         
-        const double mod1freqDelta = (localTargetMod1freq != mod1freq) ? (targetMod1freq - mod1freq) / numSamples : 0;
+        const float mod1freqDelta = (localTargetMod1freq != mod1freq) ? (targetMod1freq - mod1freq) / numSamples : 0;
         //==============================
         
         
@@ -197,48 +196,48 @@ public:
     }
     //--------------------
     // Variables for passing data from this class to the machine learning component:
-    double& getModIndex()
+    float& getModIndex()
     {
         return modIndex;
     }
     
-    int& getHarmRatio()
+    float& getHarmRatio()
     {
         return harmRatio;
     }
     
-    double& getMod1freq()
+    float& getMod1freq()
     {
         return mod1freq;
     }
     
     //--------------------
-    double& getModIndexTarget()
+    float& getModIndexTarget()
     {
         return targetModIndex;
     }
     
-    int& getHarmTarget()
+    float& getHarmTarget()
     {
         return targetHarmRatio;
     }
     
-    double& getMod1freqTarget()
+    float& getMod1freqTarget()
     {
         return targetMod1freq;
     }
     //---------------------
-    void setHarmTarget(int _value)
+    void setHarmTarget(float _value)
     {
         targetHarmRatio = _value;
     }
     
-    void setModIndexTarget(double _value)
+    void setModIndexTarget(float _value)
     {
         targetModIndex = _value;
     }
     
-    void setMod1freqTarget(double _value)
+    void setMod1freqTarget(float _value)
     {
         targetMod1freq = _value;
     }
@@ -249,22 +248,22 @@ private:
     //== MACHINE LEARNABLE PARAMS ==
     
     // FM Synthesis parameters
-    double modIndex;
-    int harmRatio;
+    float modIndex;
+    float harmRatio;
     
     // LFO Parameter
-    double mod1freq;
+    float mod1freq;
     
     // TARGETS:
-    double targetModIndex;
-    int targetHarmRatio;
-    double targetMod1freq;
+    float targetModIndex;
+    float targetHarmRatio;
+    float targetMod1freq;
     
     //== OTHER VARIABLES ==
-    double level;           // Output level of the synth
-    double carrierFreq;     // Carrier frequency
-    double mod0freq;        // Modulating frequency
-    double mod0amp;         // Modulating amplitude
+    float level;           // Output level of the synth
+    float carrierFreq;     // Carrier frequency
+    float mod0freq;        // Modulating frequency
+    float mod0amp;         // Modulating amplitude
     
     //== JUCE ADSR (not Maxi) ==
     ADSR adsr;

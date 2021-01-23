@@ -21,8 +21,10 @@ processor(p)
     //harmdial slider
     harmDial.setSliderStyle (Slider::SliderStyle::RotaryVerticalDrag);
     harmDial.setTextBoxStyle (Slider::TextEntryBoxPosition::TextBoxBelow, true, 50, 15);
+    harmDial.setTextBoxIsEditable(true);
     addAndMakeVisible (&harmDial);
     harmDialAttach = std::make_unique <AudioProcessorValueTreeState::SliderAttachment> (processor.getAPVTS(), HARMDIAL_ID, harmDial);
+    
     
     //modIndexDial slider
     modIndexDial.setSliderStyle (Slider::SliderStyle::RotaryVerticalDrag);

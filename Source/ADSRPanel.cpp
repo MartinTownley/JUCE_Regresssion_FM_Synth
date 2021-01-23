@@ -9,7 +9,7 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "Envelope.h"
+#include "ADSRPanel.h"
 
 //==============================================================================
 Envelope::Envelope(JuceSynthFrameworkAudioProcessor& p) :

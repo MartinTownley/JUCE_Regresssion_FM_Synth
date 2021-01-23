@@ -45,7 +45,7 @@ void LabelComp::paint (juce::Graphics& g)
 
     //text
     g.setColour (juce::Colours::rebeccapurple);
-    g.setFont (16.0f);
+    g.setFont (Font(16, Font::bold));
     g.drawText (str, getLocalBounds(),
                 juce::Justification::centred, true);
 }

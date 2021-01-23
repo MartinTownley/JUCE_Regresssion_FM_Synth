@@ -120,8 +120,8 @@
       </GROUP>
       <FILE id="h9UqT7" name="LabelComp.cpp" compile="1" resource="0" file="Source/LabelComp.cpp"/>
       <FILE id="DmcVgK" name="LabelComp.h" compile="0" resource="0" file="Source/LabelComp.h"/>
-      <FILE id="ckD7CN" name="Envelope.cpp" compile="1" resource="0" file="Source/Envelope.cpp"/>
-      <FILE id="AThHch" name="Envelope.h" compile="0" resource="0" file="Source/Envelope.h"/>
+      <FILE id="ckD7CN" name="ADSRPanel.cpp" compile="1" resource="0" file="Source/ADSRPanel.cpp"/>
+      <FILE id="AThHch" name="ADSRPanel.h" compile="0" resource="0" file="Source/ADSRPanel.h"/>
       <FILE id="oPm2HS" name="FMod.cpp" compile="1" resource="0" file="Source/FMod.cpp"/>
       <FILE id="h05cxT" name="FMod.h" compile="0" resource="0" file="Source/FMod.h"/>
       <FILE id="mrum8p" name="Oscillator.cpp" compile="1" resource="0" file="Source/Oscillator.cpp"/>

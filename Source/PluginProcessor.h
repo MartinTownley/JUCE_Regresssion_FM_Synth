@@ -106,19 +106,19 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     
-    int& passHarmTarget() {return myVoice->getHarmTarget(); };
+    float& passHarmTarget() {return myVoice->getHarmTarget(); };
     
-    double& passModIndexTarget() {return myVoice->getModIndexTarget(); };
+    float& passModIndexTarget() {return myVoice->getModIndexTarget(); };
     
-    double& passMod1freqTarget() {return myVoice->getMod1freqTarget(); };
+    float& passMod1freqTarget() {return myVoice->getMod1freqTarget(); };
     //--------------
-    int& passHarmRatio() {return myVoice->getHarmRatio(); };
+    float& passHarmRatio() {return myVoice->getHarmRatio(); };
     
-    double& passModIndex() {return myVoice->getModIndex(); };
+    float& passModIndex() {return myVoice->getModIndex(); };
     
-    double& passMod1freq() {return myVoice->getMod1freq(); };
+    float& passMod1freq() {return myVoice->getMod1freq(); };
     //--------------
-    void setValues(int _value0, double _value1, double _value2);
+    void setValues(float _value0, float _value1, float _value2);
     
     AudioProcessorValueTreeState& getAPVTS() {return mAPVTS;};
     

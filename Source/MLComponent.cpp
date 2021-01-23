@@ -35,7 +35,7 @@ processor(p), _trained0(false)
     instruction.setColour (TextButton::buttonColourId, Colours::indianred);
     instruction.setColour (TextButton::textColourOffId, Colours::white);
     instruction.setEnabled(false);
-    instruction.setButtonText ("Select Parameters");
+    instruction.setButtonText ("Set parameters, hold the controller in some position in X and Z, and then hold triangle briefly to associate that position with that sound (mappable parameters: Harmonicity, Mod Index, LFO Freq)");
     //Instructions Add:
     addAndMakeVisible(&instruction);
 }
@@ -81,12 +81,6 @@ void MLComponent::resized()
     trainButton.setBounds (bounds.removeFromBottom(trainButtonHeight).reduced(trainButtonMargin));
     
     instruction.setBounds (bounds.reduced(trainButtonMargin));
-    
-    
-    //const int headerFooterHeight = 36;
-    //header.setBounds(area.removeFromTop(headerFooterHeight));
-    //footer.setBounds(area.removeFromBottom(headerFooterHeight));
-    
 }
 
 void MLComponent::buttonClicked(Button* button)
@@ -137,6 +131,8 @@ void MLComponent::trainModel0()
 
 void MLComponent::runModel0()
 {
+    
+    std::cout<< "running" << std::endl;
     if (_trained0)
     {
         //Make a vector of controller data:
@@ -155,7 +151,8 @@ void MLComponent::runModel0()
         copyValues();
         
     } else {
-        AlertWindow::showMessageBoxAsync(AlertWindow::AlertIconType::WarningIcon, "Error", "Please train the model before trying to run it!", "ok");
+       
+        AlertWindow::showMessageBoxAsync(AlertWindow::AlertIconType::WarningIcon, "Error", "Please train the model before trying to run it!", "OK");
     }
     
 }

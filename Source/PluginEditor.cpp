@@ -23,7 +23,7 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     else
         jassert (! logoImage.isNull());
     
-    addAndMakeVisible(mImageComp);
+    addAndMakeVisible(&mImageComp);
     
     setSize(1000,300);
     
@@ -40,28 +40,8 @@ JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (
     envGUI.getControlPanel().setBGColour (juce::Colours::rebeccapurple);
     oscGUI.getControlPanel().setBGColour (juce::Colours::rebeccapurple);
     mlGUI.getControlPanel().setBGColour (juce::Colours::rebeccapurple);
-    
-    //addAndMakeVisible(&test);
-    
-    //labels:
-    //attack:
-    addAndMakeVisible (&allLabels[0]);
-    allLabels[0].setText("Attack", dontSendNotification);
-    
-    //mod index amp mod
-    addAndMakeVisible(&allLabels[4]);
-    allLabels[4].setText("Mod Index Amp Mod Wave Select", dontSendNotification);
-    allLabels[4].attachToComponent (&oscGUI, false);
-    
-    footer.setColour(TextButton::buttonColourId, Colours::wheat);
-    footer.setColour(TextButton::textColourOffId, Colours::white);
-    footer.setEnabled(false);
-    footer.setButtonText("Select the synth parameters you like, then move the mouse to an area and hold space to associate that space with that sound. Repeat with a few sounds");
-    addAndMakeVisible(footer);
-    
-    
-    
 }
+
 JuceSynthFrameworkAudioProcessorEditor::~JuceSynthFrameworkAudioProcessorEditor()
 {
     Timer::stopTimer();
@@ -98,7 +78,6 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
 
 void JuceSynthFrameworkAudioProcessorEditor::timerCallback()
 {
-    
     
         if ( mlGUI.getControlPanel().passIsTriangle() == true)
         {

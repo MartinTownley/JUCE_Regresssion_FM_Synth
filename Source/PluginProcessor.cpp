@@ -53,7 +53,6 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
 {
     //Create parameterlayout gets used as an argument for treeState at the top of this file (scroll up)
     
-    
     //Making a vector of audioParameter unique pointers:
     std::vector <std::unique_ptr <RangedAudioParameter> > params;
     
@@ -86,16 +85,16 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
                                                                5.0f,
                                                                1.0f);
     
-    auto harmDialParam = std::make_unique<AudioParameterInt>(HARMDIAL_ID,
+    auto harmDialParam = std::make_unique<AudioParameterFloat>(HARMDIAL_ID,
                                                              HARMDIAL_NAME,
-                                                             1,
-                                                             128,
-                                                             1);
+                                                             1.0f,
+                                                             20.0f,
+                                                             1.0f);
     
     auto modIndexParam = std::make_unique<AudioParameterFloat>(MODINDEXDIAL_ID,
                                                                MODINDEXDIAL_NAME,
                                                                1.0f,
-                                                               100.0f,
+                                                               20.0f,
                                                                1.0f);
     
     
@@ -110,7 +109,7 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
     auto indexModFreqParam = std::make_unique<AudioParameterFloat>(INDEXMODFREQ_ID,
                                                                    INDEXMODFREQ_NAME,
                                                                    0.0f,
-                                                                   10.0f,
+                                                                   300.0f,
                                                                    1.0f);
     
     auto trainButtonParam = std::make_unique<AudioParameterBool> (TRAIN_ID,
@@ -203,6 +202,7 @@ void JuceSynthFrameworkAudioProcessor::prepareToPlay (double sampleRate, int sam
     // Clear out/ignore unused samples from the last keypress
     ignoreUnused(samplesPerBlock);
     
+    maxiSettings::setup(std::round(sampleRate), 2, samplesPerBlock);
     
     // Set sample rate:
     lastSampleRate = sampleRate;
@@ -321,12 +321,11 @@ void JuceSynthFrameworkAudioProcessor::setStateInformation (const void* data, in
 }
 
 
-void JuceSynthFrameworkAudioProcessor::setValues(int _value0, double _value1, double _value2)
+void JuceSynthFrameworkAudioProcessor::setValues(float _value0, float _value1, float _value2)
 {
     myVoice->setHarmTarget(_value0); //passing values to synth voice
     myVoice->setModIndexTarget(_value1);
     myVoice->setMod1freqTarget(_value2);
-    
 }
 
 //==============================================================================
