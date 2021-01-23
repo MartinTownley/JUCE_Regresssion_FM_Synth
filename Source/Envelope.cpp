@@ -113,9 +113,6 @@ void Envelope::resized()
     //sustainSlider
     sustainSlider.setBounds (bounds.removeFromLeft(100).withSizeKeepingCentre(componentSize, componentSize));
     
-    
-    
-    
     //releaseSlider
     releaseSlider.setBounds (bounds.removeFromLeft(100).withSizeKeepingCentre(componentSize, componentSize));
 }

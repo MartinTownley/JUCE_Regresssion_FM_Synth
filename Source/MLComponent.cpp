@@ -13,25 +13,31 @@
 
 //==============================================================================
 MLComponent::MLComponent(JuceSynthFrameworkAudioProcessor& p) :
-processor(p)
+processor(p), _trained0(false)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
-    trainButton.setColour(TextButton::buttonColourId, Colours::lightyellow);
-    trainButton.setColour(TextButton::textColourOffId, Colours::black);
+    
+    //TrainButton set properties:
+    trainButton.setColour (TextButton::buttonColourId, Colours::lightyellow);
+    trainButton.setColour (TextButton::textColourOffId, Colours::black);
     trainButton.setButtonText("Train");
-    
-    //Attach
+    //TB Add:
     addAndMakeVisible(&trainButton);
-    
     trainButton.addListener(this);
-    
+    //TB Attach:
     trainButtonAttach = std::make_unique <AudioProcessorValueTreeState::ButtonAttachment> (processor.getAPVTS(), TRAIN_ID, trainButton);
-    
+    //TB Set onClick:
     trainButton.onClick = [&]() { this->trainModel0(); } ;
     
-    _trained0 = false;
-    
+    //-------
+    //Map instructions set properties:
+    instruction.setColour (TextButton::buttonColourId, Colours::indianred);
+    instruction.setColour (TextButton::textColourOffId, Colours::white);
+    instruction.setEnabled(false);
+    instruction.setButtonText ("Select Parameters");
+    //Instructions Add:
+    addAndMakeVisible(&instruction);
 }
 
 MLComponent::~MLComponent()
@@ -67,11 +73,17 @@ void MLComponent::resized()
     auto bounds = getLocalBounds();
     const int componentSize { 100 };
     
-    juce::Rectangle<int> area(getLocalBounds());
-
-    trainButton.setBounds (bounds.removeFromLeft(200).withSizeKeepingCentre(componentSize, componentSize));
+    //juce::Rectangle<int> area(getLocalBounds());
     
-    const int headerFooterHeight = 36;
+    const int trainButtonHeight = 40;
+    const int trainButtonMargin = 5;
+
+    trainButton.setBounds (bounds.removeFromBottom(trainButtonHeight).reduced(trainButtonMargin));
+    
+    instruction.setBounds (bounds.reduced(trainButtonMargin));
+    
+    
+    //const int headerFooterHeight = 36;
     //header.setBounds(area.removeFromTop(headerFooterHeight));
     //footer.setBounds(area.removeFromBottom(headerFooterHeight));
     
@@ -100,7 +112,9 @@ void MLComponent::recordContData0()
     
     if (input.size() > 0)
     {
-        //footer.setButtonText("When you have finished mapping your gestures, press train!");
+        instruction.setColour (TextButton::buttonColourId, Colours::whitesmoke);
+        instruction.setButtonText("When you have finished mapping your gestures, press train!");
+        
     }
     
 }
@@ -112,6 +126,12 @@ void MLComponent::trainModel0()
     {
         std::cout << "editor trained: " << _trained0 << std::endl;
         _trained0 = rapidRegression0.train(trainingSet0);
+        
+        instruction.setButtonText("Now hold cross while moving the controller to play");
+    }
+    else
+    {
+        AlertWindow::showMessageBoxAsync(AlertWindow::AlertIconType::WarningIcon, "Error", "Please record more audio and controller coordinate examples before training", "ok");
     }
 }
 

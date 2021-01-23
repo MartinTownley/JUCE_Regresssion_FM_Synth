@@ -247,7 +247,7 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
     for (int i=0; i < mySynth.getNumVoices(); i++)
     {
         // If the voice is dynamically cast as a synth voice, relay the information:
-        if (myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i)))
+        if ((myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i))))
         {
             myVoice-> setADSRSampleRate (lastSampleRate);
             

@@ -31,9 +31,9 @@ public:
     
 private:
     
-    //Triangle on the controller records:
+    //Triangle button held:
     bool isTriangle;
-    // Cross on the controller runs:
+    // Cross button held:
     bool isCross;
     
     float theZed;

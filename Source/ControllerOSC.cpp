@@ -28,13 +28,19 @@ ControllerOSC::~ControllerOSC()
 
 void ControllerOSC::oscMessageReceived(const OSCMessage &message)
 {
+    //std::cout << &message <<std::endl;
+    
+    
     if (message.size() == 4 && message[0].isFloat32())
     {
         //retrieve x & z gyroscope data
+        
+        
         theZed = message[0].getFloat32();
+        std::cout << theZed << std::endl;
         theEx = message[1].getFloat32();
         
-        //set recording and running booleans
+        //assign triangle & cross booleans
         isTriangle = message[2].getInt32();
         isCross = message[3].getInt32();
     }

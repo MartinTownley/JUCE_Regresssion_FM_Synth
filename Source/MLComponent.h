@@ -61,8 +61,11 @@ private:
     
     ControllerOSC controller0;
     
-    //trainButtonAttach
+    // TrainButtonAttach:
     std::unique_ptr <AudioProcessorValueTreeState::ButtonAttachment> trainButtonAttach;
+    
+    //Instruction for mapping (non-interactive button):
+    TextButton instruction;
     
     //==RAPIDLIB==
     regression rapidRegression0;
@@ -70,11 +73,13 @@ private:
     
     bool _trained0;
     
-    JuceSynthFrameworkAudioProcessor& processor;
+   
     
     int newHarmTarget;
     double newModIndexTarget;
     double newMod1freqTarget;
+    
+    JuceSynthFrameworkAudioProcessor& processor;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MLComponent)
 };
