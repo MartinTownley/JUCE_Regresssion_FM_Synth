@@ -22,13 +22,9 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
                        ),
-
-// Pre-definitions
-mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout()  ) 
+                    mAPVTS(*this, nullptr, "PARAMETERS", createParameterLayout()  )
 #endif
 {
-    //constructor
-    
     // Clear voices, get rid of garbage:
     mySynth.clearVoices();
     
@@ -103,7 +99,7 @@ AudioProcessorValueTreeState::ParameterLayout JuceSynthFrameworkAudioProcessor::
                                                                  StringArray ("OFFS",
                                                                               "SINE",
                                                                               "SQUARE",
-                                                                              "SAW"), 1);
+                                                                              "SAW"), 0);
     
     
     auto indexModFreqParam = std::make_unique<AudioParameterFloat>(INDEXMODFREQ_ID,
@@ -196,9 +192,6 @@ void JuceSynthFrameworkAudioProcessor::changeProgramName (int index, const Strin
 //==============================================================================
 void JuceSynthFrameworkAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
-    
     // Clear out/ignore unused samples from the last keypress
     ignoreUnused(samplesPerBlock);
     
@@ -257,13 +250,12 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioBuffer<float>& buffer,
                                mAPVTS.getRawParameterValue(RELEASE_ID)->load() );
                                
             myVoice-> setFMParams (mAPVTS.getRawParameterValue (HARMDIAL_ID)-> load(),
-                                  mAPVTS.getRawParameterValue(MODINDEXDIAL_ID)->load());
+                                  mAPVTS.getRawParameterValue (MODINDEXDIAL_ID)->load(),
+                                   mAPVTS.getRawParameterValue (INDEXMODFREQ_ID)-> load()) ;
             
-            myVoice-> setIndexModAmpfreq (mAPVTS.getRawParameterValue(INDEXMODFREQ_ID)-> load());
+            
             
             myVoice-> setOscType (mAPVTS.getRawParameterValue(OSCMENU_ID)-> load());
-            
-            
         }
     }
     

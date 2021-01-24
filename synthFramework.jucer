@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="vtuibJ" name="synthFramework" projectType="audioplug" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
-              displaySplashScreen="1" jucerFormatVersion="1">
-  <MAINGROUP id="OMnIBC" name="synthFramework">
+<JUCERPROJECT id="vtuibJ" name="FreakMod" projectType="audioplug" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
+              displaySplashScreen="1" jucerFormatVersion="1" pluginAAXCategory="1">
+  <MAINGROUP id="OMnIBC" name="FreakMod">
     <GROUP id="{5CE4C8DA-698D-196F-96F0-7BC66F5767BB}" name="Resources">
       <FILE id="U8PCoz" name="fmPNG.png" compile="0" resource="1" file="Resources/fmPNG.png"/>
       <FILE id="ZcBqVv" name="freakMod.pdf" compile="0" resource="1" file="Resources/freakMod.pdf"/>
@@ -134,6 +134,7 @@
       <FILE id="MccFJ0" name="PluginProcessor.h" compile="0" resource="0"
             file="Source/PluginProcessor.h"/>
       <FILE id="WMpDkS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
+      <FILE id="uE0Q06" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
       <FILE id="qwarDA" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="NdwtJ7" name="ControllerOSC.cpp" compile="1" resource="0"
             file="Source/ControllerOSC.cpp"/>
