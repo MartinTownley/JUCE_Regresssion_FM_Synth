@@ -146,18 +146,19 @@ double SynthVoice::switchOscType ()
 {
     switch (modulator1Type) {
         case 0:
-            return 1;
-            break;
+            return 1.0;
+            
         case 1:
             return modulator1.sinewave(targetMod1freq);
-            break;
+            
         case 2:
             return modulator1.rect(targetMod1freq);
-            break;
+            
         case 3:
             return modulator1.phasor(targetMod1freq);
         default:
-            break;
+            jassertfalse;
+            return 1.0;
     }
 }
 

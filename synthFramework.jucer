@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="vtuibJ" name="FreakMod" projectType="audioplug" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
-              displaySplashScreen="1" jucerFormatVersion="1" pluginAAXCategory="1">
+              displaySplashScreen="1" jucerFormatVersion="1" pluginAAXCategory="1"
+              pluginManufacturer="MTownley">
   <MAINGROUP id="OMnIBC" name="FreakMod">
     <GROUP id="{5CE4C8DA-698D-196F-96F0-7BC66F5767BB}" name="Resources">
       <FILE id="U8PCoz" name="fmPNG.png" compile="0" resource="1" file="Resources/fmPNG.png"/>
@@ -148,7 +149,8 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" headerPath="/Users/martintownley/Development/Libraries/Maximilian&#10;&#10;/Users/martintownley/Development/Libraries/RapidLib"/>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="/Users/martintownley/Development/Libraries/Maximilian&#10;&#10;/Users/martintownley/Development/Libraries/RapidLib"
+                       vst3BinaryLocation="~/Library/Audio/Plug-Ins/VST3" auBinaryLocation="~/Library/Audio/Plug-Ins/Components"/>
         <CONFIGURATION isDebug="0" name="Release" headerPath="/Users/martintownley/Development/Libraries/Maximilian&#10;&#10;/Users/martintownley/Development/Libraries/RapidLib"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
